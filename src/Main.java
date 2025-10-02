@@ -23,7 +23,8 @@ public class Main extends PApplet {
         c2.display(this);
         c3.display(this);
 
-        fill(appColors.getColorAt(4)); noStroke();
+
+
 
 
     }
