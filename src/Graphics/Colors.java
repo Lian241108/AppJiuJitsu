@@ -13,7 +13,7 @@ public class Colors {
     // Estableix colors de l'App
     void setColors(PApplet p5){
         this.colors = new int[5];
-        this.colors[0] = p5.color(0xFF068D9D);
+        this.colors[0] = p5.color(0xFFFFFFFF);
         this.colors[1] = p5.color(0xFF53599A);
         this.colors[2] = p5.color(0xFF6D9DC5);
         this.colors[3] = p5.color(0xFF80DED9);
@@ -45,12 +45,13 @@ public class Colors {
         return this.colors[i];
     }
 
+
     // Dibuixa paleta de colors
     void displayColors(PApplet p5, float x, float y, float w){
         p5.pushStyle();
         //Llegenda
         p5.fill(0); p5.textAlign(p5.LEFT); p5.textSize(36);
-        p5.text("Graphics.Colors:", x, y-10);
+        p5.text("Colors:", x, y-10);
 
         // Paleta de colors
         float wc = w / getNumColors();
@@ -61,25 +62,3 @@ public class Colors {
         p5.popStyle();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
