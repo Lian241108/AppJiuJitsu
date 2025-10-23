@@ -131,11 +131,13 @@ public class GUI{
         dibuixaLogoInici(p5);
         dibuixaTextFieldInicio(p5);
         dibuixaButtonInicio(p5);
+        p5.fill(0);
+        p5.text("CORREO",p5.width/2-110, p5.height/2-10);
+        p5.text("CONTRASEÑA",p5.width/2-100, p5.height/2+190);
 
         //dibuixaButton(p5);
         //dibuixaSideBar(p5);
         // dibuixaBanner(p5);
-        // dibuixaColumnes123(p5);
     }
 
     public void dibuixaPantallaInicial(PApplet p5){
@@ -146,18 +148,17 @@ public class GUI{
 
         //dibuixaSideBar(p5);
         // dibuixaBanner(p5);
-        // dibuixaColumnes123(p5);
     }
 
     public void dibuixaPantallaAlumnos(PApplet p5){
         p5.background(255);
         dibuixaLogoAltres(p5);
         dibuixaButtonALumnos(p5);
+        dibuixaColumnesAlumnos(p5);
 
         //dibuixaSwitchButton(p5);
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
-        // dibuixaColumna1(p5);
     }
 
     public void dibuixaPantallaEjercicios(PApplet p5){
@@ -165,20 +166,20 @@ public class GUI{
         dibuixaLogoAltres(p5);
         // dibuixaButton2(p5);
         dibuixaButtonEjercicios(p5);
+        dibuixaColumnesEjercicios(p5);
 
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
-        // dibuixaColumnes12(p5);
     }
 
     public void dibuixaPantallaEntrenos(PApplet p5){
         p5.background(255);
         dibuixaLogoAltres(p5);
         dibuixaButtonEntrenos(p5);
+        dibuixaColumnesEntrenos(p5);
 
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
-        // dibuixaColumnes12(p5);
     }
 
     public void dibuixaPantallaNuevoAlumno(PApplet p5){
@@ -294,7 +295,124 @@ public class GUI{
         sb1.display(p5);
     }
 
-    // Zona no editada ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    public void dibuixaColumnesAlumnos(PApplet p5){
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 1", p5.width/2-800, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 2", p5.width/2-800, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 3", p5.width/2-800, p5.height/2+300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 4", p5.width/2-200, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 5", p5.width/2-200, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 6", p5.width/2-200, p5.height/2+300);
+    }
+
+
+
+
+
+
+    public void dibuixaColumnesEjercicios(PApplet p5){
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 1", p5.width/2-800, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 2", p5.width/2-800, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 3", p5.width/2-800, p5.height/2+300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 4", p5.width/2-200, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 5", p5.width/2-200, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 6", p5.width/2-200, p5.height/2+300);
+    }
+
+    public void dibuixaColumnesEntrenos(PApplet p5){
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 1", p5.width/2-800, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 2", p5.width/2-800, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-800, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 3", p5.width/2-800, p5.height/2+300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2-300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 4", p5.width/2-200, p5.height/2-300);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 5", p5.width/2-200, p5.height/2);
+
+        p5.fill(255, 255, 0);
+        p5.rect(p5.width/2-200, p5.height/2+300, 400, 200);
+        p5.fill(0);
+        p5.text("COLUMN 6", p5.width/2-200, p5.height/2+300);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void dibuixaSideBar(PApplet p5){
         // Zona Sidebar ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -312,45 +430,6 @@ public class GUI{
         p5.rect(2*marginH + logoWidth, marginV, bannerWidth, bannerHeight);
         p5.fill(0);
         p5.text("PANTALLA " +  pantallaActual + "("+pantallaActual.ordinal() +")", marginH + logoWidth + bannerWidth/2, marginV + bannerHeight/2);
-    }
-
-    public void dibuixaColumna1(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(200, 200, 50);
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, 3*columnWidth + 2*marginH, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth + 3*columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-    }
-
-    public void dibuixaColumnes12(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(200, 200, 50);
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(200, 200, 50);
-        p5.rect(3*marginH + sidebarWidth + columnWidth, 2*marginV + bannerHeight, 2*columnWidth + marginH, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 2", 3*marginH + sidebarWidth + 2*columnWidth, 2*marginV + bannerHeight + columnHeight/2);
-    }
-
-    public void dibuixaColumnes123(PApplet p5){
-        // Zona Columnes 1, 2 i 3 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        p5.fill(200, 200, 50);
-        p5.rect(2*marginH + sidebarWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 1", 2*marginH + sidebarWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(200, 200, 50);
-        p5.rect(3*marginH + sidebarWidth + columnWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 2", 3*marginH + sidebarWidth + columnWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
-
-        p5.fill(200, 200, 50);
-        p5.rect(4*marginH + sidebarWidth + 2*columnWidth, 2*marginV + bannerHeight, columnWidth, columnHeight);
-        p5.fill(0);
-        p5.text("COLUMN 3", 4*marginH + sidebarWidth + 2*columnWidth +columnWidth/2, 2*marginV + bannerHeight + columnHeight/2);
     }
 
 

@@ -90,6 +90,8 @@ public class Main extends PApplet {
         else if(key=='7'){
             gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
         }
+        gui.t11.keyPressed(key, keyCode);
+        gui.t12.keyPressed(key, keyCode);
     }
 
     // ******************* MOUSE interaction ***************************** //
@@ -101,6 +103,8 @@ public class Main extends PApplet {
         else if(gui.b21.mouseOverButton(this)){
             println("B2 has been pressed!!!");
         }
+        gui.t11.isPressed(this);
+        gui.t12.isPressed(this);
 
 
     }
@@ -112,5 +116,6 @@ public class Main extends PApplet {
     public void mouseReleased() {
         println("MOUSE RELEASED");
     }
+
 
 }
