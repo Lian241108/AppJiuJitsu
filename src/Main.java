@@ -19,7 +19,6 @@ public class Main extends PApplet {
         noStroke();                         // Sense bordes
         textAlign(CENTER); textSize(18);   // Alineació i mida del text
         gui = new GUI(this);// Constructor de la GUI
-
     }
 
     public void draw(){

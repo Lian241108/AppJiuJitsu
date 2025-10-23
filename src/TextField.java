@@ -20,9 +20,9 @@ public class TextField {
     // Constructor
     public TextField(PApplet p5, int x, int y, int w, int h) {
         this.x = x; this.y = y; this.w = w; this.h = h;
-        this.bgColor = p5.color(100, 100, 100);
+        this.bgColor = p5.color(150, 150, 150);
         this.fgColor = p5.color(0, 0, 0);
-        this.selectedColor = p5.color(190, 190, 60);
+        this.selectedColor = p5.color(255, 255, 0);
         this.borderColor = p5.color(30, 30, 30);
         this.borderWeight = 1;
     }

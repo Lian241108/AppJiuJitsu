@@ -14,12 +14,8 @@ public class GUI{
 
     PImage logo;
 
-
-
-
     // Enumerat de les Pantalles de l'App
     public enum PANTALLA {INICIO,INICIAL, ALUMNOS, EJERCICIOS, ENTRENOS, NUEVOALUMNO, NUEVOEJERCICIO, NUEVOENTRENO};
-
 
     // Pantalla Actual
     public PANTALLA pantallaActual;
