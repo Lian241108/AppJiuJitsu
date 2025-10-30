@@ -13,7 +13,7 @@ public class Colors {
     // Estableix colors de l'App
     void setColors(PApplet p5){
         this.colors = new int[5];
-        this.colors[0] = p5.color(0xFFFFFFFF);
+        this.colors[0] = p5.color(255,255,255);
         this.colors[1] = p5.color(0xFF53599A);
         this.colors[2] = p5.color(0xFF6D9DC5);
         this.colors[3] = p5.color(0xFF80DED9);

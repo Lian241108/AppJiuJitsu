@@ -12,6 +12,7 @@ public class Button {
     String textBoto;  // Text
     boolean enabled;// Estat del botó (actiu / inactiu).
 
+
     // Constructor
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textBoto = text;
@@ -62,7 +63,6 @@ public class Button {
         p5.rect(this.x, this.y, this.w, this.h, 10);    // Rectangle del botó
 
         // Text (color, alineació i mida)
-
 
         p5.fill(0); p5.textAlign(p5.CENTER); p5.textSize(50);
         p5.text(textBoto, this.x + this.w/2, this.y + this.h/2 + 10);

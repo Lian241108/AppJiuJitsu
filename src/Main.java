@@ -1,9 +1,11 @@
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public class Main extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
+
 
 
     public static void main(String[] args) {
@@ -96,14 +98,62 @@ public class Main extends PApplet {
     // ******************* MOUSE interaction ***************************** //
 
     public void mousePressed(){
+
+        //PANTALLA INICIO
         if(gui.b11.mouseOverButton(this)){
-            println("B1 has been pressed!!!");
+            println("B11 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.INICIAL;
         }
-        else if(gui.b21.mouseOverButton(this)){
-            println("B2 has been pressed!!!");
+
+        //PANTALLA INICIAL
+        if(gui.b21.mouseOverButton(this)){
+            println("B21 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
         }
+        if(gui.b22.mouseOverButton(this)){
+            println("B22 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
+        }
+        if(gui.b23.mouseOverButton(this)){
+            println("B23 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
+        }
+        if(gui.b24.mouseOverButton(this)){
+            println("B11 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.INICIO;
+        }
+
+        //PAntalla ALUMNOS
+        if(gui.b34.mouseOverButton(this)){
+            println("B11 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        }
+
+        //PAntalla EJercicios
+        if(gui.b44.mouseOverButton(this)){
+            println("B11 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        }
+
+        //PAntalla Entrenos
+        if(gui.b54.mouseOverButton(this)){
+            println("B11 has been pressed!!!");
+            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        }
+
+
+
+
         gui.t11.isPressed(this);
         gui.t12.isPressed(this);
+
+        if(gui.s1.mouseOverSelect(this) && gui.s1.isEnabled()){
+            if(!gui.s1.isCollapsed()){
+                gui.s1.update(this);      // Actualitzar valor
+
+            }
+            gui.s1.toggle(); // Plegar o desplegar
+        }
 
 
     }
