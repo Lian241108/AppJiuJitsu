@@ -23,6 +23,7 @@ public class GUI{
     Select s1,s2,s3,s4;
 
 
+
     // Constructor de la GUI
     public GUI(PApplet p5){
         pantallaActual = PANTALLA.INICIO;
@@ -32,7 +33,6 @@ public class GUI{
         createTextField(p5);
         createSwitchButton(p5);
         createSelect(p5);
-
 
         logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
     }
@@ -117,7 +117,7 @@ public class GUI{
         String[] valors1 = {"MASCULINO", "FEMENINO", "PREFIERO NI RESPONDER"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
         s1 = new Select(valors1, 100, 100, 200, 50);
-        s2 = new Select(valors1, 100, 500, 200, 50);
+        s2 = new Select(valors2, 100, 500, 200, 50);
     }
 
     // PANTALLES DE LA GUI

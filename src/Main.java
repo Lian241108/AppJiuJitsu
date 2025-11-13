@@ -36,7 +36,7 @@ public class Main extends PApplet {
             case GUI.PANTALLA.ALUMNOS:     gui.dibuixaPantallaAlumnos(this);
                 break;
 
-            case GUI.PANTALLA.ENTRENOS:   gui.dibuixaPantallaEjercicios(this);
+            case GUI.PANTALLA.ENTRENOS:   gui.dibuixaPantallaEntrenos(this);
                 break;
 
             case GUI.PANTALLA.EJERCICIOS:   gui.dibuixaPantallaEjercicios(this);
@@ -100,45 +100,55 @@ public class Main extends PApplet {
     public void mousePressed(){
 
         //PANTALLA INICIO
-        if(gui.b11.mouseOverButton(this)){
-            println("B11 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        if(gui.pantallaActual==GUI.PANTALLA.INICIO) {
+            if (gui.b11.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
         }
 
         //PANTALLA INICIAL
-        if(gui.b21.mouseOverButton(this)){
-            println("B21 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
-        }
-        if(gui.b22.mouseOverButton(this)){
-            println("B22 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
-        }
-        if(gui.b23.mouseOverButton(this)){
-            println("B23 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
-        }
-        if(gui.b24.mouseOverButton(this)){
-            println("B11 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.INICIO;
+        else if(gui.pantallaActual==GUI.PANTALLA.INICIAL) {
+            if(gui.b21.mouseOverButton(this)){
+                println("B21 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
+            }
+            if(gui.b22.mouseOverButton(this)){
+                println("B22 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
+            }
+            if(gui.b23.mouseOverButton(this)){
+                println("B23 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
+            }
+            if(gui.b24.mouseOverButton(this)){
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIO;
+            }
         }
 
         //PAntalla ALUMNOS
-        if(gui.b34.mouseOverButton(this)){
-            println("B11 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        else if(gui.pantallaActual==GUI.PANTALLA.ALUMNOS) {
+            if (gui.b34.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
         }
 
         //PAntalla EJercicios
-        if(gui.b44.mouseOverButton(this)){
-            println("B11 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        else if(gui.pantallaActual==GUI.PANTALLA.EJERCICIOS) {
+            if (gui.b44.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
         }
 
         //PAntalla Entrenos
-        if(gui.b54.mouseOverButton(this)){
-            println("B11 has been pressed!!!");
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
+        else if(gui.pantallaActual==GUI.PANTALLA.ENTRENOS) {
+            if (gui.b54.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
         }
 
 
@@ -155,6 +165,13 @@ public class Main extends PApplet {
             gui.s1.toggle(); // Plegar o desplegar
         }
 
+        if(gui.s2.mouseOverSelect(this) && gui.s2.isEnabled()) {
+            if (!gui.s2.isCollapsed()) {
+                gui.s2.update(this);      // Actualitzar valor
+
+            }
+            gui.s2.toggle(); // Plegar o desplegar
+        }
 
     }
 
