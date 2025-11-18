@@ -1,6 +1,8 @@
 import Graphics.Fonts;
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.PImage;
+
 
 public class Button {
 
@@ -10,10 +12,9 @@ public class Button {
     int fillColor, strokeColor; // Colors del boto (fill / stroke).
     int fillColorOver, fillColorDisabled;  // Colors del boto (actiu / inactiu).
     String textBoto;  // Text
-    boolean enabled;// Estat del botó (actiu / inactiu).
+    boolean enabled;// Estat del botó (actiu / inactiu)ç// .
+    PFont font;
 
-
-    // Constructor
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textBoto = text;
         this.x = x;
@@ -41,6 +42,7 @@ public class Button {
         this.fillColorOver = cOver;
         this.fillColorDisabled = cDisabled;
     }
+
 
     // Getters
     public boolean isEnabled(){

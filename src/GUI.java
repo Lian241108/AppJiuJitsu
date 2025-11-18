@@ -10,6 +10,8 @@ public class GUI{
 
     PImage logo;
 
+    PFont pFont1, pFont2, pFont3;
+
     // Enumerat de les Pantalles de l'App
     public enum PANTALLA {INICIO,INICIAL, ALUMNOS, EJERCICIOS, ENTRENOS, NUEVOALUMNO, NUEVOEJERCICIO, NUEVOENTRENO};
 
@@ -17,13 +19,15 @@ public class GUI{
     public PANTALLA pantallaActual;
 
     // Botons, text fields, switch buttons
-    Button b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82;  // 2a passa : declarar els components
+    Button b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42;
     SwitchButton sb1;
     Select s1,s2,s3,s4;
 
     TextList textListAlumnos;
-    PagedTable Pt1;
+    PagedTable Pt1, Pt2, Pt3;
+
+
 
 
 
@@ -40,7 +44,12 @@ public class GUI{
 
         createPagedTable(p5);
 
+
         logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
+
+        pFont1 = p5.createFont("Font/Japan wave.ttf", 30);
+        pFont2 = p5.createFont("Font/Roboto-Black.ttf", 30);
+        pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
 
 
     }
@@ -66,11 +75,14 @@ public class GUI{
 
     public void createButtons(PApplet p5){
 
+
         //Pantalla Inicio
+
+
         b11 = new Button (p5,"INICIAR", p5.width/2-150, p5.height/2+400, 300, 100);
 
         //Pantalla Inicial
-        b21 = new Button(p5, "ALUMNOS", p5.width/2 - 700,p5.height/2-200 , 400, 600);
+        b21 = new Button(p5, "ALUMNOS",p5.width/2 - 700,p5.height/2-200 , 400, 600);
         b22 = new Button(p5, "EJERCICIOS", p5.width/2-200, p5.height/2-200, 400, 600);
         b23 = new Button(p5, "ENTRENOS", p5.width/2 + 300, p5.height/2-200, 400, 600);
         b24 = new Button(p5, "<", marginH, marginV, 50, 50);
@@ -162,9 +174,17 @@ public class GUI{
 
         p5.background(255);
         dibuixaLogoInici(p5);
+
+
+        p5.textFont(pFont1);
         dibuixaTextFieldInicio(p5);
+
+        p5.textFont(pFont2);
         dibuixaButtonInicio(p5);
         p5.fill(0);
+
+        p5.textFont(pFont3);
+
         p5.text("CORREO",p5.width/2-110, p5.height/2-10);
         p5.text("CONTRASEÑA",p5.width/2-100, p5.height/2+190);
         dibuixaSelect(p5);
@@ -254,7 +274,7 @@ public class GUI{
     }
 
     public void dibuixaPagedTable(PApplet p5){
-        Pt1.display(p5);
+
     }
 
     public void dibuixaTextList (PApplet p5){

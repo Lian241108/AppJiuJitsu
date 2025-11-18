@@ -2,6 +2,8 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
+import static processing.core.PConstants.BACKSPACE;
+
 public class TextList {
 
     float x, y, w, h;          // Posició i dimensions
@@ -42,6 +44,7 @@ public class TextList {
         }
         p5.popStyle();
     }
+
 
     public String getSelectedValue(){
         return this.selectedValue;

@@ -93,6 +93,10 @@ public class Main extends PApplet {
         }
         gui.t11.keyPressed(key, keyCode);
         gui.t12.keyPressed(key, keyCode);
+
+
+
+
     }
 
     // ******************* MOUSE interaction ***************************** //
@@ -125,6 +129,7 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIO;
             }
+
         }
 
         //PAntalla ALUMNOS
@@ -156,6 +161,7 @@ public class Main extends PApplet {
 
         gui.t11.isPressed(this);
         gui.t12.isPressed(this);
+        gui.textListAlumnos.buttonPressed(this);
 
 
         if(gui.s1.mouseOverSelect(this) && gui.s1.isEnabled()){
