@@ -157,6 +157,7 @@ public class Main extends PApplet {
         gui.t11.isPressed(this);
         gui.t12.isPressed(this);
 
+
         if(gui.s1.mouseOverSelect(this) && gui.s1.isEnabled()){
             if(!gui.s1.isCollapsed()){
                 gui.s1.update(this);      // Actualitzar valor

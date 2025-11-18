@@ -22,6 +22,9 @@ public class GUI{
     SwitchButton sb1;
     Select s1,s2,s3,s4;
 
+    TextList textListAlumnos;
+    PagedTable Pt1;
+
 
 
     // Constructor de la GUI
@@ -33,12 +36,32 @@ public class GUI{
         createTextField(p5);
         createSwitchButton(p5);
         createSelect(p5);
+        createTextList(p5);
+
+        createPagedTable(p5);
 
         logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
+
+
     }
 
     public void createSwitchButton(PApplet p5){
         sb1 = new SwitchButton(p5, 800,900 ,50, 50);
+    }
+
+    public void createPagedTable(PApplet p5){
+        String[] headers = {"ID", "Nombre", "Edad", "Curso"};
+        String[][] data = {
+                {"1", "Juan", "15", "Matemáticas"},
+                {"2", "Maria", "14", "Lengua"},
+                {"3", "Carlos", "16", "Física"},
+                {"4", "Ana", "15", "Química"},
+                {"5", "Luis", "17", "Biología"},
+                {"6", "Sofia", "16", "Historia"},
+                {"7", "Pedro", "15", "Arte"},
+        };
+
+        Pt1 = new PagedTable(4, headers.length);
     }
 
     public void createButtons(PApplet p5){
@@ -120,6 +143,20 @@ public class GUI{
         s2 = new Select(valors2, 100, 500, 200, 50);
     }
 
+    public void createTextList (PApplet p5){
+
+        String[][] alumnos = {
+                {"1", "Juan"},
+                {"2", "Maria"},
+                {"3", "Carlos"},
+                {"4", "Ana"},
+                {"5", "Luis"}
+        };
+
+        textListAlumnos = new TextList(p5, alumnos, p5.width/2-800, p5.height/2-300, 400, 50);
+
+    }
+
     // PANTALLES DE LA GUI
     public void dibuixaPantallaInicio(PApplet p5){
 
@@ -132,6 +169,7 @@ public class GUI{
         p5.text("CONTRASEÑA",p5.width/2-100, p5.height/2+190);
         dibuixaSelect(p5);
 
+
         //dibuixaButton(p5);
         //dibuixaSideBar(p5);
         // dibuixaBanner(p5);
@@ -143,6 +181,9 @@ public class GUI{
         dibuixaLogoAltres(p5);
         dibuixaButtonInicial(p5);
 
+        dibuixaTextList(p5);
+
+
         //dibuixaSideBar(p5);
         // dibuixaBanner(p5);
     }
@@ -152,6 +193,8 @@ public class GUI{
         dibuixaLogoAltres(p5);
         dibuixaButtonALumnos(p5);
         dibuixaColumnesAlumnos(p5);
+
+        dibuixaPagedTable(p5);
 
         //dibuixaSwitchButton(p5);
         // dibuixaSideBar(p5);
@@ -208,6 +251,14 @@ public class GUI{
     public void dibuixaLogoAltres(PApplet p5){
         p5.imageMode(p5.CENTER);
         p5.image(logo, p5.width/2,100, logoWidth, logoHeight);
+    }
+
+    public void dibuixaPagedTable(PApplet p5){
+        Pt1.display(p5);
+    }
+
+    public void dibuixaTextList (PApplet p5){
+        textListAlumnos.display(p5);
     }
 
     public void dibuixaLogoInici(PApplet p5){
