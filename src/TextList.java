@@ -7,7 +7,7 @@ import static processing.core.PConstants.BACKSPACE;
 public class TextList {
 
     float x, y, w, h;          // Posició i dimensions
-    String[][] texts;          // Valors possibles
+    String[] texts;          // Valors possibles
 
     TextField textField;       // Camp de text
 
@@ -20,7 +20,7 @@ public class TextList {
     int numMatchs = 0;
     ArrayList<Button> buttons;
 
-    public TextList(PApplet p5, String[][] texts, float x, float y, float w, float h) {
+    public TextList(PApplet p5, String[] texts, float x, float y, float w, float h) {
 
         this.texts = texts;
         this.selectedId = "";
@@ -64,8 +64,8 @@ public class TextList {
 
         if (searchFor.length() > 0) {
             for (int i=0; i<texts.length; i++) {
-                if (texts[i][1].startsWith(searchFor)) {
-                    Button b = new Button(p5, texts[i][1], x + 10, y + h + 50 + (h + 50)*numMatchs, w, h);
+                if (texts[i].toLowerCase().startsWith(searchFor.toLowerCase())) {
+                    Button b = new Button(p5, texts[i], x + 10, y + h + 50 + (h + 50)*numMatchs, w, h);
                     buttons.add(b);
                     this.numMatchs++;
                     if (this.numMatchs==5) {

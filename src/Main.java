@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PFont;
 
+
 public class Main extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
@@ -94,6 +95,12 @@ public class Main extends PApplet {
         gui.t11.keyPressed(key, keyCode);
         gui.t12.keyPressed(key, keyCode);
 
+        if(gui.textListAlumnos.getTextField().mouseOverTextField(this)){
+            gui.textListAlumnos.getTextField().keyPressed(key,(int)keyCode);
+            gui.textListAlumnos.update(this);
+
+        }
+
 
 
 
@@ -161,6 +168,7 @@ public class Main extends PApplet {
 
         gui.t11.isPressed(this);
         gui.t12.isPressed(this);
+        gui.textListAlumnos.getTextField().isPressed(this);
         gui.textListAlumnos.buttonPressed(this);
 
 

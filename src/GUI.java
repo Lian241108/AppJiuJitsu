@@ -157,13 +157,7 @@ public class GUI{
 
     public void createTextList (PApplet p5){
 
-        String[][] alumnos = {
-                {"1", "Juan"},
-                {"2", "Maria"},
-                {"3", "Carlos"},
-                {"4", "Ana"},
-                {"5", "Luis"}
-        };
+        String[] alumnos = {"Juan","Maria", "Carlos", "Ana", "Luis"};
 
         textListAlumnos = new TextList(p5, alumnos, p5.width/2-800, p5.height/2-300, 400, 50);
 
