@@ -15,7 +15,7 @@ public class PagedTable {
     public PagedTable(int nr, int nc){
         this.numRows = nr;
         this.numCols = nc;
-        this.numPage = 0;
+        this.numPage = 2;
     }
 
     // Setters
