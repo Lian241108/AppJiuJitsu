@@ -19,12 +19,14 @@ public class GUI{
     public PANTALLA pantallaActual;
 
     // Botons, text fields, switch buttons
-    Button b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82;  // 2a passa : declarar els components
+    Button b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42;
     SwitchButton sb1;
     Select s1,s2,s3,s4;
 
     TextList textListAlumnos;
+
+    PagedTable pt1;
 
 
 
@@ -43,6 +45,8 @@ public class GUI{
         createSelect(p5);
         createTextList(p5);
 
+        createPagedTable(p5);
+
 
 
         logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
@@ -50,6 +54,31 @@ public class GUI{
         pFont1 = p5.createFont("Font/Japan wave.ttf", 30);
         pFont2 = p5.createFont("Font/Roboto-Black.ttf", 30);
         pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
+
+
+    }
+
+    public void createPagedTable(PApplet p5){
+        pt1 = new PagedTable(6, 5);   // 1 cabecera + 5 filas visibles
+
+        String[] headers = {"ID","Nombre","Edad","Nivel","Email"};
+        pt1.setHeaders(headers);
+
+        float[] widths = {10, 25, 10, 20, 35};
+        pt1.setColumnWidths(widths);
+
+        String[][] datos = {
+                {"1","Juan","17","Pro","juan@mail.com"},
+                {"2","Miquel","22","Avanzado","miquel@mail.com"},
+                {"3","Toni","19","Básico","toni@mail.com"},
+                {"4","Ando","20","Pro","ando@mail.com"},
+                {"5","Felip","30","Intermedio","felip@mail.com"},
+                {"6","Laura","18","Pro","laura@mail.com"},
+                {"7","Pol","25","Básico","pol@mail.com"},
+                {"8","Sara","21","Avanzado","sara@mail.com"}
+        };
+
+        pt1.setData(datos);
 
 
     }
@@ -75,8 +104,8 @@ public class GUI{
 
         // Pantalla Alumnos
         b31 = new Button (p5,"NUEVO ALUMNO",p5.width/2+400, p5.height/2+400, 400, 100);
-        b32 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
-        b33 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
+        //b32 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
+        //b33 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b34 = new Button(p5, "<", marginH, marginV, 50, 50);
 
         //Pantalla Ejercicios
@@ -102,6 +131,9 @@ public class GUI{
         // PAntalla NuevoEntreno
         b81 = new Button(p5, "<", marginH, marginV, 50, 50);
         b82 = new Button (p5,"GUARDAR",p5.width/2+400, p5.height/2+400, 300, 100);
+
+        bpt1 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
+        bpt2 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
 
 
     }
@@ -192,7 +224,8 @@ public class GUI{
         p5.background(255);
         dibuixaLogoAltres(p5);
         dibuixaButtonALumnos(p5);
-        dibuixaColumnesAlumnos(p5);
+        //dibuixaColumnesAlumnos(p5);
+        dibuixaPagedTable(p5);
 
 
 
@@ -258,6 +291,10 @@ public class GUI{
         textListAlumnos.display(p5);
     }
 
+    public void dibuixaPagedTable(PApplet p5){
+        pt1.display(p5, p5.width/2 - 400, p5.height/2 - 200, 800, 400);
+    }
+
     public void dibuixaLogoInici(PApplet p5){
         p5.imageMode(p5.CENTER);
         p5.image(logo, p5.displayWidth/2, p5.displayHeight/2-300, logoWidth*2, logoHeight*2);
@@ -281,9 +318,11 @@ public class GUI{
 
     public void dibuixaButtonALumnos(PApplet p5){
         b31.display(p5);
-        b32.display(p5);
-        b33.display(p5);
+        //b32.display(p5);
+        //b33.display(p5);
         b34.display(p5);
+        bpt1.display(p5);
+        bpt2.display(p5);
     }
     public void dibuixaButtonEjercicios(PApplet p5){
         b41.display(p5);

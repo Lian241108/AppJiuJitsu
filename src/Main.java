@@ -11,6 +11,7 @@ public class Main extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main("Main", args);
+
     }
 
     public void settings(){
@@ -139,11 +140,19 @@ public class Main extends PApplet {
 
         }
 
+
+
         //PAntalla ALUMNOS
         else if(gui.pantallaActual==GUI.PANTALLA.ALUMNOS) {
             if (gui.b34.mouseOverButton(this)) {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
+            if(gui.bpt1.mouseOverButton(this) && gui.bpt1.isEnabled()){
+                gui.pt1.prevPage();
+            }
+            if(gui.bpt2.mouseOverButton(this) && gui.bpt2.isEnabled()){
+                gui.pt1.nextPage();
             }
         }
 
@@ -161,6 +170,8 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
+
         }
 
 
