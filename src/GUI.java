@@ -28,6 +28,8 @@ public class GUI{
 
     PagedTable pt1;
 
+    Calendari c1;
+
 
 
 
@@ -46,6 +48,8 @@ public class GUI{
         createTextList(p5);
 
         createPagedTable(p5);
+
+        createCalendari(p5);
 
 
 
@@ -81,6 +85,10 @@ public class GUI{
         pt1.setData(datos);
 
 
+    }
+
+    public void createCalendari(PApplet p5){
+        c1 = new Calendari(100,100,500,500);
     }
 
     public void createSwitchButton(PApplet p5){
@@ -239,7 +247,9 @@ public class GUI{
         dibuixaLogoAltres(p5);
         // dibuixaButton2(p5);
         dibuixaButtonEjercicios(p5);
-        dibuixaColumnesEjercicios(p5);
+
+        dibuixaCalendari(p5);
+       // dibuixaColumnesEjercicios(p5);
 
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
@@ -285,6 +295,10 @@ public class GUI{
     public void dibuixaLogoAltres(PApplet p5){
         p5.imageMode(p5.CENTER);
         p5.image(logo, p5.width/2,100, logoWidth, logoHeight);
+    }
+
+    public void dibuixaCalendari(PApplet p5){
+        c1.display(p5);
     }
 
     public void dibuixaTextList (PApplet p5){
