@@ -36,6 +36,7 @@ public class GUI{
 
 
 
+
     // Constructor de la GUI
     public GUI(PApplet p5){
         pantallaActual = PANTALLA.INICIO;
@@ -48,7 +49,6 @@ public class GUI{
         createTextList(p5);
 
         createPagedTable(p5);
-
         createCalendari(p5);
 
 
@@ -60,6 +60,10 @@ public class GUI{
         pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
 
 
+    }
+
+    public void createCalendari(PApplet p5){
+        c1 = new Calendari(100,100,300,400);
     }
 
     public void createPagedTable(PApplet p5){
@@ -87,9 +91,6 @@ public class GUI{
 
     }
 
-    public void createCalendari(PApplet p5){
-        c1 = new Calendari(100,100,500,500);
-    }
 
     public void createSwitchButton(PApplet p5){
         sb1 = new SwitchButton(p5, 800,900 ,50, 50);
@@ -250,8 +251,9 @@ public class GUI{
         dibuixaLogoAltres(p5);
         // dibuixaButton2(p5);
         dibuixaButtonEjercicios(p5);
-
         dibuixaCalendari(p5);
+
+
        // dibuixaColumnesEjercicios(p5);
 
         // dibuixaSideBar(p5);
@@ -349,6 +351,7 @@ public class GUI{
 
         bc1.display(p5);
         bc2.display(p5);
+
     }
 
     public void dibuixaButtonEntrenos(PApplet p5){

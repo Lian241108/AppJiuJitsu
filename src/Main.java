@@ -170,7 +170,7 @@ public class Main extends PApplet {
                 gui.c1.nextMonth();
             }
 
-
+            gui.c1.checkButtons(this);
 
         }
 
