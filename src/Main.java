@@ -162,6 +162,16 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
+                gui.c1.prevMonth();
+            }
+
+            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()){
+                gui.c1.nextMonth();
+            }
+
+
+
         }
 
         //PAntalla Entrenos
