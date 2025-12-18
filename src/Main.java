@@ -138,6 +138,11 @@ public class Main extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.INICIO;
             }
 
+            if(gui.b0.mouseOverButton(this)){
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIO;
+            }
+
         }
 
 
@@ -148,11 +153,21 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
-            if(gui.bpt1.mouseOverButton(this) && gui.bpt1.isEnabled()){
+            if (gui.bpt1.mouseOverButton(this) && gui.bpt1.isEnabled()) {
                 gui.pt1.prevPage();
             }
-            if(gui.bpt2.mouseOverButton(this) && gui.bpt2.isEnabled()){
+            if (gui.bpt2.mouseOverButton(this) && gui.bpt2.isEnabled()) {
                 gui.pt1.nextPage();
+            }
+
+            if (gui.b0.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIO;
+            }
+
+            if (gui.b31.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.NUEVOALUMNO;
             }
         }
 
@@ -162,15 +177,17 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
-            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
-                gui.c1.prevMonth();
+
+
+            if(gui.b0.mouseOverButton(this)){
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIO;
             }
 
-            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()){
-                gui.c1.nextMonth();
+            if (gui.b41.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
             }
-
-            gui.c1.checkButtons(this);
 
         }
 
@@ -180,6 +197,26 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
+            if(gui.b0.mouseOverButton(this)){
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.INICIO;
+            }
+
+            if (gui.b31.mouseOverButton(this)) {
+                println("B11 has been pressed!!!");
+                gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
+            }
+
+            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
+                gui.c1.prevMonth();
+            }
+
+            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()){
+                gui.c1.nextMonth();
+            }
+            gui.c1.checkButtons(this);
+
 
 
         }

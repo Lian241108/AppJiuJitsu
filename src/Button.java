@@ -14,6 +14,7 @@ public class Button {
     String textBoto;  // Text
     boolean enabled;// Estat del botó (actiu / inactiu)ç// .
     PFont font;
+    PImage logo;
 
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textBoto = text;
@@ -27,6 +28,23 @@ public class Button {
         this.fillColorDisabled = p5.color(150);
         this.strokeColor = p5.color(0);
     }
+
+
+    public Button(PApplet p5, PImage logo, float x, float y, float w, float h){
+        this.logo = logo;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.enabled = true;
+        this.fillColor = p5.color(255, 0, 0);
+        this.fillColorOver = p5.color(255, 255, 255);
+        this.fillColorDisabled = p5.color(150);
+        this.strokeColor = p5.color(0);
+    }
+
+
+
 
     // Setters
 
@@ -67,8 +85,16 @@ public class Button {
         // Text (color, alineació i mida)
 
         p5.fill(0); p5.textAlign(p5.CENTER); p5.textSize(50);
-        p5.text(textBoto, this.x + this.w/2, this.y + this.h/2 + 10);
+        if(textBoto!=null) {
+            p5.text(textBoto, this.x + this.w / 2, this.y + this.h / 2 + 10);
+        }
+        if(logo!=null) {
+            p5.imageMode(p5.CORNER);
+            p5.image(logo, this.x, this.y, this.w, this.h);
+        }
         p5.popStyle();
+
+
     }
 
     // Indica si el cursor està sobre el botó

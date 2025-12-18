@@ -19,6 +19,8 @@ public class GUI{
     public PANTALLA pantallaActual;
 
     // Botons, text fields, switch buttons
+
+
     Button b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42;
     SwitchButton sb1;
@@ -37,33 +39,30 @@ public class GUI{
 
 
 
+
     // Constructor de la GUI
     public GUI(PApplet p5){
         pantallaActual = PANTALLA.INICIO;
 
         // 3a passa: crear els components
-        createButtons(p5);
-        createTextField(p5);
-        createSwitchButton(p5);
-        createSelect(p5);
-        createTextList(p5);
-
-        createPagedTable(p5);
-        createCalendari(p5);
-
-
-
         logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
-
         pFont1 = p5.createFont("Font/Japan wave.ttf", 30);
         pFont2 = p5.createFont("Font/Roboto-Black.ttf", 30);
         pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
 
 
+        createButtons(p5);
+        createTextField(p5);
+        createSwitchButton(p5);
+        createSelect(p5);
+        createTextList(p5);
+        createPagedTable(p5);
+        createCalendari(p5);
+
     }
 
     public void createCalendari(PApplet p5){
-        c1 = new Calendari(100,100,300,400);
+        c1 = new Calendari(100,100,600,400);
     }
 
     public void createPagedTable(PApplet p5){
@@ -85,10 +84,7 @@ public class GUI{
                 {"7","Pol","25","Básico","pol@mail.com"},
                 {"8","Sara","21","Avanzado","sara@mail.com"}
         };
-
         pt1.setData(datos);
-
-
     }
 
 
@@ -101,6 +97,7 @@ public class GUI{
 
 
         //Pantalla Inicio
+        b0 = new Button(p5,logo, p5.width/2-100,100, logoWidth, logoHeight);
 
 
         b11 = new Button (p5,"INICIAR", p5.width/2-150, p5.height/2+400, 300, 100);
@@ -222,25 +219,24 @@ public class GUI{
     public void dibuixaPantallaInicial(PApplet p5){
 
         p5.background(255);
-        dibuixaLogoAltres(p5);
-        dibuixaButtonInicial(p5);
 
+        dibuixaButtonInicial(p5);
         dibuixaTextList(p5);
 
-
+        //dibuixaLogoAltres(p5);
         //dibuixaSideBar(p5);
         // dibuixaBanner(p5);
+
     }
 
     public void dibuixaPantallaAlumnos(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
+
         dibuixaButtonALumnos(p5);
-        //dibuixaColumnesAlumnos(p5);
         dibuixaPagedTable(p5);
 
-
-
+        //dibuixaLogoAltres(p5);
+        //dibuixaColumnesAlumnos(p5);
         //dibuixaSwitchButton(p5);
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
@@ -248,47 +244,52 @@ public class GUI{
 
     public void dibuixaPantallaEjercicios(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
-        // dibuixaButton2(p5);
+
         dibuixaButtonEjercicios(p5);
-        dibuixaCalendari(p5);
 
-
-       // dibuixaColumnesEjercicios(p5);
-
+        //dibuixaLogoAltres(p5);
+        // dibuixaColumnesEjercicios(p5);
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
     }
 
     public void dibuixaPantallaEntrenos(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
+
         dibuixaButtonEntrenos(p5);
         dibuixaColumnesEntrenos(p5);
+        dibuixaCalendari(p5);
 
+        //dibuixaLogoAltres(p5);
         // dibuixaSideBar(p5);
         // dibuixaBanner(p5);
     }
 
     public void dibuixaPantallaNuevoAlumno(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
+
         dibuixaButtonNuevoAlumno(p5);
         dibuixaTextFieldNuevoAlumno(p5);
+
+        //dibuixaLogoAltres(p5);
     }
 
     public void dibuixaPantallaNuevoEntreno(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
+
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
+
+        //dibuixaLogoAltres(p5);
     }
 
     public void dibuixaPantallaNuevoEjercicio(PApplet p5){
         p5.background(255);
-        dibuixaLogoAltres(p5);
+
         dibuixaButtonNuevoEjercicio(p5);
         dibuixaTextFieldNuevoEjercicio(p5);
+
+        //dibuixaLogoAltres(p5);
 
     }
 
@@ -297,10 +298,10 @@ public class GUI{
 
     // ZONES DE LA GUI
 
-    public void dibuixaLogoAltres(PApplet p5){
-        p5.imageMode(p5.CENTER);
-        p5.image(logo, p5.width/2,100, logoWidth, logoHeight);
-    }
+    // public void dibuixaLogoAltres(PApplet p5){
+        // p5.imageMode(p5.CENTER);
+        // p5.image(logo, p5.width/2,100, logoWidth, logoHeight);
+    //}
 
     public void dibuixaCalendari(PApplet p5){
         c1.display(p5);
@@ -326,6 +327,7 @@ public class GUI{
 
     public void dibuixaButtonInicio(PApplet p5){
         b11.display(p5);
+
     }
 
     public void dibuixaButtonInicial(PApplet p5){
@@ -333,6 +335,8 @@ public class GUI{
         b22.display(p5);
         b23.display(p5);
         b24.display(p5);
+
+        b0.display(p5);
     }
 
     public void dibuixaButtonALumnos(PApplet p5){
@@ -342,6 +346,8 @@ public class GUI{
         b34.display(p5);
         bpt1.display(p5);
         bpt2.display(p5);
+
+        b0.display(p5);
     }
     public void dibuixaButtonEjercicios(PApplet p5){
         b41.display(p5);
@@ -349,8 +355,7 @@ public class GUI{
         b43.display(p5);
         b44.display(p5);
 
-        bc1.display(p5);
-        bc2.display(p5);
+        b0.display(p5);
 
     }
 
@@ -359,21 +364,32 @@ public class GUI{
         b52.display(p5);
         b53.display(p5);
         b54.display(p5);
+
+        b0.display(p5);
+
+        bc1.display(p5);
+        bc2.display(p5);
     }
 
     public void dibuixaButtonNuevoAlumno(PApplet p5){
         b61.display(p5);
         b62.display(p5);
+
+        b0.display(p5);
     }
 
     public void dibuixaButtonNuevoEjercicio(PApplet p5){
         b71.display(p5);
         b72.display(p5);
+
+        b0.display(p5);
     }
 
     public void dibuixaButtonNuevoEntreno(PApplet p5){
         b81.display(p5);
         b82.display(p5);
+
+        b0.display(p5);
     }
 
     //*******************************************************
