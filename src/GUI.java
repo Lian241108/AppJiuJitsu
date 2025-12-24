@@ -316,7 +316,6 @@ public class GUI{
 
     public void dibuixaButtonInicio(PApplet p5){
         b11.display(p5);
-
     }
 
     public void dibuixaButtonInicial(PApplet p5){

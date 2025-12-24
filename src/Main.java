@@ -54,74 +54,122 @@ public class Main extends PApplet {
     }
 
     public void updateCursor(PApplet p5){
-        if(gui.b11.updateHandCursor(p5) || gui.b21.updateHandCursor(p5)){
-            cursor(HAND);
+        //PANTALLA INICIO
+        if(gui.pantallaActual==GUI.PANTALLA.INICIO) {
+            if(gui.b11.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
         }
-        else {
-            cursor(ARROW);
+        //PANTALLA INICIAL
+        else if(gui.pantallaActual==GUI.PANTALLA.INICIAL) {
+            if(gui.b21.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b22.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b23.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b24.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
         }
+
+        //PANTALLA ALUMNOS
+        else if(gui.pantallaActual==GUI.PANTALLA.ALUMNOS) {
+            if(gui.b31.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            //if(gui.b32.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            //if(gui.b33.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b34.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+
+        //PANTALLA EJERCICIOS
+        else if(gui.pantallaActual==GUI.PANTALLA.EJERCICIOS) {
+            if(gui.b41.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b42.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b43.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b34.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+
+        //PANTALLA ENTRENOS
+        else if(gui.pantallaActual==GUI.PANTALLA.ENTRENOS) {
+            if(gui.b51.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b52.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b53.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b54.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+
+        //PANTALLA NUEVO ALUMNO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
+            if(gui.b61.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b62.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+        //PANTALLA NUEVO EJERCICIO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
+            if(gui.b71.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b72.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+        //PANTALLA ENTRENO ENTRENO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOENTRENO) {
+            if(gui.b81.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+            if(gui.b82.updateHandCursor(p5)){cursor(HAND);} else {cursor(ARROW);}
+        }
+
+
     }
 
     // ******************* KEYBOARD interaction ***************************** //
 
     public void keyPressed(){
 
+        //PANTALLA INICIO
+        if(gui.pantallaActual==GUI.PANTALLA.INICIO) {
+            gui.t11.keyPressed(key, keyCode);
+            gui.t12.keyPressed(key, keyCode);
+        }
 
-        if(key=='0'){
-            gui.pantallaActual = GUI.PANTALLA.INICIO;
+        //PANTALLA INICIAL
+        //PANTALLA ALUMNOS
+        else if(gui.pantallaActual==GUI.PANTALLA.ALUMNOS) {
+            if (gui.textListAlumnos.getTextField().mouseOverTextField(this)) {
+                gui.textListAlumnos.getTextField().keyPressed(key, (int) keyCode);
+                gui.textListAlumnos.update(this);
+            }
         }
-        else if(key=='1'){
-            gui.pantallaActual = GUI.PANTALLA.INICIAL;
-        }
-        else if(key=='2'){
-            gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
-        }
-        else if(key=='3'){
-            gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
-        }
-        else if(key=='4'){
-            gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
-        }
-        else if(key=='5'){
-            gui.pantallaActual = GUI.PANTALLA.NUEVOALUMNO;
-        }
-        else if(key=='6'){
-            gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
-        }
-        else if(key=='7'){
-            gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
-        }
-        gui.t11.keyPressed(key, keyCode);
-        gui.t12.keyPressed(key, keyCode);
-        gui.t21.keyPressed(key, keyCode);
-        gui.t22.keyPressed(key, keyCode);
-        gui.t23.keyPressed(key, keyCode);
-        gui.t24.keyPressed(key, keyCode);
-        gui.t25.keyPressed(key, keyCode);
-        gui.t26.keyPressed(key, keyCode);
-        gui.t31.keyPressed(key, keyCode);
-        gui.t32.keyPressed(key, keyCode);
-        gui.t33.keyPressed(key, keyCode);
-        gui.t41.keyPressed(key, keyCode);
-        gui.t42.keyPressed(key, keyCode); 
 
-        if(gui.textListAlumnos.getTextField().mouseOverTextField(this)){
-            gui.textListAlumnos.getTextField().keyPressed(key,(int)keyCode);
-            gui.textListAlumnos.update(this);
+        //PANTALLA EJERCICIOS
+        else if(gui.pantallaActual==GUI.PANTALLA.EJERCICIOS) {
+            if (gui.textListEjercicios.getTextField().mouseOverTextField(this)) {
+                gui.textListEjercicios.getTextField().keyPressed(key, (int) keyCode);
+                gui.textListEjercicios.update(this);
+            }
         }
-        if(gui.textListEntrenos.getTextField().mouseOverTextField(this)){
-            gui.textListEntrenos.getTextField().keyPressed(key,(int)keyCode);
-            gui.textListEntrenos.update(this);
-        }
-        if(gui.textListEjercicios.getTextField().mouseOverTextField(this)){
-            gui.textListEjercicios.getTextField().keyPressed(key,(int)keyCode);
-            gui.textListEjercicios.update(this);
+
+        //PANTALLA ENTRENOS
+        else if(gui.pantallaActual==GUI.PANTALLA.ENTRENOS) {
+            if (gui.textListEntrenos.getTextField().mouseOverTextField(this)) {
+                gui.textListEntrenos.getTextField().keyPressed(key, (int) keyCode);
+                gui.textListEntrenos.update(this);
+            }
         }
 
 
 
+            //PANTALLA NUEVO ALUMNO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
+            gui.t21.keyPressed(key, keyCode);
+            gui.t22.keyPressed(key, keyCode);
+            gui.t23.keyPressed(key, keyCode);
+            gui.t24.keyPressed(key, keyCode);
+            gui.t25.keyPressed(key, keyCode);
+            gui.t26.keyPressed(key, keyCode);
+        }
 
+            //PANTALLA NUEVO EJERCICIO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
+            gui.t31.keyPressed(key, keyCode);
+            gui.t32.keyPressed(key, keyCode);
+            gui.t33.keyPressed(key, keyCode);
+        }
+
+            //PANTALLA NUEVo ENTRENO
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOENTRENO) {
+            gui.t41.keyPressed(key, keyCode);
+            gui.t42.keyPressed(key, keyCode);
+        }
     }
+
 
     // ******************* MOUSE interaction ***************************** //
 
