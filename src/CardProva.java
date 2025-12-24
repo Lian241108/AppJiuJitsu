@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 public class CardProva extends PApplet {
 
-    Card c1;
+    Card ca1;
 
 
 
@@ -16,13 +16,13 @@ public class CardProva extends PApplet {
     }
 
     public void setup(){
-        c1 = new Card(this, "FITIPALDI",100,100,300,500);
+        ca1 = new Card(this, "FITIPALDI",100,100,300,500);
 
     }
 
     public void draw(){
         background(255);
-        c1.display(this);
+        ca1.display(this);
     }
 
     public void mousePressed(){

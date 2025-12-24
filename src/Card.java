@@ -1,6 +1,9 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import static Graphics.Mides.midaSubtitol;
+import static Graphics.Mides.midaTitol;
+
 public class Card {
 
     PImage img;
@@ -22,23 +25,41 @@ public class Card {
     }
 
     public void display(PApplet p5){
-
         p5.pushStyle();
+        p5.rectMode(p5.CORNER);
 
-        p5.rect(x,y,w,h);
+        float margin = 10;
+
+        // Carta blanca
+        p5.fill(255);
+        p5.stroke(0);
+        p5.rect(x, y, w, h);
+
+        // Título
+        p5.fill(0);
+        p5.textAlign(p5.CENTER);
+        p5.textSize(midaSubtitol);
+        p5.text(titol, x + w/2, y + 20);
+
+        // Área imagen
+        float imgY = y + 40;
+        float imgH = h / 3;
 
         if(img == null){
-            p5.rectMode(p5.CORNER);
-            p5.rect(x+5,y+5,w-10,h/4);
-        }else{
-            p5.image(img,x+5,y+5,w-10,h/4 );
+            p5.fill(230);
+            p5.rect(x + margin, imgY, w - margin * 2, imgH, 8);
+        } else {
+            p5.image(img, x + margin, imgY, w - margin * 2, imgH);
         }
-        p5.fill(0);
-        p5.text(titol, x+5,h/4+15);
+
+        // TextField y botón
         textField.display(p5);
         boto.display(p5);
 
         p5.popStyle();
     }
 
+    public boolean mouseOver(PApplet p5) {
+        return false;
+    }
 }
