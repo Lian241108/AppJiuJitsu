@@ -261,21 +261,17 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
-
             if(gui.b0.mouseOverButton(this)){
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
-
-            if (gui.b31.mouseOverButton(this)) {
+            if (gui.b51.mouseOverButton(this)) {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
             }
-
             if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
                 gui.c1.prevMonth();
             }
-
             if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()){
                 gui.c1.nextMonth();
             }
@@ -304,7 +300,7 @@ public class Main extends PApplet {
             }
             if(gui.b71.mouseOverButton(this)){
                 println("B11 has been pressed!!!");
-                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
+                gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
             }
         }
 
@@ -317,7 +313,7 @@ public class Main extends PApplet {
             }
             if(gui.b81.mouseOverButton(this)){
                 println("B11 has been pressed!!!");
-                gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
+                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
         }
 
@@ -335,6 +331,7 @@ public class Main extends PApplet {
         gui.t33.isPressed(this);
         gui.t41.isPressed(this);
         gui.t42.isPressed(this);
+
 
         // TextLists
         gui.textListAlumnos.getTextField().isPressed(this);
@@ -362,22 +359,6 @@ public class Main extends PApplet {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

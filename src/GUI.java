@@ -55,7 +55,7 @@ public class GUI{
     }
 
     public void createCalendari(PApplet p5){
-        c1 = new Calendari(100,100,600,400);
+        c1 = new Calendari(500,100,600,400);
     }
 
     public void createCard(PApplet p5){
