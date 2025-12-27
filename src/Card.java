@@ -19,8 +19,8 @@ public class Card {
         this.w = w;
         this.h = h;
 
-        this.textField = new TextField(p5, (int)x+5, (int)(y+h/2), (int)w-10, (int)25);
-        this.boto = new Button(p5, "Godoy",(int)x+5, (int)(y+h/2+25), (int)w-10, (int)25 );
+        this.textField = new TextField(p5, (int)x+5, (int)(y+h/2+90), (int)w-10, (int)50);
+        this.boto = new Button(p5, "EDITAR",(int)x+5, (int)(y+h-80), (int)w-10, (int)70 );
 
     }
 
@@ -32,18 +32,19 @@ public class Card {
 
         // Carta blanca
         p5.fill(255);
-        p5.stroke(0);
+        p5.strokeWeight(5);
+        p5.stroke(255,0,0);
         p5.rect(x, y, w, h);
 
         // Título
         p5.fill(0);
         p5.textAlign(p5.CENTER);
         p5.textSize(midaSubtitol);
-        p5.text(titol, x + w/2, y + 20);
+        p5.text(titol, x + w/2, y + 60);
 
         // Área imagen
-        float imgY = y + 40;
-        float imgH = h / 3;
+        float imgY = y + 90;
+        float imgH = h / 3+20;
 
         if(img == null){
             p5.fill(230);

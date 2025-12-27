@@ -21,7 +21,7 @@ public class GUI{
     public PANTALLA pantallaActual;
 
     // Botons, text fields, switch buttons.....
-    Button b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
+    Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42;
     SwitchButton sb1;
     Select s1,s2,s3,s4;
@@ -61,7 +61,7 @@ public class GUI{
     public void createCard(PApplet p5){
         p5.pushStyle();
         p5.rectMode(p5.CENTER);
-        ca1 = new Card(p5,"ybybbhh", 100,100,300,500);
+        ca1 = new Card(p5,"O-Goshi", 100,500,300,500);
 
         p5.popStyle();
     }
@@ -98,6 +98,8 @@ public class GUI{
 
 
         //Pantalla Inicio
+        bOK = new Button(p5, "OK", 100,100,100,100);
+
         b0 = new Button(p5,logo, p5.width/2-100,100, logoWidth, logoHeight);
 
 
@@ -281,6 +283,7 @@ public class GUI{
 
     // ZONES DE LA GUI
 
+
     public void dibuixaCard(PApplet p5){
         ca1.display(p5);
     }
@@ -355,8 +358,11 @@ public class GUI{
 
         b0.display(p5);
 
+        bOK.display(p5);
         bc1.display(p5);
         bc2.display(p5);
+
+
     }
 
     public void dibuixaButtonNuevoAlumno(PApplet p5){

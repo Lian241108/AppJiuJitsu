@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 public class Calendari {
 
+    boolean visible = false;
+
     // Textos representatius dels mesos
     String[] months = {"Jan","Feb","Mar","Apr","May","Jun",
             "Jul","Aug","Sep","Oct","Nov","Dec"};
@@ -67,6 +69,13 @@ public class Calendari {
 
 
     // Setters
+    public void toggleVisibility(){
+        this.visible = !this.visible;
+    }
+
+    public void setVisible(boolean b){
+        this.visible = b;
+    }
 
     public void setCalendar(int d, int m, int y){
         cal.set(Calendar.YEAR, y);
@@ -178,22 +187,28 @@ public class Calendari {
 
 
     // Dibuixa el Calendari
-    public void display(PApplet p5){
-        p5.pushStyle();
-        p5.fill(0); p5.textSize(36); p5.textAlign(p5.LEFT);
-        p5.text(months[mes-1]+"/"+any, x, y - 30);
-        for(DayButton b : buttons){
-            if(b!=null){
-                b.display(p5);
+    public void display(PApplet p5) {
+        if (visible) {
+            p5.pushStyle();
+            p5.fill(0);
+            p5.textSize(36);
+            p5.textAlign(p5.LEFT);
+            p5.text(months[mes - 1] + "/" + any, x, y - 30);
+            for (DayButton b : buttons) {
+                if (b != null) {
+                    b.display(p5);
+                }
             }
-        }
 
-        if(dateSelected){
-            String dateText = this.selectedDay+"/"+this.selectedMonth+"/"+this.selectedYear;
-            p5.fill(0); p5.textSize(24); p5.textAlign(p5.RIGHT);
-            p5.text(dateText, x+w, y - 30);
+            if (dateSelected) {
+                String dateText = this.selectedDay + "/" + this.selectedMonth + "/" + this.selectedYear;
+                p5.fill(0);
+                p5.textSize(24);
+                p5.textAlign(p5.RIGHT);
+                p5.text(dateText, x + w, y - 30);
+            }
+            p5.popStyle();
         }
-        p5.popStyle();
     }
 
 

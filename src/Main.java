@@ -181,6 +181,7 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
         }
 
         //PANTALLA INICIAL
@@ -268,6 +269,9 @@ public class Main extends PApplet {
             if (gui.b51.mouseOverButton(this)) {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
+            }
+            if(gui.bOK.mouseOverButton(this)){
+                gui.c1.toggleVisibility();
             }
             if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
                 gui.c1.prevMonth();
