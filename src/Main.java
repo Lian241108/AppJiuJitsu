@@ -234,6 +234,9 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.NUEVOALUMNO;
             }
+            if (gui.sb1.mouseOverButton(this)){
+                gui.sb1.toggle();
+            }
         }
 
         //PAntalla EJercicios

@@ -1,9 +1,4 @@
-import static java.awt.SystemColor.text;
-
-import com.jogamp.nativewindow.macosx.MacOSXGraphicsDevice;
 import processing.core.PFont;
-import java.awt.*;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 import static Graphics.Layout.*;
@@ -61,7 +56,7 @@ public class GUI{
     public void createCard(PApplet p5){
         p5.pushStyle();
         p5.rectMode(p5.CENTER);
-        ca1 = new Card(p5,"O-Goshi", 100,500,300,500);
+        ca1 = new Card(p5,"O-Goshi", p5.width/2-800,500,300,500);
 
         p5.popStyle();
     }
@@ -96,11 +91,11 @@ public class GUI{
 
     public void createButtons(PApplet p5){
 
-
         //Pantalla Inicio
+
         bOK = new Button(p5, "OK", 100,100,100,100);
 
-        b0 = new Button(p5,logo, p5.width/2-100,100, logoWidth, logoHeight);
+        b0 = new Button(p5,logo, p5.width/2-100,50, logoWidth, logoHeight);
 
 
         b11 = new Button (p5,"INICIAR", p5.width/2-150, p5.height/2+400, 300, 100);
@@ -116,6 +111,8 @@ public class GUI{
         //b32 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
         //b33 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b34 = new Button(p5, "<", marginH, marginV, 50, 50);
+        bpt1 = new Button (p5,"<", p5.width/2-500, p5.height/2+425, 50, 50);
+        bpt2 = new Button (p5,">", p5.width/2-400, p5.height/2+425, 50, 50);
 
         //Pantalla Ejercicios
         b41 = new Button (p5,"NUEVO EJERCICIO",p5.width/2+400, p5.height/2+400, 400, 100);
@@ -141,13 +138,8 @@ public class GUI{
         b81 = new Button(p5, "<", marginH, marginV, 50, 50);
         b82 = new Button (p5,"GUARDAR",p5.width/2+400, p5.height/2+400, 300, 100);
 
-        bpt1 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
-        bpt2 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
-
         bc1 = new Button (p5,"<", p5.width/2+100, p5.height/2-100, 50, 50);
         bc2 = new Button (p5,">", p5.width/2+200, p5.height/2-100, 50, 50);
-
-
     }
 
     public void createTextField(PApplet p5){
@@ -213,24 +205,14 @@ public class GUI{
 
         p5.textFont(pFont3);
 
-        p5.text("CORREO",p5.width/2-110, p5.height/2-10);
-        p5.text("CONTRASEÑA",p5.width/2-100, p5.height/2+190);
-
-        //dibuixaButton(p5);
-        //dibuixaSideBar(p5);
-        // dibuixaBanner(p5);
+        p5.text("CORREO",p5.width/2-100, p5.height/2-10);
+        p5.text("CONTRASEÑA",p5.width/2-70, p5.height/2+190);
     }
 
     public void dibuixaPantallaInicial(PApplet p5){
-
         p5.background(255);
         p5.textFont(pFont3);
         dibuixaButtonInicial(p5);
-
-        //dibuixaLogoAltres(p5);
-        //dibuixaSideBar(p5);
-        // dibuixaBanner(p5);
-
     }
 
     public void dibuixaPantallaAlumnos(PApplet p5){
@@ -238,6 +220,7 @@ public class GUI{
         dibuixaButtonALumnos(p5);
         dibuixaPagedTable(p5);
         dibuixaTextListAlumnos(p5);
+        dibuixaSwitchButton(p5);
     }
 
     public void dibuixaPantallaEjercicios(PApplet p5){
@@ -304,7 +287,7 @@ public class GUI{
     }
 
     public void dibuixaPagedTable(PApplet p5){
-        pt1.display(p5, p5.width/2 - 400, p5.height/2 - 200, 800, 400);
+        pt1.display(p5, p5.width/2 - 800, p5.height/2 - 100, 1000, 500);
     }
 
     public void dibuixaLogoInici(PApplet p5){
