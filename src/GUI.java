@@ -235,14 +235,14 @@ public class GUI{
 
         dibuixaButtonEntrenos(p5);
         dibuixaCalendari(p5);
-        dibuixaTextListEJercicios(p5);
+        dibuixaTextListEntrenos(p5);
     }
 
     public void dibuixaPantallaNuevoAlumno(PApplet p5){
         p5.background(255);
         dibuixaButtonNuevoAlumno(p5);
         dibuixaTextFieldNuevoAlumno(p5);
-        dibuixaSelect(p5);
+        dibuixaSelectAlumnos(p5);
     }
 
     public void dibuixaPantallaNuevoEntreno(PApplet p5){
@@ -250,7 +250,7 @@ public class GUI{
 
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
-        dibuixaSelect(p5);
+        dibuixaSelectEntreno(p5);
     }
 
     public void dibuixaPantallaNuevoEjercicio(PApplet p5){
@@ -258,7 +258,6 @@ public class GUI{
 
         dibuixaButtonNuevoEjercicio(p5);
         dibuixaTextFieldNuevoEjercicio(p5);
-        dibuixaSelect(p5);
     }
 
 
@@ -295,8 +294,10 @@ public class GUI{
         p5.image(logo, p5.displayWidth/2, p5.displayHeight/2-300, logoWidth*2, logoHeight*2);
     }
     
-    public void dibuixaSelect(PApplet p5){
+    public void dibuixaSelectAlumnos(PApplet p5){
         s1.display(p5);
+    }
+    public void dibuixaSelectEntreno(PApplet p5){
         s2.display(p5);
     }
 

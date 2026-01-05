@@ -13,7 +13,6 @@ public class Button {
     int fillColorOver, fillColorDisabled;  // Colors del boto (actiu / inactiu).
     String textBoto;  // Text
     boolean enabled;// Estat del botó (actiu / inactiu)ç// .
-    PFont font;
     PImage logo;
 
     public Button(PApplet p5, String text, float x, float y, float w, float h){
