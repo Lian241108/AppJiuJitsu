@@ -5,7 +5,12 @@ import static Graphics.Layout.*;
 
 public class GUI{
 
-    PImage logo;
+    PImage imgCarregada;
+    String nomCarregada;
+    Button botoCarregada;
+
+
+    PImage logo, img;
 
     PFont pFont1, pFont2, pFont3;
 
@@ -71,10 +76,10 @@ public class GUI{
         pt1.setColumnWidths(widths);
 
         String[][] datos = {
-                {"1","Juan","17","Pro","juan@mail.com"},
+                {"1","Joan","17","Pro","joan@mail.com"},
                 {"2","Miquel","22","Avanzado","miquel@mail.com"},
                 {"3","Toni","19","Básico","toni@mail.com"},
-                {"4","Ando","20","Pro","ando@mail.com"},
+                {"4","Angoo","20","Pro","angoo@mail.com"},
                 {"5","Felip","30","Intermedio","felip@mail.com"},
                 {"6","Laura","18","Pro","laura@mail.com"},
                 {"7","Pol","25","Básico","pol@mail.com"},
@@ -92,6 +97,7 @@ public class GUI{
     public void createButtons(PApplet p5){
 
         //Pantalla Inicio
+        botoCarregada = new Button(p5, "LOAD IMAGE", 100, 100, 100, 100);
 
         bOK = new Button(p5, "OK", 100,100,100,100);
 
@@ -196,22 +202,30 @@ public class GUI{
         p5.background(255);
         dibuixaLogoInici(p5);
 
-        p5.textFont(pFont1);
+        //p5.textFont(pFont1);
         dibuixaTextFieldInicio(p5);
 
-        p5.textFont(pFont2);
+        //p5.textFont(pFont2);
         dibuixaButtonInicio(p5);
         p5.fill(0);
 
-        p5.textFont(pFont3);
+        //p5.textFont(pFont3);
 
         p5.text("CORREO",p5.width/2-100, p5.height/2-10);
         p5.text("CONTRASEÑA",p5.width/2-70, p5.height/2+190);
+
+        botoCarregada.display(p5);
+        if(imgCarregada!=null) {
+            p5.imageMode(p5.CORNER);
+            p5.image(imgCarregada, 10, 10, 100, 100);
+            p5.fill(0);
+            p5.text(nomCarregada, 10, 10);
+        }
     }
 
     public void dibuixaPantallaInicial(PApplet p5){
         p5.background(255);
-        p5.textFont(pFont3);
+        //p5.textFont(pFont3);
         dibuixaButtonInicial(p5);
     }
 
@@ -303,6 +317,7 @@ public class GUI{
 
     public void dibuixaButtonInicio(PApplet p5){
         b11.display(p5);
+
     }
 
     public void dibuixaButtonInicial(PApplet p5){

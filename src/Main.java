@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import processing.core.PFont;
 
+import java.io.File;
+
 
 public class Main extends PApplet {
 
@@ -26,30 +28,39 @@ public class Main extends PApplet {
     public void draw(){
 
         // Dibuixa la pantalla corresponent
-        switch(gui.pantallaActual){
-            case GUI.PANTALLA.INICIO:   gui.dibuixaPantallaInicio(this);
+        switch(gui.pantallaActual) {
+            case GUI.PANTALLA.INICIO:
+                gui.dibuixaPantallaInicio(this);
                 break;
 
-            case GUI.PANTALLA.INICIAL:   gui.dibuixaPantallaInicial(this);
+            case GUI.PANTALLA.INICIAL:
+                gui.dibuixaPantallaInicial(this);
                 break;
 
-            case GUI.PANTALLA.ALUMNOS:     gui.dibuixaPantallaAlumnos(this);
+            case GUI.PANTALLA.ALUMNOS:
+                gui.dibuixaPantallaAlumnos(this);
                 break;
 
-            case GUI.PANTALLA.ENTRENOS:   gui.dibuixaPantallaEntrenos(this);
+            case GUI.PANTALLA.ENTRENOS:
+                gui.dibuixaPantallaEntrenos(this);
                 break;
 
-            case GUI.PANTALLA.EJERCICIOS:   gui.dibuixaPantallaEjercicios(this);
+            case GUI.PANTALLA.EJERCICIOS:
+                gui.dibuixaPantallaEjercicios(this);
                 break;
-            case GUI.PANTALLA.NUEVOEJERCICIO:   gui.dibuixaPantallaNuevoEjercicio(this);
+            case GUI.PANTALLA.NUEVOEJERCICIO:
+                gui.dibuixaPantallaNuevoEjercicio(this);
                 break;
-            case GUI.PANTALLA.NUEVOENTRENO:   gui.dibuixaPantallaNuevoEntreno(this);
+            case GUI.PANTALLA.NUEVOENTRENO:
+                gui.dibuixaPantallaNuevoEntreno(this);
                 break;
-            case GUI.PANTALLA.NUEVOALUMNO:   gui.dibuixaPantallaNuevoAlumno(this);
+            case GUI.PANTALLA.NUEVOALUMNO:
+                gui.dibuixaPantallaNuevoAlumno(this);
                 break;
         }
 
         updateCursor(this);
+
 
     }
 
@@ -180,6 +191,11 @@ public class Main extends PApplet {
             if (gui.b11.mouseOverButton(this)) {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
+            }
+
+            if(gui.botoCarregada.mouseOverButton(this)){
+                // Obrim el dialeg
+                selectInput("Selecciona una imatge ...", "fileSelected");
             }
 
         }
@@ -376,6 +392,21 @@ public class Main extends PApplet {
 
     public void mouseReleased() {
         println("MOUSE RELEASED");
+    }
+
+
+    // Carrega Imatge
+    public void fileSelected(File selection) {
+        if (selection == null) {
+            println("No s'ha seleccionat cap fitxer.");
+        } else {
+
+            // Obtenim la ruta del fitxer seleccionat
+            String rutaImatge = selection.getAbsolutePath();
+
+            gui.imgCarregada = loadImage(rutaImatge);  // Actualitzam imatge
+            gui.nomCarregada = selection.getName();  // Actualitzam títol
+        }
     }
 
 
