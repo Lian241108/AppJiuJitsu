@@ -358,8 +358,10 @@ public class GUI{
         b0.display(p5);
 
         bOK.display(p5);
-        bc1.display(p5);
-        bc2.display(p5);
+
+        if (bc1.visible) bc1.display(p5);
+
+        if (bc2.visible) bc2.display(p5);
 
 
     }

@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PFont;
+import java.util.ArrayList;
 
 import java.io.File;
 
@@ -8,6 +9,12 @@ public class Main extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
+    ArrayList<Card> todasCartas = new ArrayList<>();
+
+    //ar.get(i);
+    //ar.set(objeto, i)
+    //ar.size();
+    //ar.add(obj)
 
     public static void main(String[] args) {
         PApplet.main("Main", args);
@@ -291,11 +298,13 @@ public class Main extends PApplet {
             }
             if(gui.bOK.mouseOverButton(this)){
                 gui.c1.toggleVisibility();
+                gui.bc1.toggleVisibility();
+                gui.bc2.toggleVisibility();
             }
-            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()){
+            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()&& gui.bc1.visible){
                 gui.c1.prevMonth();
             }
-            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()){
+            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()&&gui.bc2.visible){
                 gui.c1.nextMonth();
             }
             gui.c1.checkButtons(this);

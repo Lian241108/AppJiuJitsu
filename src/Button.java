@@ -14,6 +14,7 @@ public class Button {
     String textBoto;  // Text
     boolean enabled;// Estat del botó (actiu / inactiu)ç// .
     PImage logo;
+    public boolean visible;
 
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textBoto = text;
@@ -26,6 +27,7 @@ public class Button {
         this.fillColorOver = p5.color(255, 255, 255);
         this.fillColorDisabled = p5.color(150);
         this.strokeColor = p5.color(0);
+        this.visible = false;
     }
 
 
@@ -40,6 +42,7 @@ public class Button {
         this.fillColorOver = p5.color(255, 255, 255);
         this.fillColorDisabled = p5.color(150);
         this.strokeColor = p5.color(0);
+        this.visible = false;
     }
 
 
@@ -100,6 +103,10 @@ public class Button {
     public boolean mouseOverButton(PApplet p5){
         return (p5.mouseX >= this.x) && (p5.mouseX <= this.x + this.w) &&
                 (p5.mouseY >= this.y) && (p5.mouseY <= this.y + this.h);
+    }
+
+    public void toggleVisibility(){
+        this.visible = !this.visible;
     }
 
     // Indica si cal posar el cursor a HAND

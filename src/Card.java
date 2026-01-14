@@ -12,6 +12,7 @@ public class Card {
     Button boto;
     float x, y, w, h;
 
+
     public Card(PApplet p5, String titol, float x, float y, float w, float h){
         this.titol = titol;
         this.x = x;
