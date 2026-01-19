@@ -9,7 +9,7 @@ public class GUI{
     String nomCarregada;
     Button botoCarregada;
 
-    PagedCard pc1;
+    PagedCard pc1, pc2;
     Card[] cardsEjercicios;
 
 
@@ -44,6 +44,7 @@ public class GUI{
         pFont2 = p5.createFont("Font/Roboto-Black.ttf", 30);
         pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
 
+        p5.textFont(pFont2);
 
         createButtons(p5);
         createTextField(p5);
@@ -52,43 +53,72 @@ public class GUI{
         createTextList(p5);
         createPagedTable(p5);
         createCalendari(p5);
-
-        createCard(p5);
         createPagedCards(p5);
+        createPagedCards2(p5);
 
+        //createCard(p5);
     }
 
     public void createPagedCards(PApplet p5){
 
-        cardsEjercicios = new Card[16];
+        cardsEjercicios = new Card[32];
 
-        float areaX = p5.width/2 - 800;
-        float areaY = p5.height/2 - 300;
-        float areaW = 1200;
-        float areaH = 800;
+        float x = p5.width/2 - 900;
+        float y = p5.height/2 - 300;
+        float width = 600;
+        float height = 800;
 
-        float gap = 20;
-        float cardW = (areaW - gap) / 2.0f;
-        float cardH = (areaH - gap) / 2.0f;
+        float espacio = 50;
+        float cardW = (width - espacio) / 2.0f;
+        float cardH = (height - espacio) / 2.0f;
 
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < 32; i++){
 
-            int local = i % 4;     // 0..3 dentro de su página
-            int col = local % 2;   // 0..1
-            int row = local / 2;   // 0..1
+            int local = i % 8;     // 0..3 dentro de su página
+            int col = local % 4;   // 0..1
+            int row = local / 4;   // 0..1
 
-            float cx = areaX + col * (cardW + gap);
-            float cy = areaY + row * (cardH + gap);
+            float cx = x + col * (cardW + espacio);
+            float cy = y + row * (cardH + espacio);
 
             cardsEjercicios[i] = new Card(p5, "Ejercicio " + (i+1), cx, cy, cardW, cardH);
         }
 
-        pc1 = new PagedCard(cardsEjercicios, 4, 4);
-        pc1.setDimensions(areaX, areaY, areaW, areaH);
+        pc1 = new PagedCard(cardsEjercicios, 8, 4);
+        pc1.setDimensions(x, y, width, height);
+    }
+
+    public void createPagedCards2(PApplet p5){
+
+        cardsEjercicios = new Card[32];
+
+        float x = p5.width/2 - 900;
+        float y = p5.height/2 - 300;
+        float width = 600;
+        float height = 800;
+
+        float espacio = 50;
+        float cardW = (width - espacio) / 2.0f;
+        float cardH = (height - espacio) / 2.0f;
+
+        for(int i = 0; i < 32; i++){
+
+            int local = i % 8;     // 0..3 dentro de su página
+            int col = local % 4;   // 0..1
+            int row = local / 4;   // 0..1
+
+            float cx = x + col * (cardW + espacio);
+            float cy = y + row * (cardH + espacio);
+
+            cardsEjercicios[i] = new Card(p5, "Entrenos " + (i+1), cx, cy, cardW, cardH);
+        }
+
+        pc2 = new PagedCard(cardsEjercicios, 8, 4);
+        pc2.setDimensions(x, y, width, height);
     }
 
     public void createCalendari(PApplet p5){
-        c1 = new Calendari(500,100,600,400);
+        c1 = new Calendari(p5.width/2+400,p5.height/2+150,400,300);
     }
 
     public void createCard(PApplet p5){
@@ -130,9 +160,9 @@ public class GUI{
     public void createButtons(PApplet p5){
 
         //Pantalla Inicio
-        botoCarregada = new Button(p5, "LOAD IMAGE", 100, 100, 100, 100);
+        botoCarregada = new Button(p5, "LOAD IMAGE", p5.width/2-800, p5.height/2+200, 350, 100);
 
-        bOK = new Button(p5, "OK", 100,100,100,100);
+        bOK = new Button(p5, "OK", p5.width/2+400,p5.height/2,100,100);
 
         b0 = new Button(p5,logo, p5.width/2-100,50, logoWidth, logoHeight);
 
@@ -146,7 +176,7 @@ public class GUI{
         b24 = new Button(p5, "<", marginH, marginV, 50, 50);
 
         // Pantalla Alumnos
-        b31 = new Button (p5,"NUEVO ALUMNO",p5.width/2+400, p5.height/2+400, 400, 100);
+        b31 = new Button (p5,"NUEVO ALUMNO",p5.width/2+400, p5.height/2+300, 400, 100);
         //b32 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
         //b33 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b34 = new Button(p5, "<", marginH, marginV, 50, 50);
@@ -154,13 +184,13 @@ public class GUI{
         bpt2 = new Button (p5,">", p5.width/2-400, p5.height/2+425, 50, 50);
 
         //Pantalla Ejercicios
-        b41 = new Button (p5,"NUEVO EJERCICIO",p5.width/2+400, p5.height/2+400, 400, 100);
+        b41 = new Button (p5,"NUEVO EJERCICIO",p5.width/2+400, p5.height/2+400, 450, 100);
         b42 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
         b43 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b44 = new Button(p5, "<", marginH, marginV, 50, 50);
 
         //Pantalla Entrenos
-        b51 = new Button (p5,"NUEVO ENTRENO", p5.width/2+400, p5.height/2+400, 400, 100);
+        b51 = new Button (p5,"NUEVO ENTRENO", p5.width/2+400, p5.height/2+400, 450, 100);
         b52 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
         b53 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b54 = new Button(p5, "<", marginH, marginV, 50, 50);
@@ -177,8 +207,8 @@ public class GUI{
         b81 = new Button(p5, "<", marginH, marginV, 50, 50);
         b82 = new Button (p5,"GUARDAR",p5.width/2+400, p5.height/2+400, 300, 100);
 
-        bc1 = new Button (p5,"<", p5.width/2+100, p5.height/2-100, 50, 50);
-        bc2 = new Button (p5,">", p5.width/2+200, p5.height/2-100, 50, 50);
+        bc1 = new Button (p5,"<", p5.width/2+550, p5.height/2, 50, 50);
+        bc2 = new Button (p5,">", p5.width/2+650, p5.height/2, 50, 50);
     }
 
     public void createTextField(PApplet p5){
@@ -200,7 +230,7 @@ public class GUI{
 
         // Pantalla NuevoEjercicio
         t31 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-        t32 = new TextField(p5, p5.width/2-800, p5.height/2+200, 400, 100 );
+        //t32 = new TextField(p5, p5.width/2-800, p5.height/2+200, 400, 100 );
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
         
         // PAntalla NuevoEntreno
@@ -212,8 +242,8 @@ public class GUI{
     public void createSelect(PApplet p5){
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
-        s1 = new Select(valors1, 100, 100, 200, 50);
-        s2 = new Select(valors2, 100, 500, 200, 50);
+        s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
+        s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
     }
 
     public void createTextList (PApplet p5){
@@ -223,8 +253,8 @@ public class GUI{
         String[] ejercicios = {"Ogoshi","Osotogari", "Flexions", "Sentadillas", "Caigudes"};
 
         textListAlumnos = new TextList(p5, alumnos, p5.width/2-800, p5.height/2-300, 400, 50);
-        textListEntrenos = new TextList(p5, entrenos, p5.width/2-800, p5.height/2-300, 400, 50);
-        textListEjercicios = new TextList(p5, ejercicios, p5.width/2-800, p5.height/2-300, 400, 50);
+        textListEntrenos = new TextList(p5, entrenos, p5.width/2+400, p5.height/2-190, 400, 50);
+        textListEjercicios = new TextList(p5, ejercicios, p5.width/2+400, p5.height/2-190, 400, 50);
 
 
     }
@@ -237,8 +267,6 @@ public class GUI{
 
         //p5.textFont(pFont1);
         dibuixaTextFieldInicio(p5);
-
-        //p5.textFont(pFont2);
         dibuixaButtonInicio(p5);
         p5.fill(0);
 
@@ -247,13 +275,6 @@ public class GUI{
         p5.text("CORREO",p5.width/2-100, p5.height/2-10);
         p5.text("CONTRASEÑA",p5.width/2-70, p5.height/2+190);
 
-        botoCarregada.display(p5);
-        if(imgCarregada!=null) {
-            p5.imageMode(p5.CORNER);
-            p5.image(imgCarregada, 10, 10, 100, 100);
-            p5.fill(0);
-            p5.text(nomCarregada, 10, 10);
-        }
     }
 
     public void dibuixaPantallaInicial(PApplet p5){
@@ -267,7 +288,11 @@ public class GUI{
         dibuixaButtonALumnos(p5);
         dibuixaPagedTable(p5);
         dibuixaTextListAlumnos(p5);
-        dibuixaSwitchButton(p5);
+
+        p5.textAlign(p5.CORNER);
+
+        p5.text("BUSCAR: ",p5.width/2-800, p5.height/2-310);
+        //dibuixaSwitchButton(p5);
     }
 
     public void dibuixaPantallaEjercicios(PApplet p5){
@@ -276,6 +301,8 @@ public class GUI{
         //dibuixaCard(p5);
         dibuixaPagedCard(p5);
         dibuixaTextListEJercicios(p5);
+
+        p5.text("BUSCAR: ",p5.width/2+400, p5.height/2-200);
     }
 
     public void dibuixaPantallaEntrenos(PApplet p5){
@@ -284,6 +311,11 @@ public class GUI{
         dibuixaButtonEntrenos(p5);
         dibuixaCalendari(p5);
         dibuixaTextListEntrenos(p5);
+
+        dibuixaPagedCard2(p5);
+
+        p5.text("BUSCAR: ",p5.width/2+400, p5.height/2-190);
+
     }
 
     public void dibuixaPantallaNuevoAlumno(PApplet p5){
@@ -291,6 +323,15 @@ public class GUI{
         dibuixaButtonNuevoAlumno(p5);
         dibuixaTextFieldNuevoAlumno(p5);
         dibuixaSelectAlumnos(p5);
+
+        p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
+        p5.text("GENERO: ",p5.width/2-800, p5.height/2-110);
+        p5.text("DNI: ",p5.width/2-200, p5.height/2-310);
+        p5.text("EDAD: ",p5.width/2-800, p5.height/2+40);
+        p5.text("TUTOR LEGAL: ",p5.width/2-200, p5.height/2+40);
+        p5.text("TELEFONO: ",p5.width/2-200, p5.height/2+190);
+        p5.text("DESCRIPCIÓN: ",p5.width/2+400, p5.height/2-310);
+
     }
 
     public void dibuixaPantallaNuevoEntreno(PApplet p5){
@@ -298,7 +339,10 @@ public class GUI{
 
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
-        dibuixaSelectEntreno(p5);
+
+        p5.textAlign(p5.CORNER);
+        p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
+        p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
     }
 
     public void dibuixaPantallaNuevoEjercicio(PApplet p5){
@@ -306,6 +350,22 @@ public class GUI{
 
         dibuixaButtonNuevoEjercicio(p5);
         dibuixaTextFieldNuevoEjercicio(p5);
+
+        dibuixaSelectEjercicio(p5);
+
+        botoCarregada.display(p5);
+        if(imgCarregada!=null) {
+            p5.imageMode(p5.CORNER);
+            p5.image(imgCarregada, 10, 10, 100, 100);
+            p5.fill(0);
+            p5.text(nomCarregada, 10, 10);
+        }
+        p5.textAlign(p5.CORNER);
+
+
+        p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
+        p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
+        p5.text("TIPO: ",p5.width/2-800, p5.height/2-60);
     }
 
 
@@ -345,7 +405,7 @@ public class GUI{
     public void dibuixaSelectAlumnos(PApplet p5){
         s1.display(p5);
     }
-    public void dibuixaSelectEntreno(PApplet p5){
+    public void dibuixaSelectEjercicio(PApplet p5){
         s2.display(p5);
     }
 
@@ -404,6 +464,10 @@ public class GUI{
         pc1.display(p5);
     }
 
+    public void dibuixaPagedCard2(PApplet p5){
+        pc2.display(p5);
+    }
+
     public void dibuixaButtonNuevoAlumno(PApplet p5){
         b61.display(p5);
         b62.display(p5);
@@ -443,7 +507,7 @@ public class GUI{
 
     public void dibuixaTextFieldNuevoEjercicio(PApplet p5){
         t31.display(p5);
-        t32.display(p5);
+        //t32.display(p5);
         t33.display(p5);
     }
 

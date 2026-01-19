@@ -8,7 +8,7 @@ public class PagedCard {
     private int currentPage = 0;
 
     // (Opcional) solo para dibujar el texto de página
-    private float x, y;
+    public float x, y;
 
     public PagedCard(Card[] cards, int cardsPerPage, int totalPages){
         this.cards = cards;

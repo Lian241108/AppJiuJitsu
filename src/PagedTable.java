@@ -85,6 +85,7 @@ public class PagedTable {
 
         // Dibuixa textos
         p5.fill(0); p5.textSize(24);
+        p5.textAlign(p5.CORNER);
         for(int r = 0; r < numRows; r++){
             xCol = x;
             for(int c = 0; c< numCols; c++){

@@ -16,6 +16,7 @@ public class Button {
     PImage logo;
     public boolean visible;
 
+
     public Button(PApplet p5, String text, float x, float y, float w, float h){
         this.textBoto = text;
         this.x = x;
@@ -28,6 +29,7 @@ public class Button {
         this.fillColorDisabled = p5.color(150);
         this.strokeColor = p5.color(0);
         this.visible = false;
+
     }
 
 
@@ -43,6 +45,7 @@ public class Button {
         this.fillColorDisabled = p5.color(150);
         this.strokeColor = p5.color(0);
         this.visible = false;
+
     }
 
 
@@ -71,31 +74,32 @@ public class Button {
 
     // Dibuixa el botó
     public void display(PApplet p5){
-        p5.pushStyle();
-        if(!enabled){
-            p5.fill(fillColorDisabled);  // Color desabilitat
-        }
-        else if(mouseOverButton(p5)){
-            p5.fill(fillColorOver);      // Color quan ratolí a sobre
-        }
-        else{
-            p5.fill(fillColor);          // Color actiu però ratolí fora
-        }
-        p5.stroke(strokeColor); p5.strokeWeight(3);        //Color i gruixa del contorn
-        p5.rect(this.x, this.y, this.w, this.h, 10);    // Rectangle del botó
 
-        // Text (color, alineació i mida)
+            p5.pushStyle();
+            if (!enabled) {
+                p5.fill(fillColorDisabled);  // Color desabilitat
+            } else if (mouseOverButton(p5)) {
+                p5.fill(fillColorOver);      // Color quan ratolí a sobre
+            } else {
+                p5.fill(fillColor);          // Color actiu però ratolí fora
+            }
+            p5.stroke(strokeColor);
+            p5.strokeWeight(3);        //Color i gruixa del contorn
+            p5.rect(this.x, this.y, this.w, this.h, 10);    // Rectangle del botó
 
-        p5.fill(0); p5.textAlign(p5.CENTER); p5.textSize(50);
-        if(textBoto!=null) {
-            p5.text(textBoto, this.x + this.w / 2, this.y + this.h / 2 + 10);
-        }
-        if(logo!=null) {
-            p5.imageMode(p5.CORNER);
-            p5.image(logo, this.x, this.y, this.w, this.h);
-        }
-        p5.popStyle();
+            // Text (color, alineació i mida)
 
+            p5.fill(0);
+            p5.textAlign(p5.CENTER);
+            p5.textSize(50);
+            if (textBoto != null) {
+                p5.text(textBoto, this.x + this.w / 2, this.y + this.h / 2 + 10);
+            }
+            if (logo != null) {
+                p5.imageMode(p5.CORNER);
+                p5.image(logo, this.x, this.y, this.w, this.h);
+            }
+            p5.popStyle();
 
     }
 

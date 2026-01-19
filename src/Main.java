@@ -312,6 +312,9 @@ public class Main extends PApplet {
             }
             gui.c1.checkButtons(this);
 
+            if(gui.b52.mouseOverButton(this)) gui.pc2.prevPage();
+            if(gui.b53.mouseOverButton(this)) gui.pc2.nextPage();
+
         }
 
         //PAntalla Nuevo Alumno
@@ -363,7 +366,7 @@ public class Main extends PApplet {
         gui.t25.isPressed(this);
         gui.t26.isPressed(this);
         gui.t31.isPressed(this);
-        gui.t32.isPressed(this);
+        //gui.t32.isPressed(this);
         gui.t33.isPressed(this);
         gui.t41.isPressed(this);
         gui.t42.isPressed(this);

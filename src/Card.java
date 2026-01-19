@@ -20,8 +20,8 @@ public class Card {
         this.w = w;
         this.h = h;
 
-        this.textField = new TextField(p5, (int)x+5, (int)(y+h/2+90), (int)w-10, (int)50);
-        this.boto = new Button(p5, "EDITAR",(int)x+5, (int)(y+h-80), (int)w-10, (int)70 );
+        this.textField = new TextField(p5, (int)x+5, (int)(y+h/2+60), (int)w-10, (int)50);
+        this.boto = new Button(p5, "EDITAR",(int)x+5, (int)(y+h-70), (int)w-10, (int)60 );
 
     }
 
@@ -45,7 +45,7 @@ public class Card {
 
         // Área imagen
         float imgY = y + 90;
-        float imgH = h / 3+20;
+        float imgH = h / 3 + 20;
 
         if(img == null){
             p5.fill(230);
