@@ -9,6 +9,9 @@ public class GUI{
     String nomCarregada;
     Button botoCarregada;
 
+    PagedCard pc1;
+    Card[] cardsEjercicios;
+
 
     PImage logo, img;
 
@@ -51,7 +54,37 @@ public class GUI{
         createCalendari(p5);
 
         createCard(p5);
+        createPagedCards(p5);
 
+    }
+
+    public void createPagedCards(PApplet p5){
+
+        cardsEjercicios = new Card[16];
+
+        float areaX = p5.width/2 - 800;
+        float areaY = p5.height/2 - 300;
+        float areaW = 1200;
+        float areaH = 800;
+
+        float gap = 20;
+        float cardW = (areaW - gap) / 2.0f;
+        float cardH = (areaH - gap) / 2.0f;
+
+        for(int i = 0; i < 16; i++){
+
+            int local = i % 4;     // 0..3 dentro de su página
+            int col = local % 2;   // 0..1
+            int row = local / 2;   // 0..1
+
+            float cx = areaX + col * (cardW + gap);
+            float cy = areaY + row * (cardH + gap);
+
+            cardsEjercicios[i] = new Card(p5, "Ejercicio " + (i+1), cx, cy, cardW, cardH);
+        }
+
+        pc1 = new PagedCard(cardsEjercicios, 4, 4);
+        pc1.setDimensions(areaX, areaY, areaW, areaH);
     }
 
     public void createCalendari(PApplet p5){
@@ -240,7 +273,8 @@ public class GUI{
     public void dibuixaPantallaEjercicios(PApplet p5){
         p5.background(255);
         dibuixaButtonEjercicios(p5);
-        dibuixaCard(p5);
+        //dibuixaCard(p5);
+        dibuixaPagedCard(p5);
         dibuixaTextListEJercicios(p5);
     }
 
@@ -364,6 +398,10 @@ public class GUI{
         if (bc2.visible) bc2.display(p5);
 
 
+    }
+
+    public void dibuixaPagedCard(PApplet p5){
+        pc1.display(p5);
     }
 
     public void dibuixaButtonNuevoAlumno(PApplet p5){

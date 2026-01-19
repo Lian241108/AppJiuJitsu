@@ -2,7 +2,13 @@ import processing.core.PApplet;
 
 public class CardProva extends PApplet {
 
+
+
+
     Card ca1;
+    int numPages = 4;
+    int numCards = 4;
+    int[] cards;
 
 
 

@@ -1,135 +1,55 @@
-
 import processing.core.PApplet;
-import processing.core.PImage;
 
-public class PagedCard extends PApplet {
+public class PagedCard {
 
-    // Botons
-    Button b1, b2;
+    private Card[] cards;
+    private int cardsPerPage;   // 4
+    private int totalPages;     // 4
+    private int currentPage = 0;
 
-    // Dimensions dels botons
-    float buttonW = 60, buttonH = 60;
+    // (Opcional) solo para dibujar el texto de página
+    private float x, y;
 
-    // Cards Paginades
-    PagedCard pc;
-
-    // Dimensions de les cards
-    float cardsW = 800, cardsH = 700;
-
-    // Número de cards per pàgina
-    int numCardsPage = 4;
-
-    // Dades de les cards
-    String[][] info = {
-            {"Títol 1", "Lloc 1", "Data 1", "Secció 1", "Descripció 1"},
-            {"Títol 2", "Lloc 2", "Data 2", "Secció 2", "Descripció 2"},
-            {"Títol 3", "Lloc 3", "Data 3", "Secció 1", "Descripció 3"},
-            {"Títol 4", "Lloc 4", "Data 4", "Secció 1", "Descripció 4"},
-            {"Títol 5", "Lloc 5", "Data 5", "Secció 2", "Descripció 5"},
-            {"Títol 6", "Lloc 6", "Data 6", "Secció 2", "Descripció 6"},
-            {"Títol 7", "Lloc 7", "Data 7", "Secció 1", "Descripció 7"},
-            {"Títol 8", "Lloc 8", "Data 8", "Secció 8", "Descripció 8"},
-            {"Títol 9", "Lloc 9", "Data 9", "Secció 9", "Descripció 9"},
-            {"Títol 0", "Lloc 0", "Data 0", "Secció 0", "Descripció 0"},
-    };
-
-    // Imatges de les cards
-    PImage img1, img2;
-
-    boolean cursorHand = false;
-
-    public static void main(String[] args) {
-        PApplet.main("gui.test.PagedCardTest", args);
+    public PagedCard(Card[] cards, int cardsPerPage, int totalPages){
+        this.cards = cards;
+        this.cardsPerPage = cardsPerPage;
+        this.totalPages = totalPages;
     }
 
-    public void settings(){
-        size(1200, 800);     // Dimensions de la Pantalla
-        smooth(10);
+    // Ya no lo usamos para recolocar, solo para el texto "Página X/Y"
+    public void setDimensions(float x, float y, float w, float h){
+        this.x = x;
+        this.y = y;
     }
 
-    public void setup(){
-
-        // Imatges de les Categories
-        img1 = loadImage("categoria1.png");
-        img2 = loadImage("categoria2.png");
-
-        // Creació de la taula
-        pc = new PagedCard(numCardsPage);
-        pc.setDimensions(50, 50, cardsW, cardsH);
-        pc.setData(info);
-        pc.setCards();
-        pc.setImages(img1, img2);
-
-        // Creació dels botons
-        b1 = new Button(this, "NEXT", 100 + cardsW, 80, buttonW, buttonH);
-        b2 = new Button(this, "PREV", 100 + cardsW, 100 + buttonH, buttonW, buttonH);
-
+    public void nextPage(){
+        if(currentPage < totalPages - 1) currentPage++;
     }
 
-    public void draw(){
-
-        background(255);
-
-        // Dibuixa les Cards paginades
-        pc.display(this);
-        pc.printSelectedCard(this);
-
-        // Dibuixa els botons
-        b1.display(this);
-        b2.display(this);
-
-        // Actualitza forma del cursor
-        updateCursor(this);
-
+    public void prevPage(){
+        if(currentPage > 0) currentPage--;
     }
 
-    // Modifica el cursor
-    void updateCursor(PApplet p5){
+    public void display(PApplet p5){
+        p5.pushStyle();
 
-        if((b1.mouseOverButton(p5) && b1.isEnabled())||
-                (b2.mouseOverButton(p5) && b2.isEnabled())){
-            cursorHand = true;
-        }
-        else {
-            cursorHand = pc.checkMouseOver(p5);
+        int start = currentPage * cardsPerPage;
+        int end = start + cardsPerPage;
+
+        for(int i = start; i < end; i++){
+            if(i < 0 || i >= cards.length) continue;
+            if(cards[i] == null) continue;
+
+            // SOLO dibujar (las cards ya tienen su x,y,w,h puestos al crearlas)
+            cards[i].display(p5);
         }
 
-        if(cursorHand){
-            cursor(HAND);
-        }
-        else {
-            cursor(ARROW);
-        }
+        // Indicador de página
+        p5.fill(0);
+        p5.textAlign(p5.LEFT);
+        p5.textSize(18);
+        p5.text("Página " + (currentPage + 1) + " / " + totalPages, x, y - 10);
 
+        p5.popStyle();
     }
-
-
-    // ******************* KEYBOARD interaction ***************************** //
-
-    public void keyPressed(){
-    }
-
-    // ******************* MOUSE interaction ***************************** //
-
-    public void mousePressed(){
-        if(b1.mouseOverButton(this) && b1.isEnabled()){
-            pc.nextPage();
-        }
-        else if(b2.mouseOverButton(this) && b2.isEnabled()){
-            pc.prevPage();
-        }
-        else {
-            pc.checkCardSelection(this);
-        }
-    }
-
-    public void mouseDragged(){
-        println("MOUSE DRAGGED");
-    }
-
-    public void mouseReleased() {
-        println("MOUSE RELEASED");
-    }
-
 }
-

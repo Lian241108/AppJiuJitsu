@@ -280,6 +280,9 @@ public class Main extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
             }
 
+            if(gui.b42.mouseOverButton(this)) gui.pc1.prevPage();
+            if(gui.b43.mouseOverButton(this)) gui.pc1.nextPage();
+
         }
 
         //PAntalla Entrenos
