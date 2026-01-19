@@ -18,6 +18,8 @@ public class PagedTable {
         this.numPage = 0;
     }
 
+
+
     // Setters
 
     public void setHeaders(String[] h){

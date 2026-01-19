@@ -7,7 +7,7 @@ public class CardProva extends PApplet {
 
 
     public static void main(String[] args){
-        PApplet.main("CardProva");
+        PApplet.main("Card.CardProva");
     }
 
     public void settings(){
