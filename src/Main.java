@@ -175,6 +175,7 @@ public class Main extends PApplet {
         }
 
             //PANTALLA NUEVO EJERCICIO
+
         else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
             gui.t31.keyPressed(key, keyCode);
             gui.t32.keyPressed(key, keyCode);

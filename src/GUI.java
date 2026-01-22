@@ -141,7 +141,7 @@ public class GUI{
         String[][] datos = {
                 {"1","Joan","17","Pro","joan@mail.com"},
                 {"2","Miquel","22","Avanzado","miquel@mail.com"},
-                {"3","Toni","19","Básico","toni@mail.com"},
+                {"3","Toni","19","Penos","toni@mail.com"},
                 {"4","Angoo","20","Pro","angoo@mail.com"},
                 {"5","Felip","30","Intermedio","felip@mail.com"},
                 {"6","Laura","18","Pro","laura@mail.com"},
