@@ -130,23 +130,24 @@ public class GUI{
     }
 
     public void createPagedTable(PApplet p5){
-        pt1 = new PagedTable(6, 5);   // 1 cabecera + 5 filas visibles
+        pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles
 
-        String[] headers = {"ID","Nombre","Edad","Nivel","Email"};
+        String[] headers = {"ID","Nombre y apellidos","DNI","Edad", "Data","Tutor legal","Telefono","Nivel","Ha pagat?"};
         pt1.setHeaders(headers);
 
-        float[] widths = {10, 25, 15, 20, 30};
+        float[] widths = {5, 20, 10,5,12,12,12,10,12};
         pt1.setColumnWidths(widths);
 
         String[][] datos = {
-                {"1","Joan","17","Pro","joan@mail.com"},
-                {"2","Miquel","22","Avanzado","miquel@mail.com"},
-                {"3","Toni","19","Penos","toni@mail.com"},
-                {"4","Angoo","20","Pro","angoo@mail.com"},
-                {"5","Felip","30","Intermedio","felip@mail.com"},
-                {"6","Laura","18","Pro","laura@mail.com"},
-                {"7","Pol","25","Básico","pol@mail.com"},
-                {"8","Sara","21","Avanzado","sara@mail.com"}
+                {"1","Joan","6752475X","17","24/11/28","Merce","661872298","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
+                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
         };
         pt1.setData(datos);
     }
@@ -394,7 +395,7 @@ public class GUI{
     }
 
     public void dibuixaPagedTable(PApplet p5){
-        pt1.display(p5, p5.width/2 - 800, p5.height/2 - 100, 1000, 500);
+        pt1.display(p5, p5.width/2 - 800, p5.height/2 - 100, 1400, 500);
     }
 
     public void dibuixaLogoInici(PApplet p5){
