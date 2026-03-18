@@ -528,5 +528,108 @@ public class dataBase {
         }
     }
 
+    // Funció que retorna el nom del client amb un cert dni
+    public String getNomClientAmbDNI(String dni){
+        String q = "SELECT nom FROM client WHERE dni='" + dni +"'";
+        System.out.println(q);
+        try{
+            ResultSet rs = query.executeQuery(q);
+            rs.next();
+            return rs.getString("nom");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public String[] getNomTotsClients(){
+        String q = "SELECT nom FROM client ORDER BY nom ASC";
+        System.out.println(q);
+        try{
+            int numFiles = getNumFilesTaula("client");
+            String[] info = new String[numFiles];
+            ResultSet rs = query.executeQuery(q);
+            int f = 0;
+            while(rs.next()){
+                info[f] = rs.getString("nom");
+                f++;
+            }
+            return info;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public String[][] getInfoTotsClients(){
+        String q = "SELECT dni, nom FROM client ORDER BY nom ASC";
+        System.out.println(q);
+        try{
+            int numFiles = getNumFilesTaula("client");
+            String[][] info = new String[numFiles][2];
+            ResultSet rs = query.executeQuery(q);
+            int f = 0;
+            while(rs.next()){
+                info[f][0] = rs.getString("dni");
+                info[f][1] = rs.getString("nom");
+                f++;
+            }
+            return info;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public String[][] getInfoCotxosSEAT(){
+
+        String qf = "SELECT COUNT(*) AS n " +
+                "FROM cotxo c, marca m " +
+                "WHERE c.marca=m.id AND m.nom='SEAT' ";
+        System.out.println(qf);
+
+        int nf = getNumFilesQuery(qf);
+        System.out.println("Num files Query: "+nf);
+        String[][] info = new String[nf][3];
+
+        String q = "SELECT c.matricula AS mat, c.model AS model, m.nom as nom " +
+                "FROM cotxo c, marca m " +
+                "WHERE c.marca=m.id AND m.nom='SEAT' " +
+                "ORDER BY c.matricula ASC";
+        System.out.println(q);
+
+        try{
+            ResultSet rs = query.executeQuery(q);
+            int f=0;
+            while(rs.next()){
+                info[f][0] = rs.getString("mat");
+                info[f][1] = rs.getString("model");
+                info[f][2] = rs.getString("nom");
+                f++;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return info;
+    }
+
+    public int getNumFilesQuery(String q){
+        try{
+            ResultSet rs = query.executeQuery(q);
+            rs.next();
+            return rs.getInt("n");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+
+
 
 }
