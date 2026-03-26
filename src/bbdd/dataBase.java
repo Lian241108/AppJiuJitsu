@@ -94,17 +94,17 @@ public class dataBase {
     // Retorna totes les caselles (files i columnes) d'una taula
 
     public String[][] getInfoArray2DUnitat(){
-        int nf = getNumFilesTaula("unitat");
+        int nf = getNumFilesTaula("ejercicio");
         String[][] info = new String[nf][3];
-        String q = "SELECT numero, nom, curs FROM unitat ORDER BY numero ASC";
+        String q = "SELECT Nombre, Tipus_Nombre, Dificultad_Nombre FROM ejercicio ORDER BY Nombre ASC";
         System.out.println(q);
         try{
             ResultSet rs = query.executeQuery(q);
             int f=0;
             while(rs.next()){
-                info[f][0] = String.valueOf( rs.getInt("numero"));
-                info[f][1] = rs.getString("nom");
-                info[f][2] = String.valueOf( rs.getInt("curs"));
+                info[f][0] = String.valueOf( rs.getInt("Nombre"));
+                info[f][1] = rs.getString("Tipus_Nombre");
+                info[f][2] = String.valueOf( rs.getInt("Dificultad_Nombre"));
                 f++;
             }
             return info;
@@ -132,22 +132,22 @@ public class dataBase {
 
     // Retorna les dades (enunaciat, opcions i correcte) de totes les preguntes de dificultat 2
     public String[][] getInfoPreguntaDificil(){
-        String qNF = "SELECT COUNT(*) AS num FROM pregunta WHERE dificultat='2' ";
+        String qNF = "SELECT COUNT(*) AS num FROM ejercicio WHERE dificultad_Nombre='Dificil' ";
         int nf = getNumFilesMatchQuery(qNF);
         String[][] info = new String[nf][5];
-        String q = " SELECT enunciat, opcioA, opcioB, opcioC, correcte " +
-                " FROM pregunta " +
-                " WHERE dificultat = '2' ";
+        String q = " SELECT nombre, Imagen, Descripción, Tipus_Nombre, Dificultad_Nombre " +
+                " FROM ejercicio " +
+                " WHERE dificultad = 'Dificil' ";
         System.out.println(q);
         try {
             ResultSet rs = query.executeQuery(q);
             int n = 0;
             while(rs.next()){
-                info[n][0] = rs.getString("enunciat");
-                info[n][1] = rs.getString("opcioA");
-                info[n][2] = rs.getString("opcioB");
-                info[n][3] = rs.getString("opcioC");
-                info[n][4] = rs.getString("correcte");
+                info[n][0] = rs.getString("Nombre");
+                info[n][1] = rs.getString("Imagen");
+                info[n][2] = rs.getString("Descripción");
+                info[n][3] = rs.getString("Tipus_Nombre");
+                info[n][4] = rs.getString("Dificultad_Nombre");
                 n++;
             }
         }
@@ -160,22 +160,22 @@ public class dataBase {
     // Retorna dades de dues taules relacionades
     public String[][] getInfoPreguntesUnitats(){
         String qNF = " SELECT COUNT(*) AS num " +
-                " FROM pregunta p, unitat u " +
-                " WHERE p.unitat = u.numero ";
+                " FROM ejercicio e, tipus t " +
+                " WHERE e.Tipus_Nombre = t.Nombre ";
         int nf = getNumFilesMatchQuery(qNF);
         String[][] info = new String[nf][2];
 
-        String q = " SELECT p.enunciat, u.nom " +
-                " FROM pregunta p, unitat u " +
-                " WHERE p.unitat = u.numero ";
+        String q = " SELECT e.Nombre AS nomEjercicio, t.Nombre AS nomTipus " +
+                " FROM ejercicio e, tipus t " +
+                " WHERE e.Tipus_Nombre = t.Nombre ";
 
         System.out.println(q);
         try{
             ResultSet rs = query.executeQuery(q);
             int n=0;
             while(rs.next()){
-                info[n][0] = rs.getString("p.enunciat");
-                info[n][1] = rs.getString("u.nom");
+                info[n][0] = rs.getString("nomEjercicio");
+                info[n][1] = rs.getString("nomTipus");
                 n++;
             }
 
@@ -186,7 +186,7 @@ public class dataBase {
         return info;
     }
 
-
+/*
     // Retorna el càlcul (MAX) sobre una columna numèrica (punts) d'una taula ( puntuacio).
 
     public int getMaxPuntuacioUsuari(String nomUsuari){
@@ -266,21 +266,24 @@ public class dataBase {
         }
     }
 
+
+ */
+
     // Cercador de Preguntes
     // SELECT * FROM pregunta WHERE enunciat LIKE '%Quin%'
     public String[][] preguntesCercador(String clauCerca){
 
-        String qNF = "SELECT COUNT(*) AS num FROM pregunta WHERE enunciat LIKE '%"+ clauCerca+"%'";
+        String qNF = "SELECT COUNT(*) AS num FROM ejercicio WHERE Nombre LIKE '%"+ clauCerca+"%'";
         int nf = getNumFilesMatchQuery(qNF);
         String[][] info = new String[nf][2];
-        String q = "SELECT numero, enunciat FROM pregunta WHERE enunciat LIKE '%"+ clauCerca+"%'";
+        String q = "SELECT Nombre, Descripción FROM ejercico WHERE Nombre LIKE '%"+ clauCerca+"%'";
         System.out.println(q);
         try{
             ResultSet rs = query.executeQuery(q);
             int n=0;
             while(rs.next()){
-                info[n][0] = String.valueOf(rs.getInt("numero"));
-                info[n][1] = rs.getString("enunciat");
+                info[n][0] = String.valueOf(rs.getInt("Nombre"));
+                info[n][1] = rs.getString("Descripción");
                 n++;
             }
         }
@@ -341,16 +344,15 @@ public class dataBase {
 
 
     // Retorna totes les dades d'una taula en concret
-    public String[][] getInfoTaulaUnitat(){
-        int numFiles = getNumRowsTaula("unitat");
+    public String[][] getnomEjercici(){
+        int numFiles = getNumRowsTaula("ejercicio");
         int numCols  = 2;
         String[][] info = new String[numFiles][numCols];
         try {
-            ResultSet rs = query.executeQuery( "SELECT * FROM unitat");
+            ResultSet rs = query.executeQuery( "SELECT Nombre FROM ejercicio");
             int nr = 0;
             while (rs.next()) {
-                info[nr][0] = String.valueOf(rs.getInt("numero"));
-                info[nr][1] = rs.getString("nom");
+                info[nr][0] = rs.getString("Nombre");
                 nr++;
             }
             return info;
@@ -361,9 +363,33 @@ public class dataBase {
         }
     }
 
+    /*
+    public String[][] getInfoTaulaUnitat(){
+        int numFiles = getNumRowsTaula("ejercicio");
+        int numCols  = 2;
+        String[][] info = new String[numFiles][numCols];
+        try {
+            ResultSet rs = query.executeQuery( "SELECT Nombre, Tipus_Nombre FROM ejercicio");
+            int nr = 0;
+            while (rs.next()) {
+                info[nr][0] = String.valueOf(rs.getInt("Nombre"));
+                info[nr][1] = rs.getString("Tipus_Nombre");
+                nr++;
+            }
+            return info;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+     */
+
     // Retorna les dades bidimensionals d'una query en concret (Dades de les unitats d'un curs en concret).
     public String[][] getInfoTaulaUnitatCurs(int curs){
-        int numFiles = getNumRowsQuery("SELECT COUNT(*) AS n FROM unitat WHERE curs = '"+curs+"'");
+        String dificultad = String.valueOf(curs);
+        int numFiles = getNumRowsQuery("SELECT COUNT(*) AS n FROM ejercicio WHERE Dificultad_Nombre = '"+ dificultad+"'");
         int numCols  = 3;
         String[][] info = new String[numFiles][numCols];
         try {
@@ -528,14 +554,13 @@ public class dataBase {
         }
     }
 
-    // Funció que retorna el nom del client amb un cert dni
     public String getNomClientAmbDNI(String dni){
-        String q = "SELECT nom FROM client WHERE dni='" + dni +"'";
+        String q = "SELECT Nombre FROM alumno WHERE DNI='" + dni +"'";
         System.out.println(q);
         try{
             ResultSet rs = query.executeQuery(q);
             rs.next();
-            return rs.getString("nom");
+            return rs.getString("Nombre");
         }
         catch(Exception e){
             System.out.println(e);
@@ -544,15 +569,15 @@ public class dataBase {
     }
 
     public String[] getNomTotsClients(){
-        String q = "SELECT nom FROM client ORDER BY nom ASC";
+        String q = "SELECT Nombre FROM alumno ORDER BY Nombre ASC";
         System.out.println(q);
         try{
-            int numFiles = getNumFilesTaula("client");
+            int numFiles = getNumFilesTaula("alumno");
             String[] info = new String[numFiles];
             ResultSet rs = query.executeQuery(q);
             int f = 0;
             while(rs.next()){
-                info[f] = rs.getString("nom");
+                info[f] = rs.getString("Nombre");
                 f++;
             }
             return info;
@@ -563,17 +588,23 @@ public class dataBase {
         return null;
     }
 
-    public String[][] getInfoTotsClients(){
-        String q = "SELECT dni, nom FROM client ORDER BY nom ASC";
+    public String[][] getInfoTotsAlumnes(){
+        String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel FROM alumno ORDER BY Nombre ASC";
         System.out.println(q);
         try{
-            int numFiles = getNumFilesTaula("client");
-            String[][] info = new String[numFiles][2];
+            int numFiles = getNumFilesTaula("alumno");
+            String[][] info = new String[numFiles][8];
             ResultSet rs = query.executeQuery(q);
             int f = 0;
             while(rs.next()){
                 info[f][0] = rs.getString("dni");
-                info[f][1] = rs.getString("nom");
+                info[f][1] = rs.getString("Nombre");
+                info[f][2] = rs.getString("NombreTutor");
+                info[f][3] = rs.getString("TelefonoTutor");
+                info[f][4] = rs.getString("Pagado");
+                info[f][5] = rs.getString("FechaNacimiento");
+                info[f][6] = rs.getString("Edad");
+                info[f][7] = rs.getString("Nivel");
                 f++;
             }
             return info;
@@ -584,37 +615,10 @@ public class dataBase {
         return null;
     }
 
+    // No tiene equivalente en tu BD
     public String[][] getInfoCotxosSEAT(){
-
-        String qf = "SELECT COUNT(*) AS n " +
-                "FROM cotxo c, marca m " +
-                "WHERE c.marca=m.id AND m.nom='SEAT' ";
-        System.out.println(qf);
-
-        int nf = getNumFilesQuery(qf);
-        System.out.println("Num files Query: "+nf);
-        String[][] info = new String[nf][3];
-
-        String q = "SELECT c.matricula AS mat, c.model AS model, m.nom as nom " +
-                "FROM cotxo c, marca m " +
-                "WHERE c.marca=m.id AND m.nom='SEAT' " +
-                "ORDER BY c.matricula ASC";
-        System.out.println(q);
-
-        try{
-            ResultSet rs = query.executeQuery(q);
-            int f=0;
-            while(rs.next()){
-                info[f][0] = rs.getString("mat");
-                info[f][1] = rs.getString("model");
-                info[f][2] = rs.getString("nom");
-                f++;
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return info;
+        System.out.println("Les taules cotxo i marca no existeixen en la teva BD.");
+        return new String[0][0];
     }
 
     public int getNumFilesQuery(String q){
@@ -629,7 +633,22 @@ public class dataBase {
         return 0;
     }
 
+    public boolean loginCorrecte(String nombre, String password){
+        String q = "SELECT COUNT(*) AS N "+
+                "FROM usuario "+
+                "WHERE nombre = '" + nombre + "' AND password = '"+password + "'";
+        System.out.println(q);
 
-
+        try{
+            ResultSet rs = query.executeQuery(q);
+            rs.next();
+            int n = rs.getInt("N");
+            return (n==1);
+        }
+        catch(Exception a){
+            System.out.println(a);
+        }
+        return false;
+    }
 
 }

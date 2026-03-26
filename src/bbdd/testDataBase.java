@@ -5,18 +5,17 @@ public class testDataBase {
 
     public static void main(String[] args) {
 
-
         // Configura els paràmetres de connexió a la BBDD
-        db = new dataBase("admin", "12345", "alumno");
+        db = new dataBase("admin", "12345", "appjiujitsu");
+
         // Connecta amb la BBDD
         db.connect();
 
+        // Obtenir tots els alumnes
+        String[][] alumnes = db.getInfoTotsAlumnes();
 
-        int n = db.getNumFilesTaula("dni");
-        System.out.printf("Hi ha %d dni's.\n", n);
-
-        //String s = db.getInfo("dni","client","dni","098098x");
-        //System.out.println(s);
+        // Mostrar-los per consola
+        db.printArray2D(alumnes);
     }
 }
 

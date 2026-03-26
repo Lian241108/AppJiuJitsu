@@ -1,3 +1,4 @@
+import bbdd.dataBase;
 import processing.core.PApplet;
 import processing.core.PFont;
 import java.util.ArrayList;
@@ -7,9 +8,14 @@ import java.io.File;
 
 public class Main extends PApplet {
 
+    public static dataBase db;
+
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
     ArrayList<Card> todasCartas = new ArrayList<>();
+
+    boolean loginOK = false;
+
 
     //ar.get(i);
     //ar.set(objeto, i)
@@ -29,7 +35,16 @@ public class Main extends PApplet {
     public void setup(){
         noStroke();                         // Sense bordes
         textAlign(CENTER); textSize(18);   // Alineació i mida del text
-        gui = new GUI(this);// Constructor de la GUI
+
+        // Configura els paràmetres de connexió a la BBDD
+        db = new dataBase("admin", "12345", "appjiujitsu");
+
+        // Connecta amb la BBDD
+        db.connect();
+
+        gui = new GUI(this, db);// Constructor de la GUI
+
+
     }
 
     public void draw(){
@@ -129,6 +144,10 @@ public class Main extends PApplet {
 
     // ******************* KEYBOARD interaction ***************************** //
 
+    public void keyTyped(){
+
+    }
+
     public void keyPressed(){
 
         //PANTALLA INICIO
@@ -196,9 +215,20 @@ public class Main extends PApplet {
 
         //PANTALLA INICIO
         if(gui.pantallaActual==GUI.PANTALLA.INICIO) {
-            if (gui.b11.mouseOverButton(this)) {
-                println("B11 has been pressed!!!");
-                gui.pantallaActual = GUI.PANTALLA.INICIAL;
+
+            if (gui.b11.mouseOverButton(this)){
+                String nombre  = gui.t11.getText();
+                String password  = gui.t12.getText();
+                if(db.loginCorrecte(nombre,password)){
+                    loginOK = true;
+                    print("Loging OK");
+                    gui.pantallaActual = GUI.PANTALLA.INICIAL;
+                }else{
+                    loginOK = false;
+                    print("Loging Wrong");
+
+                }
+
             }
 
             if(gui.botoCarregada.mouseOverButton(this)){
@@ -367,7 +397,7 @@ public class Main extends PApplet {
         gui.t25.isPressed(this);
         gui.t26.isPressed(this);
         gui.t31.isPressed(this);
-        //gui.t32.isPressed(this);
+        gui.t32.isPressed(this);
         gui.t33.isPressed(this);
         gui.t41.isPressed(this);
         gui.t42.isPressed(this);

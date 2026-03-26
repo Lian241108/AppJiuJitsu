@@ -1,3 +1,4 @@
+import bbdd.dataBase;
 import processing.core.PFont;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -9,6 +10,8 @@ public class GUI{
     String nomCarregada;
     Button botoCarregada;
 
+    public dataBase db;
+
     PagedCard pc1, pc2;
     Card[] cardsEjercicios;
 
@@ -16,6 +19,8 @@ public class GUI{
     PImage logo, img;
 
     PFont pFont1, pFont2, pFont3;
+
+
 
     // Enumerat de les Pantalles de l'App
     public enum PANTALLA {INICIO,INICIAL, ALUMNOS, EJERCICIOS, ENTRENOS, NUEVOALUMNO, NUEVOEJERCICIO, NUEVOENTRENO};
@@ -35,7 +40,8 @@ public class GUI{
     Card ca1;
 
     // Constructor de la GUI
-    public GUI(PApplet p5){
+    public GUI(PApplet p5, dataBase db){
+        this.db = db;
         pantallaActual = PANTALLA.INICIO;
 
         // 3a passa: crear els components
@@ -132,7 +138,7 @@ public class GUI{
     public void createPagedTable(PApplet p5){
         pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles
 
-        String[] headers = {"ID","Nombre y apellidos","DNI","Edad", "Data","Tutor legal","Telefono","Nivel","Ha pagat?"};
+        String[] headers = {"DNI", "Nombre", "Tutor legal", "Telefono", "Ha pagat?", "Fecha nacimiento", "Edad", "Nivel"};
         pt1.setHeaders(headers);
 
         float[] widths = {5, 20, 10,5,12,12,12,10,12};
@@ -231,7 +237,7 @@ public class GUI{
 
         // Pantalla NuevoEjercicio
         t31 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-        //t32 = new TextField(p5, p5.width/2-800, p5.height/2+200, 400, 100 );
+        t32 = new TextField(p5, p5.width/2-800, p5.height/2+200, 400, 100 );
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
         
         // PAntalla NuevoEntreno

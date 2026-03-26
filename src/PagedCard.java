@@ -2,6 +2,8 @@ import processing.core.PApplet;
 
 public class PagedCard {
 
+    String[][] cardsData;
+
     private Card[] cards;
     private int cardsPerPage;   // 4
     private int totalPages;     // 4
@@ -51,5 +53,10 @@ public class PagedCard {
         p5.text("Página " + (currentPage + 1) + " / " + totalPages, x, y - 10);
 
         p5.popStyle();
+    }
+
+    public void setData(String[][] d){
+        this.cardsData = d;
+        this.totalPages = d.length / this.cardsPerPage;
     }
 }
