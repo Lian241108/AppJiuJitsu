@@ -19,7 +19,6 @@ public class PagedTable {
     }
 
 
-
     // Setters
 
     public void setHeaders(String[] h){
