@@ -651,4 +651,26 @@ public class dataBase {
         return false;
     }
 
+    public void insertAlumno(String dni, String nombre, String nombreTutor,
+                             String telefonoTutor, String pagado,
+                             String fechaNacimiento, String edad, String nivel) {
+        try {
+            String q = "INSERT INTO alumno (DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel) VALUES (" +
+                    "'" + dni + "', " +
+                    "'" + nombre + "', " +
+                    "'" + nombreTutor + "', " +
+                    "'" + telefonoTutor + "', " +
+                    "'" + pagado + "', " +
+                    "'" + fechaNacimiento + "', " +
+                    "'" + edad + "', " +
+                    "'" + nivel + "')";
+            System.out.println(q);
+            query.executeUpdate(q);
+            System.out.println("Alumno insertado correctamente.");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -136,25 +136,18 @@ public class GUI{
     }
 
     public void createPagedTable(PApplet p5){
-        pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles
+        pt1 = new PagedTable(6, 8);   // 1 cabecera + 5 filas visibles, 8 columnas
 
-        String[] headers = {"DNI", "Nombre", "Tutor legal", "Telefono", "Ha pagat?", "Fecha nacimiento", "Edad", "Nivel"};
+        String[] headers = {
+                "DNI", "Nombre", "Tutor legal", "Telefono",
+                "Pagado", "Fecha nacimiento", "Edad", "Nivel"
+        };
         pt1.setHeaders(headers);
 
-        float[] widths = {5, 20, 10,5,12,12,12,10,12};
+        float[] widths = {12, 18, 18, 14, 8, 16, 6, 8};
         pt1.setColumnWidths(widths);
 
-        String[][] datos = {
-                {"1","Joan","6752475X","17","24/11/28","Merce","661872298","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-                {"1","Joan","6752475X","17","24/11/28","Merce","184789174","baix","NO"},
-        };
+        String[][] datos = db.getInfoTotsAlumnes();
         pt1.setData(datos);
     }
 
