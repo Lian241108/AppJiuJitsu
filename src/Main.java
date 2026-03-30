@@ -352,12 +352,39 @@ public class Main extends PApplet {
 
         else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
             if(gui.b0.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
             if(gui.b61.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
+            }
+
+            if(gui.b62.mouseOverButton(this)){
+                String nombre = gui.t21.getText().trim();
+                String dni = gui.t22.getText().trim();
+                String edad = gui.t23.getText().trim();
+                String nombreTutor = gui.t24.getText().trim();
+                String telefonoTutor = gui.t25.getText().trim();
+
+                String pagado = "0";
+                String fechaNacimiento = "2010-01-01";
+                String nivel = "Blanco";
+
+                if(!nombre.equals("") && !dni.equals("")){
+                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, fechaNacimiento, edad, nivel);
+                    gui.refrescarTablaAlumnos();
+
+                    gui.t21.setText("");
+                    gui.t22.setText("");
+                    gui.t23.setText("");
+                    gui.t24.setText("");
+                    gui.t25.setText("");
+                    gui.t26.setText("");
+
+                    gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
+                } else {
+                    System.out.println("Faltan campos obligatorios");
+                }
             }
         }
 

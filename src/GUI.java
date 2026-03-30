@@ -151,6 +151,10 @@ public class GUI{
         pt1.setData(datos);
     }
 
+    public void refrescarTablaAlumnos(){
+        pt1.setData(db.getInfoTotsAlumnes());
+    }
+
 
     public void createSwitchButton(PApplet p5){
         sb1 = new SwitchButton(p5, 800,900 ,50, 50);

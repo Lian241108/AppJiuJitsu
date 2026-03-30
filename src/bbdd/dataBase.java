@@ -654,21 +654,25 @@ public class dataBase {
     public void insertAlumno(String dni, String nombre, String nombreTutor,
                              String telefonoTutor, String pagado,
                              String fechaNacimiento, String edad, String nivel) {
+        String q = "INSERT INTO alumno (dni, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
-            String q = "INSERT INTO alumno (DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel) VALUES (" +
-                    "'" + dni + "', " +
-                    "'" + nombre + "', " +
-                    "'" + nombreTutor + "', " +
-                    "'" + telefonoTutor + "', " +
-                    "'" + pagado + "', " +
-                    "'" + fechaNacimiento + "', " +
-                    "'" + edad + "', " +
-                    "'" + nivel + "')";
-            System.out.println(q);
-            query.executeUpdate(q);
-            System.out.println("Alumno insertado correctamente.");
-        }
-        catch(Exception e) {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, dni);
+            ps.setString(2, nombre);
+            ps.setString(3, nombreTutor);
+            ps.setString(4, telefonoTutor);
+            ps.setString(5, pagado);
+            ps.setString(6, fechaNacimiento);
+            ps.setString(7, edad);
+            ps.setString(8, nivel);
+
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Alumno añadido correctamente");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
