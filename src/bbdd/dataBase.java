@@ -554,46 +554,12 @@ public class dataBase {
         }
     }
 
-    public String getNomClientAmbDNI(String dni){
-        String q = "SELECT Nombre FROM alumno WHERE DNI='" + dni +"'";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            rs.next();
-            return rs.getString("Nombre");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return null;
-    }
-
-    public String[] getNomTotsClients(){
-        String q = "SELECT Nombre FROM alumno ORDER BY Nombre ASC";
-        System.out.println(q);
-        try{
-            int numFiles = getNumFilesTaula("alumno");
-            String[] info = new String[numFiles];
-            ResultSet rs = query.executeQuery(q);
-            int f = 0;
-            while(rs.next()){
-                info[f] = rs.getString("Nombre");
-                f++;
-            }
-            return info;
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return null;
-    }
-
     public String[][] getInfoTotsAlumnes(){
-        String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel FROM alumno ORDER BY Nombre ASC";
+        String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel, Genero FROM alumno ORDER BY Nombre ASC";
         System.out.println(q);
         try{
             int numFiles = getNumFilesTaula("alumno");
-            String[][] info = new String[numFiles][8];
+            String[][] info = new String[numFiles][9];
             ResultSet rs = query.executeQuery(q);
             int f = 0;
             while(rs.next()){
@@ -605,6 +571,7 @@ public class dataBase {
                 info[f][5] = rs.getString("FechaNacimiento");
                 info[f][6] = rs.getString("Edad");
                 info[f][7] = rs.getString("Nivel");
+                info[f][8] = rs.getString("Genero");
                 f++;
             }
             return info;
@@ -615,23 +582,28 @@ public class dataBase {
         return null;
     }
 
-    // No tiene equivalente en tu BD
-    public String[][] getInfoCotxosSEAT(){
-        System.out.println("Les taules cotxo i marca no existeixen en la teva BD.");
-        return new String[0][0];
-    }
-
-    public int getNumFilesQuery(String q){
+    public String[][] getInfoTotsEjercicios(){
+        String q = "Nombre, Imagen, Descripción FROM ejercicio ORDER BY Nombre ASC";
+        System.out.println(q);
         try{
+            int numFiles = getNumFilesTaula("ejercicio");
+            String[][] info = new String[numFiles][3];
             ResultSet rs = query.executeQuery(q);
-            rs.next();
-            return rs.getInt("n");
+            int f = 0;
+            while(rs.next()){
+                info[f][0] = rs.getString("Nombre");
+                info[f][1] = rs.getString("Imagen");
+                info[f][2] = rs.getString("Descripción");
+                f++;
+            }
+            return info;
         }
-        catch (Exception e){
+        catch(Exception e){
             System.out.println(e);
         }
-        return 0;
+        return null;
     }
+
 
     public boolean loginCorrecte(String nombre, String password){
         String q = "SELECT COUNT(*) AS N "+
@@ -653,9 +625,9 @@ public class dataBase {
 
     public void insertAlumno(String dni, String nombre, String nombreTutor,
                              String telefonoTutor, String pagado,
-                             String fechaNacimiento, String edad, String nivel) {
-        String q = "INSERT INTO alumno (dni, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                             String fechaNacimiento, String edad, String nivel, String genero) {
+        String q = "INSERT INTO alumno (dni, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel, Genero) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = c.prepareStatement(q);
@@ -667,11 +639,30 @@ public class dataBase {
             ps.setString(6, fechaNacimiento);
             ps.setString(7, edad);
             ps.setString(8, nivel);
+            ps.setString(9,genero);
 
             ps.executeUpdate();
             ps.close();
 
             System.out.println("Alumno añadido correctamente");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void insertEjercicio(String nombre, String imagen, String descripcion) {
+        String q = "INSERT INTO alumno ( Nombre, Imagen, Descripción) " +
+                "VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, nombre);
+            ps.setString(2, imagen);
+            ps.setString(3, descripcion);
+
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Ejercicio añadido correctamente");
         } catch (Exception e) {
             e.printStackTrace();
         }

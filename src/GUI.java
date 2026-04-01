@@ -136,15 +136,15 @@ public class GUI{
     }
 
     public void createPagedTable(PApplet p5){
-        pt1 = new PagedTable(6, 8);   // 1 cabecera + 5 filas visibles, 8 columnas
+        pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles, 9 columnas
 
         String[] headers = {
                 "DNI", "Nombre", "Tutor legal", "Telefono",
-                "Pagado", "Fecha nacimiento", "Edad", "Nivel"
+                "Pagado", "Fecha nacimiento", "Edad", "Nivel", "Genero"
         };
         pt1.setHeaders(headers);
 
-        float[] widths = {12, 18, 18, 14, 8, 16, 6, 8};
+        float[] widths = {10, 18, 18, 12, 8, 16, 6, 8,12};
         pt1.setColumnWidths(widths);
 
         String[][] datos = db.getInfoTotsAlumnes();
@@ -153,6 +153,10 @@ public class GUI{
 
     public void refrescarTablaAlumnos(){
         pt1.setData(db.getInfoTotsAlumnes());
+    }
+
+    public void refrescarCartasEjercicios(){
+        pc1.setData(db.getInfoTotsEjercicios());
     }
 
 
@@ -398,7 +402,7 @@ public class GUI{
     }
 
     public void dibuixaPagedTable(PApplet p5){
-        pt1.display(p5, p5.width/2 - 800, p5.height/2 - 100, 1400, 500);
+        pt1.display(p5, p5.width/2 - 800, p5.height/2 - 100, 1500, 500);
     }
 
     public void dibuixaLogoInici(PApplet p5){

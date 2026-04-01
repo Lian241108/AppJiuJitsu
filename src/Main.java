@@ -365,13 +365,15 @@ public class Main extends PApplet {
                 String edad = gui.t23.getText().trim();
                 String nombreTutor = gui.t24.getText().trim();
                 String telefonoTutor = gui.t25.getText().trim();
+                String genero = gui.s1.getSelectedValue().trim();
+
 
                 String pagado = "0";
                 String fechaNacimiento = "2010-01-01";
                 String nivel = "Blanco";
 
                 if(!nombre.equals("") && !dni.equals("")){
-                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, fechaNacimiento, edad, nivel);
+                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, fechaNacimiento, edad, nivel, genero);
                     gui.refrescarTablaAlumnos();
 
                     gui.t21.setText("");
@@ -390,14 +392,33 @@ public class Main extends PApplet {
 
         //PAntalla Nuevo Ejercicio
 
-        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
             if(gui.b0.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
             if(gui.b71.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
+            }
+
+            if(gui.b72.mouseOverButton(this)){
+                String nombre = gui.t21.getText().trim();
+                String imagen = gui.t22.getText().trim();
+                String descirpcion = gui.t23.getText().trim();
+
+
+                if(!nombre.equals("") && !nombre.equals("")){
+                    db.insertAlumno( nombre, imagen, descripcion);
+                    gui.refrescarCartasEjercicios();
+
+                    gui.t21.setText("");
+                    gui.t22.setText("");
+                    gui.t23.setText("");
+
+                    gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
+                } else {
+                    System.out.println("Faltan campos obligatorios");
+                }
             }
         }
 
