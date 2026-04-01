@@ -582,8 +582,10 @@ public class dataBase {
         return null;
     }
 
+    /*
+
     public String[][] getInfoTotsEjercicios(){
-        String q = "Nombre, Imagen, Descripción FROM ejercicio ORDER BY Nombre ASC";
+        String q = "SELECT Nombre, Imagen, Descripción FROM ejercicio ORDER BY Nombre ASC";
         System.out.println(q);
         try{
             int numFiles = getNumFilesTaula("ejercicio");
@@ -603,6 +605,8 @@ public class dataBase {
         }
         return null;
     }
+
+     */
 
 
     public boolean loginCorrecte(String nombre, String password){
@@ -649,6 +653,9 @@ public class dataBase {
             e.printStackTrace();
         }
     }
+
+    /*
+
     public void insertEjercicio(String nombre, String imagen, String descripcion) {
         String q = "INSERT INTO alumno ( Nombre, Imagen, Descripción) " +
                 "VALUES (?, ?, ?)";
@@ -667,5 +674,7 @@ public class dataBase {
             e.printStackTrace();
         }
     }
+
+     */
 
 }

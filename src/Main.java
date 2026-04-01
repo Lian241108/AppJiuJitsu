@@ -391,6 +391,7 @@ public class Main extends PApplet {
         }
 
         //PAntalla Nuevo Ejercicio
+        /*
 
         else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
             if(gui.b0.mouseOverButton(this)){
@@ -402,18 +403,18 @@ public class Main extends PApplet {
             }
 
             if(gui.b72.mouseOverButton(this)){
-                String nombre = gui.t21.getText().trim();
-                String imagen = gui.t22.getText().trim();
-                String descirpcion = gui.t23.getText().trim();
+                String nombre = gui.t31.getText().trim();
+                String imagen = gui.t32.getText().trim();
+                String descripcion = gui.t33.getText().trim();
 
 
                 if(!nombre.equals("") && !nombre.equals("")){
-                    db.insertAlumno( nombre, imagen, descripcion);
+                    db.insertEjercicio( nombre, imagen, descripcion);
                     gui.refrescarCartasEjercicios();
 
-                    gui.t21.setText("");
-                    gui.t22.setText("");
-                    gui.t23.setText("");
+                    gui.t31.setText("");
+                    gui.t32.setText("");
+                    gui.t33.setText("");
 
                     gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
                 } else {
@@ -421,6 +422,8 @@ public class Main extends PApplet {
                 }
             }
         }
+
+         */
 
         //PAntalla Nuevo Entreno
 

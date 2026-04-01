@@ -144,7 +144,7 @@ public class GUI{
         };
         pt1.setHeaders(headers);
 
-        float[] widths = {10, 18, 18, 12, 8, 16, 6, 8,12};
+        float[] widths = {12, 18, 18, 12, 8, 16, 6, 8,12};
         pt1.setColumnWidths(widths);
 
         String[][] datos = db.getInfoTotsAlumnes();
@@ -153,10 +153,6 @@ public class GUI{
 
     public void refrescarTablaAlumnos(){
         pt1.setData(db.getInfoTotsAlumnes());
-    }
-
-    public void refrescarCartasEjercicios(){
-        pc1.setData(db.getInfoTotsEjercicios());
     }
 
 
