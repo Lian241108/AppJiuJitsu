@@ -12,8 +12,11 @@ public class GUI{
 
     public dataBase db;
 
-    PagedCard pc1, pc2;
-    Card[] cardsEjercicios;
+
+
+    PagedCard2D pc1, pc2;
+    Card2[] cardsEjercicios;
+    Card2[] cardsEntrenos;
 
 
     PImage logo, img;
@@ -60,68 +63,42 @@ public class GUI{
         createPagedTable(p5);
         createCalendari(p5);
         createPagedCards(p5);
-        createPagedCards2(p5);
+        //createPagedCards2(p5);
 
         //createCard(p5);
     }
 
     public void createPagedCards(PApplet p5){
-
-        cardsEjercicios = new Card[32];
-
-        float x = p5.width/2 - 900;
-        float y = p5.height/2 - 300;
-        float width = 600;
-        float height = 800;
-
-        float espacio = 50;
-        float cardW = (width - espacio) / 2.0f;
-        float cardH = (height - espacio) / 2.0f;
-
-        for(int i = 0; i < 32; i++){
-
-            int local = i % 8;     // 0..3 dentro de su página
-            int col = local % 4;   // 0..1
-            int row = local / 4;   // 0..1
-
-            float cx = x + col * (cardW + espacio);
-            float cy = y + row * (cardH + espacio);
-
-            cardsEjercicios[i] = new Card(p5, "Ejercicio " + (i+1), cx, cy, cardW, cardH);
-        }
-
-        pc1 = new PagedCard(cardsEjercicios, 8, 4);
-        pc1.setDimensions(x, y, width, height);
-    }
-
-    public void createPagedCards2(PApplet p5){
-
-        cardsEjercicios = new Card[32];
+        pc1 = new PagedCard2D(2, 4);   // 2 filas, 4 columnas = 8 cards por página
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
-        float width = 600;
-        float height = 800;
+        float w = 1200;
+        float h = 720;
 
-        float espacio = 50;
-        float cardW = (width - espacio) / 2.0f;
-        float cardH = (height - espacio) / 2.0f;
+        pc1.setDimensions(x, y, w, h);
 
-        for(int i = 0; i < 32; i++){
+        String[][] datos = db.getInfoTotsEjercicios();
+        Card2[] cards = new Card2[datos.length];
 
-            int local = i % 8;     // 0..3 dentro de su página
-            int col = local % 4;   // 0..1
-            int row = local / 4;   // 0..1
+        for(int i = 0; i < datos.length; i++){
+            String nombre = datos[i][0];
+            String imagen = datos[i][1];
+            String descripcion = datos[i][2];
+            String tipo = datos[i][3];
+            String dificultad = datos[i][4];
 
-            float cx = x + col * (cardW + espacio);
-            float cy = y + row * (cardH + espacio);
+            cards[i] = new Card2(nombre, imagen, descripcion, tipo, dificultad);
 
-            cardsEjercicios[i] = new Card(p5, "Entrenos " + (i+1), cx, cy, cardW, cardH);
+            if(imagen != null && !imagen.trim().isEmpty()){
+                cards[i].setImage(p5.loadImage(imagen));
+            }
         }
 
-        pc2 = new PagedCard(cardsEjercicios, 8, 4);
-        pc2.setDimensions(x, y, width, height);
+        pc1.setCards(cards);
     }
+
+
 
     public void createCalendari(PApplet p5){
         c1 = new Calendari(p5.width/2+400,p5.height/2+150,400,300);
