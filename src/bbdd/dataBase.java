@@ -610,29 +610,28 @@ public class dataBase {
         return null;
     }
 
-    public String[][] getInfoTotsEntrenos() {
-        String q = "SELECT ID, Nombre, Fecha " +
-                "FROM entreno ORDER BY ID ASC";
-        System.out.println(q);
+    public String[][] getInfoTotsEntrenos(){
+        String q = "SELECT Nombre, Fecha FROM entreno ORDER BY Fecha DESC";
 
-        try {
+        try{
             int numFiles = getNumFilesTaula("entreno");
-            String[][] info = new String[numFiles][5];
+            String[][] info = new String[numFiles][2];
 
             ResultSet rs = query.executeQuery(q);
-            int f = 0;
+            int i = 0;
 
-            while (rs.next()) {
-                info[f][0] = rs.getString("ID");
-                info[f][1] = rs.getString("Nombre");
-                info[f][2] = rs.getString("Fecha");
-                f++;
+            while(rs.next()){
+                info[i][0] = rs.getString("Nombre");
+                info[i][1] = rs.getString("Fecha");
+                i++;
             }
+
             return info;
         }
-        catch (Exception e) {
+        catch(Exception e){
             System.out.println(e);
         }
+
         return null;
     }
 

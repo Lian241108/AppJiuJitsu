@@ -40,8 +40,6 @@ public class GUI{
     PagedTable pt1;
     Calendari c1;
 
-    Card ca1;
-
     // Constructor de la GUI
     public GUI(PApplet p5, dataBase db){
         this.db = db;
@@ -63,7 +61,7 @@ public class GUI{
         createPagedTable(p5);
         createCalendari(p5);
         createPagedCards(p5);
-        //createPagedCards2(p5);
+        createPagedCards2(p5);
 
         //createCard(p5);
     }
@@ -98,19 +96,36 @@ public class GUI{
         pc1.setCards(cards);
     }
 
+    public void createPagedCards2(PApplet p5){
+        pc2 = new PagedCard2D(2, 4);   // 8 cards por página
+
+        float x = p5.width/2 - 900;
+        float y = p5.height/2 - 300;
+        float w = 1200;
+        float h = 720;
+
+        pc2.setDimensions(x, y, w, h);
+
+        String[][] datos = db.getInfoTotsEntrenos();
+        Card2[] cards = new Card2[datos.length];
+
+        for(int i = 0; i < datos.length; i++){
+            String nombre = datos[i][0];
+            String fecha = datos[i][1];
+
+            // usamos descripcion para guardar la fecha
+            cards[i] = new Card2(nombre, "", "Fecha: " + fecha, "", "");
+        }
+
+        pc2.setCards(cards);
+    }
+
 
 
     public void createCalendari(PApplet p5){
         c1 = new Calendari(p5.width/2+400,p5.height/2+150,400,300);
     }
 
-    public void createCard(PApplet p5){
-        p5.pushStyle();
-        p5.rectMode(p5.CENTER);
-        ca1 = new Card(p5,"O-Goshi", p5.width/2-800,500,300,500);
-
-        p5.popStyle();
-    }
 
     public void createPagedTable(PApplet p5){
         pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles, 9 columnas
@@ -353,12 +368,6 @@ public class GUI{
 
 
     // ZONES DE LA GUI
-
-
-    public void dibuixaCard(PApplet p5){
-        ca1.display(p5);
-    }
-
     public void dibuixaCalendari(PApplet p5){
         c1.display(p5);
     }

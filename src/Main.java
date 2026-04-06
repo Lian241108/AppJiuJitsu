@@ -12,7 +12,6 @@ public class Main extends PApplet {
 
     // Interfície Gràfica (Pantalles i components)
     GUI gui;
-    ArrayList<Card> todasCartas = new ArrayList<>();
 
     boolean loginOK = false;
 
