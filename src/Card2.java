@@ -14,16 +14,16 @@ public class Card2 {
     float x, y, w, h, r;
     float buttonH = 50;
 
-    public enum TipoCard {EJERCICIO, ENTRENO};
-    TipoCard tipoCard;
+    boolean tieneImagen;
 
 
-    public Card2(String nombre, String imagenPath, String descripcion, String tipo, String dificultad) {
+    public Card2(String nombre, String imagenPath, String descripcion, String tipo, String dificultad, boolean tieneImagen) {
         this.nombre = nombre;
         this.imagenPath = imagenPath;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.dificultad = dificultad;
+        this.tieneImagen = tieneImagen;
     }
 
     public void setDimensions(float x, float y, float w, float h, float r) {
@@ -72,27 +72,34 @@ public class Card2 {
         p5.fill(80);
         p5.text(tipo + " | " + dificultad, x + 12, y + 40);
 
-        // imagen grande
-        float imgX = x + 12;
-        float imgY = y + 62;
-        float imgW = w - 24;
-        float imgH = h - 62 - buttonH - 24;
 
-        if (img != null) {
-            p5.image(img, imgX, imgY, imgW, imgH);
-        } else {
-            p5.fill(230);
+
+        if (tieneImagen == true) {
+
+            // imagen grande
+            float imgX = x + 12;
+            float imgY = y + 62;
+            float imgW = w - 24;
+            float imgH = h - 62 - buttonH - 24;
+
+            if (img != null) {
+                p5.image(img, imgX, imgY, imgW, imgH);
+            } else {
+                p5.fill(230);
+                p5.rect(imgX, imgY, imgW, imgH, 10);
+
+                p5.fill(120);
+                p5.textAlign(PApplet.CENTER, PApplet.CENTER);
+                p5.textSize(16);
+                p5.text("Sin imagen", imgX + imgW / 2, imgY + imgH / 2);
+            }
+            p5.noFill();
+            p5.stroke(255, 40, 40);
+            p5.strokeWeight(2);
             p5.rect(imgX, imgY, imgW, imgH, 10);
-            p5.fill(120);
-            p5.textAlign(PApplet.CENTER, PApplet.CENTER);
-            p5.textSize(16);
-            p5.text("Sin imagen", imgX + imgW / 2, imgY + imgH / 2);
+
         }
 
-        p5.noFill();
-        p5.stroke(255, 40, 40);
-        p5.strokeWeight(2);
-        p5.rect(imgX, imgY, imgW, imgH, 10);
 
         // botón editar
         float bx = x + 12;

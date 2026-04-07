@@ -86,7 +86,7 @@ public class GUI{
             String tipo = datos[i][3];
             String dificultad = datos[i][4];
 
-            cards[i] = new Card2(nombre, imagen, descripcion, tipo, dificultad);
+            cards[i] = new Card2(nombre, imagen, descripcion, tipo, dificultad, true);
 
             if(imagen != null && !imagen.trim().isEmpty()){
                 cards[i].setImage(p5.loadImage(imagen));
@@ -97,7 +97,7 @@ public class GUI{
     }
 
     public void createPagedCards2(PApplet p5){
-        pc2 = new PagedCard2D(2, 4);   // 8 cards por página
+        pc2 = new PagedCard2D(3, 5);   // 8 cards por página
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
@@ -114,7 +114,7 @@ public class GUI{
             String fecha = datos[i][1];
 
             // usamos descripcion para guardar la fecha
-            cards[i] = new Card2(nombre, "", "Fecha: " + fecha, "", "");
+            cards[i] = new Card2(nombre, "", "", "", "",false);
         }
 
         pc2.setCards(cards);
