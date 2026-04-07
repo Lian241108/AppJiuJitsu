@@ -63,7 +63,6 @@ public class GUI{
         createPagedCards(p5);
         createPagedCards2(p5);
 
-        //createCard(p5);
     }
 
     public void createPagedCards(PApplet p5){

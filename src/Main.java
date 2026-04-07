@@ -368,7 +368,7 @@ public class Main extends PApplet {
 
 
                 String pagado = "0";
-                String fechaNacimiento = "2010-01-01";
+                String fechaNacimiento = "00-00-00";
                 String nivel = "Blanco";
 
                 if(!nombre.equals("") && !dni.equals("")){
@@ -390,9 +390,9 @@ public class Main extends PApplet {
         }
 
         //PAntalla Nuevo Ejercicio
-        /*
 
-        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOALUMNO) {
+
+        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
             if(gui.b0.mouseOverButton(this)){
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
@@ -406,7 +406,7 @@ public class Main extends PApplet {
                 String imagen = gui.t32.getText().trim();
                 String descripcion = gui.t33.getText().trim();
 
-
+/*
                 if(!nombre.equals("") && !nombre.equals("")){
                     db.insertEjercicio( nombre, imagen, descripcion);
                     gui.refrescarCartasEjercicios();
@@ -419,10 +419,11 @@ public class Main extends PApplet {
                 } else {
                     System.out.println("Faltan campos obligatorios");
                 }
+
+ */
             }
         }
 
-         */
 
         //PAntalla Nuevo Entreno
 
