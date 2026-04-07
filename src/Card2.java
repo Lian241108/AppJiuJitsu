@@ -14,6 +14,9 @@ public class Card2 {
     float x, y, w, h, r;
     float buttonH = 50;
 
+    public enum TipoCard {EJERCICIO, ENTRENO};
+    TipoCard tipoCard;
+
 
     public Card2(String nombre, String imagenPath, String descripcion, String tipo, String dificultad) {
         this.nombre = nombre;

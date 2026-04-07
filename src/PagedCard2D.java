@@ -3,6 +3,7 @@ import processing.core.PApplet;
 public class PagedCard2D {
 
     Card2[] cards;
+
     int numCards;
 
     int numRowsPage;
