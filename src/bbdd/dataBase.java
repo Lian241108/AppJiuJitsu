@@ -583,23 +583,23 @@ public class dataBase {
     }
 
     public String[][] getInfoTotsEjercicios() {
-        String q = "SELECT Nombre, Imagen, Descripción, Tipus_Nombre, Dificultad_Nombre " +
+        String q = "SELECT Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre " +
                 "FROM ejercicio ORDER BY Nombre ASC";
         System.out.println(q);
 
         try {
             int numFiles = getNumFilesTaula("ejercicio");
-            String[][] info = new String[numFiles][5];
+            String[][] info = new String[numFiles][4];
 
             ResultSet rs = query.executeQuery(q);
             int f = 0;
 
             while (rs.next()) {
                 info[f][0] = rs.getString("Nombre");
-                info[f][1] = rs.getString("Imagen");
-                info[f][2] = rs.getString("Descripción");
-                info[f][3] = rs.getString("Tipus_Nombre");
-                info[f][4] = rs.getString("Dificultad_Nombre");
+                //info[f][1] = rs.getString("Imagen");
+                info[f][1] = rs.getString("Descripción");
+                info[f][2] = rs.getString("Tipus_Nombre");
+                info[f][3] = rs.getString("Dificultad_Nombre");
                 f++;
             }
             return info;
@@ -682,18 +682,17 @@ public class dataBase {
         }
     }
 
-    public void insertEjercicio(String nombre, String imagen, String descripcion,
+    public void insertEjercicio(String nombre, String descripcion,
                                 String tipusNombre, String dificultadNombre) {
-        String q = "INSERT INTO ejercicio (Nombre, Imagen, Descripción, Tipus_Nombre, Dificultad_Nombre) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String q = "INSERT INTO ejercicio (Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre) " +
+                "VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = c.prepareStatement(q);
             ps.setString(1, nombre);
-            ps.setString(2, imagen);
-            ps.setString(3, descripcion);
-            ps.setString(4, tipusNombre);
-            ps.setString(5, dificultadNombre);
+            ps.setString(2, descripcion);
+            ps.setString(3, tipusNombre);
+            ps.setString(4, dificultadNombre);
 
             ps.executeUpdate();
             ps.close();

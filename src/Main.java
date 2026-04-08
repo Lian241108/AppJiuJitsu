@@ -196,7 +196,7 @@ public class Main extends PApplet {
 
         else if(gui.pantallaActual==GUI.PANTALLA.NUEVOEJERCICIO) {
             gui.t31.keyPressed(key, keyCode);
-            gui.t32.keyPressed(key, keyCode);
+            //gui.t32.keyPressed(key, keyCode);
             gui.t33.keyPressed(key, keyCode);
         }
 
@@ -403,25 +403,27 @@ public class Main extends PApplet {
 
             if(gui.b72.mouseOverButton(this)){
                 String nombre = gui.t31.getText().trim();
-                String imagen = gui.t32.getText().trim();
+                //String imagenPath = gui.t32.getText().trim();
                 String descripcion = gui.t33.getText().trim();
+                String tipo = gui.s2.getSelectedValue().trim();
+                String dificultad = gui.s3.getSelectedValue().trim();
 
-/*
+
                 if(!nombre.equals("") && !nombre.equals("")){
-                    db.insertEjercicio( nombre, imagen, descripcion);
-                    gui.refrescarCartasEjercicios();
+                    db.insertEjercicio( nombre, descripcion, tipo, dificultad);
+                    gui.createPagedCardsEjercicios(this);
 
                     gui.t31.setText("");
-                    gui.t32.setText("");
+                    //gui.t32.setText("");
                     gui.t33.setText("");
 
                     gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
                 } else {
                     System.out.println("Faltan campos obligatorios");
                 }
-
- */
             }
+
+
         }
 
 
@@ -448,7 +450,7 @@ public class Main extends PApplet {
         gui.t25.isPressed(this);
         gui.t26.isPressed(this);
         gui.t31.isPressed(this);
-        gui.t32.isPressed(this);
+        //gui.t32.isPressed(this);
         gui.t33.isPressed(this);
         gui.t41.isPressed(this);
         gui.t42.isPressed(this);
@@ -477,6 +479,13 @@ public class Main extends PApplet {
 
             }
             gui.s2.toggle(); // Plegar o desplegar
+        }
+        if(gui.s3.mouseOverSelect(this) && gui.s3.isEnabled()) {
+            if (!gui.s3.isCollapsed()) {
+                gui.s3.update(this);      // Actualitzar valor
+
+            }
+            gui.s3.toggle(); // Plegar o desplegar
         }
 
     }

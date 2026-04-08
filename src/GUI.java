@@ -83,17 +83,19 @@ public class GUI{
 
         for(int i = 0; i < datos.length; i++){
             String nombre = datos[i][0];
-            String imagen = datos[i][1];
-            String descripcion = datos[i][2];
-            String tipo = datos[i][3];
-            String dificultad = datos[i][4];
+            //String imagen = datos[i][1];
+            String descripcion = datos[i][1];
+            String tipo = datos[i][2];
+            String dificultad = datos[i][3];
 
 
-            cards[i] = new CardEjercicios(nombre, imagen, descripcion,tipo,dificultad);
-
+            cards[i] = new CardEjercicios(nombre, descripcion,tipo,dificultad);
+/*
             if(imagen != null && !imagen.trim().isEmpty()){
                 cards[i].setImage(p5.loadImage(imagen));
             }
+
+ */
         }
 
         pc1.setCards(cards);
@@ -231,7 +233,7 @@ public class GUI{
 
         // Pantalla NuevoEjercicio
         t31 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-        t32 = new TextField(p5, p5.width/2-800, p5.height/2+200, 400, 100 );
+       // t32 = new TextField(p5, p5.width/2-800, p5.height/2+50, 400, 100 );
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
         
         // PAntalla NuevoEntreno
@@ -243,8 +245,11 @@ public class GUI{
     public void createSelect(PApplet p5){
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
+        String[] valors3 = {"FACIL", "MEDIO", "FIFICIL"};
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
+        s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);
+
     }
 
     public void createTextList (PApplet p5){
@@ -344,6 +349,7 @@ public class GUI{
         p5.textAlign(p5.CORNER);
         p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
+        //p5.text("DIFICULTAD: ",p5.width/2-800, p5.height/2-310);
     }
 
     public void dibuixaPantallaNuevoEjercicio(PApplet p5){
@@ -402,7 +408,10 @@ public class GUI{
     }
     public void dibuixaSelectEjercicio(PApplet p5){
         s2.display(p5);
+        s3.display(p5);
     }
+
+
 
     public void dibuixaButtonInicio(PApplet p5){
         b11.display(p5);

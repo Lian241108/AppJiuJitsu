@@ -16,10 +16,10 @@ public class CardEjercicios {
     float buttonH = 50;
 
 
-    public CardEjercicios(String nombre, String imagenPath, String descripcion, String tipo, String dificultad) {
+    public CardEjercicios(String nombre, String descripcion, String tipo, String dificultad) {
         this.nombre = nombre;
-        this.imagenPath = imagenPath;
-        this.dificultad = dificultad;
+        //this.imagenPath = imagenPath;
+        this.descripcion = descripcion;
         this.tipo = tipo;
         this.dificultad = dificultad;
     }
@@ -126,4 +126,5 @@ public class CardEjercicios {
         return p5.mouseX >= bx && p5.mouseX <= bx + bw &&
                 p5.mouseY >= by && p5.mouseY <= by + bh;
     }
+
 }
