@@ -1,8 +1,8 @@
 import processing.core.PApplet;
 
-public class PagedCard2D {
+public class PagedCardEjercicios {
 
-    Card2[] cards;
+    CardEjercicios[] cards;
 
     int numCards;
 
@@ -19,7 +19,7 @@ public class PagedCard2D {
 
     int selectedCard = -1;
 
-    public PagedCard2D(int numRows, int numCols) {
+    public PagedCardEjercicios(int numRows, int numCols) {
         this.numRowsPage = numRows;
         this.numCardsRow = numCols;
         this.numCardsPage = numRows * numCols;
@@ -38,7 +38,7 @@ public class PagedCard2D {
         updateCardPositions();
     }
 
-    public void setCards(Card2[] cards) {
+    public void setCards(CardEjercicios[] cards) {
         this.cards = cards;
         this.numCards = (cards == null) ? 0 : cards.length;
 
@@ -107,7 +107,7 @@ public class PagedCard2D {
         }
     }
 
-    public Card2 getSelectedCard() {
+    public CardEjercicios getSelectedCard() {
         if (selectedCard >= 0 && selectedCard < numCards) {
             return cards[selectedCard];
         }

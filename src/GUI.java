@@ -14,9 +14,10 @@ public class GUI{
 
 
 
-    PagedCard2D pc1, pc2;
-    Card2[] cardsEjercicios;
-    Card2[] cardsEntrenos;
+    PagedCardEjercicios pc1;
+    PagedCardEntrenos pc2;
+    CardEjercicios[] cardsEjercicios;
+    CardEntrenos[] cardsEntrenos;
 
 
     PImage logo, img;
@@ -60,14 +61,14 @@ public class GUI{
         createTextList(p5);
         createPagedTable(p5);
         createCalendari(p5);
-        createPagedCards(p5);
-        createPagedCards2(p5);
+        createPagedCardsEjercicios(p5);
+        createPagedCardsEntrenos(p5);
 
         //createCard(p5);
     }
 
-    public void createPagedCards(PApplet p5){
-        pc1 = new PagedCard2D(2, 4);   // 2 filas, 4 columnas = 8 cards por página
+    public void createPagedCardsEjercicios(PApplet p5){
+        pc1 = new PagedCardEjercicios(2, 4);   // 2 filas, 4 columnas = 8 cards por página
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
@@ -78,18 +79,17 @@ public class GUI{
 
         String[][] datos = db.getInfoTotsEjercicios();
 
-        Card2[] cards = new Card2[datos.length];
+        CardEjercicios[] cards = new CardEjercicios[datos.length];
 
         for(int i = 0; i < datos.length; i++){
             String nombre = datos[i][0];
             String imagen = datos[i][1];
             String descripcion = datos[i][2];
             String tipo = datos[i][3];
-            String id = datos[i][4];
-            String dificultad = datos[i][5];
+            String dificultad = datos[i][4];
 
 
-            cards[i] = new Card2(nombre, imagen, descripcion, tipo, true, id, dificultad);
+            cards[i] = new CardEjercicios(nombre, imagen, descripcion,tipo,dificultad);
 
             if(imagen != null && !imagen.trim().isEmpty()){
                 cards[i].setImage(p5.loadImage(imagen));
@@ -99,8 +99,8 @@ public class GUI{
         pc1.setCards(cards);
     }
 
-    public void createPagedCards2(PApplet p5){
-        pc2 = new PagedCard2D(3, 5);   // 8 cards por página
+    public void createPagedCardsEntrenos(PApplet p5){
+        pc2 = new PagedCardEntrenos(3, 5);   // 8 cards por página
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
@@ -110,14 +110,16 @@ public class GUI{
         pc2.setDimensions(x, y, w, h);
 
         String[][] datos = db.getInfoTotsEntrenos();
-        Card2[] cards = new Card2[datos.length];
+        CardEntrenos[] cards = new CardEntrenos[datos.length];
 
         for(int i = 0; i < datos.length; i++){
-            String nombre = datos[i][0];
-            String id = datos[i][1];
+            String id = datos[i][0];
+            String nombre = datos[i][1];
+            String fecha = datos[i][2];
+
 
             // usamos descripcion para guardar la fecha
-            cards[i] = new Card2(nombre, "", "", "", false,"");
+            cards[i] = new CardEntrenos(id, nombre, fecha);
         }
 
         pc2.setCards(cards);

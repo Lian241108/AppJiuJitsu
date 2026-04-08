@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Card2 {
+public class CardEjercicios {
 
     PImage img;
     String id;
@@ -15,16 +15,13 @@ public class Card2 {
     float x, y, w, h, r;
     float buttonH = 50;
 
-    boolean tieneImagen;
 
-
-    public Card2(String nombre, String imagenPath, String tipo, String dificultad, boolean tieneImagen, String id) {
+    public CardEjercicios(String nombre, String imagenPath, String descripcion, String tipo, String dificultad) {
         this.nombre = nombre;
         this.imagenPath = imagenPath;
+        this.dificultad = dificultad;
         this.tipo = tipo;
         this.dificultad = dificultad;
-        this.tieneImagen = tieneImagen;
-        this.id = id;
     }
 
     public void setDimensions(float x, float y, float w, float h, float r) {
@@ -63,8 +60,6 @@ public class Card2 {
         p5.rect(x, y, w, h, r);
 
 
-        if (tieneImagen == true) {
-
             // título
             p5.fill(0);
             p5.textAlign(PApplet.LEFT, PApplet.TOP);
@@ -97,20 +92,6 @@ public class Card2 {
             p5.stroke(255, 40, 40);
             p5.strokeWeight(2);
             p5.rect(imgX, imgY, imgW, imgH, 10);
-
-        }else{
-            // título
-            p5.fill(0);
-            p5.textAlign(PApplet.LEFT, PApplet.TOP);
-            p5.textSize(20);
-            p5.text(id, x + 12, y + 10);
-
-            // subtítulo pequeño
-            p5.textSize(12);
-            p5.fill(80);
-            p5.text(nombre, x + 12, y + 40);
-        }
-
 
 
         // botón editar
