@@ -4,6 +4,7 @@ import processing.core.PImage;
 public class Card2 {
 
     PImage img;
+    String id;
 
     String nombre;
     String imagenPath;
@@ -17,13 +18,13 @@ public class Card2 {
     boolean tieneImagen;
 
 
-    public Card2(String nombre, String imagenPath, String descripcion, String tipo, String dificultad, boolean tieneImagen) {
+    public Card2(String nombre, String imagenPath, String tipo, String dificultad, boolean tieneImagen, String id) {
         this.nombre = nombre;
         this.imagenPath = imagenPath;
-        this.descripcion = descripcion;
         this.tipo = tipo;
         this.dificultad = dificultad;
         this.tieneImagen = tieneImagen;
+        this.id = id;
     }
 
     public void setDimensions(float x, float y, float w, float h, float r) {
@@ -61,20 +62,19 @@ public class Card2 {
         p5.fill(248);
         p5.rect(x, y, w, h, r);
 
-        // título
-        p5.fill(0);
-        p5.textAlign(PApplet.LEFT, PApplet.TOP);
-        p5.textSize(20);
-        p5.text(nombre, x + 12, y + 10);
-
-        // subtítulo pequeño
-        p5.textSize(12);
-        p5.fill(80);
-        p5.text(tipo + " | " + dificultad, x + 12, y + 40);
-
-
 
         if (tieneImagen == true) {
+
+            // título
+            p5.fill(0);
+            p5.textAlign(PApplet.LEFT, PApplet.TOP);
+            p5.textSize(20);
+            p5.text(nombre, x + 12, y + 10);
+
+            // subtítulo pequeño
+            p5.textSize(12);
+            p5.fill(80);
+            p5.text(tipo + " | " + dificultad, x + 12, y + 40);
 
             // imagen grande
             float imgX = x + 12;
@@ -98,7 +98,19 @@ public class Card2 {
             p5.strokeWeight(2);
             p5.rect(imgX, imgY, imgW, imgH, 10);
 
+        }else{
+            // título
+            p5.fill(0);
+            p5.textAlign(PApplet.LEFT, PApplet.TOP);
+            p5.textSize(20);
+            p5.text(id, x + 12, y + 10);
+
+            // subtítulo pequeño
+            p5.textSize(12);
+            p5.fill(80);
+            p5.text(nombre, x + 12, y + 40);
         }
+
 
 
         // botón editar

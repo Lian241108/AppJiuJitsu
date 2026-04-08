@@ -77,6 +77,7 @@ public class GUI{
         pc1.setDimensions(x, y, w, h);
 
         String[][] datos = db.getInfoTotsEjercicios();
+
         Card2[] cards = new Card2[datos.length];
 
         for(int i = 0; i < datos.length; i++){
@@ -84,9 +85,11 @@ public class GUI{
             String imagen = datos[i][1];
             String descripcion = datos[i][2];
             String tipo = datos[i][3];
-            String dificultad = datos[i][4];
+            String id = datos[i][4];
+            String dificultad = datos[i][5];
 
-            cards[i] = new Card2(nombre, imagen, descripcion, tipo, dificultad, true);
+
+            cards[i] = new Card2(nombre, imagen, descripcion, tipo, true, id, dificultad);
 
             if(imagen != null && !imagen.trim().isEmpty()){
                 cards[i].setImage(p5.loadImage(imagen));
@@ -111,10 +114,10 @@ public class GUI{
 
         for(int i = 0; i < datos.length; i++){
             String nombre = datos[i][0];
-            String fecha = datos[i][1];
+            String id = datos[i][1];
 
             // usamos descripcion para guardar la fecha
-            cards[i] = new Card2(nombre, "", "", "", "",false);
+            cards[i] = new Card2(nombre, "", "", "", false,"");
         }
 
         pc2.setCards(cards);
