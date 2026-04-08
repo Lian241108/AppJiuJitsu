@@ -703,4 +703,31 @@ public class dataBase {
         }
     }
 
+    public void insertEntrenos(String nombre, String fecha) {
+        try {
+            // 1. Buscamos el ID más alto actual
+            String queryMaxID = "SELECT MAX(ID) AS ultimoID FROM entreno";
+            ResultSet rs = query.executeQuery(queryMaxID);
+            int nuevoID = 1; // Por defecto, si la tabla está vacía, empezamos en 1
+
+            if (rs.next()) {
+                nuevoID = rs.getInt("ultimoID") + 1;
+            }
+
+            // 2. Insertamos el nuevo registro incluyendo el ID calculado por Java
+            String q = "INSERT INTO entreno (ID, Nombre, Fecha) VALUES (?, ?, ?)";
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setInt(1, nuevoID);     // El ID que hemos calculado
+            ps.setString(2, nombre);   // El nombre que viene del TextField
+            ps.setString(3, fecha);    // La fecha
+
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Entreno añadido con ID manual: " + nuevoID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

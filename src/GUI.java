@@ -245,7 +245,7 @@ public class GUI{
     public void createSelect(PApplet p5){
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
-        String[] valors3 = {"FACIL", "MEDIO", "FIFICIL"};
+        String[] valors3 = {"FACIL", "MEDIO", "DIFICIL"};
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);

@@ -438,6 +438,19 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
+
+            if (gui.b82.mouseOverButton(this)) {
+                String nombre = gui.t41.getText();
+                String fecha = gui.t42.getText(); // Asegúrate de que esto sea una fecha válida (AAAA-MM-DD)
+
+                db.insertEntrenos(nombre, fecha);
+
+                gui.createPagedCardsEntrenos(this);
+                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
+            } else {
+                    System.out.println("Faltan campos obligatorios");
+
+            }
         }
 
 
