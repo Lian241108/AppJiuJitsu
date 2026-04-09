@@ -68,29 +68,6 @@ public class dataBase {
         return 0;
     }
 
-    // Retorna totes les caselles d'una columna
-
-    public String[] getInfoArray(String nomTaula, String nomColumna){
-        int n = getNumFilesTaula(nomTaula);
-        String[] info = new String[n];
-        String q = "SELECT "+ nomColumna +
-                " FROM " + nomTaula +
-                " ORDER BY " + nomColumna + " ASC";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            int f=0;
-            while(rs.next()){
-                info[f] = rs.getString(nomColumna);
-                f++;
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return info;
-    }
-
     // Retorna totes les caselles (files i columnes) d'una taula
 
     public String[][] getInfoArray2DUnitat(){
@@ -130,80 +107,8 @@ public class dataBase {
         return 0;
     }
 
-    // Retorna les dades (enunaciat, opcions i correcte) de totes les preguntes de dificultat 2
-    public String[][] getInfoPreguntaDificil(){
-        String qNF = "SELECT COUNT(*) AS num FROM ejercicio WHERE dificultad_Nombre='Dificil' ";
-        int nf = getNumFilesMatchQuery(qNF);
-        String[][] info = new String[nf][5];
-        String q = " SELECT nombre, Imagen, Descripción, Tipus_Nombre, Dificultad_Nombre " +
-                " FROM ejercicio " +
-                " WHERE dificultad = 'Dificil' ";
-        System.out.println(q);
-        try {
-            ResultSet rs = query.executeQuery(q);
-            int n = 0;
-            while(rs.next()){
-                info[n][0] = rs.getString("Nombre");
-                info[n][1] = rs.getString("Imagen");
-                info[n][2] = rs.getString("Descripción");
-                info[n][3] = rs.getString("Tipus_Nombre");
-                info[n][4] = rs.getString("Dificultad_Nombre");
-                n++;
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return info;
-    }
 
-    // Retorna dades de dues taules relacionades
-    public String[][] getInfoPreguntesUnitats(){
-        String qNF = " SELECT COUNT(*) AS num " +
-                " FROM ejercicio e, tipus t " +
-                " WHERE e.Tipus_Nombre = t.Nombre ";
-        int nf = getNumFilesMatchQuery(qNF);
-        String[][] info = new String[nf][2];
 
-        String q = " SELECT e.Nombre AS nomEjercicio, t.Nombre AS nomTipus " +
-                " FROM ejercicio e, tipus t " +
-                " WHERE e.Tipus_Nombre = t.Nombre ";
-
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            int n=0;
-            while(rs.next()){
-                info[n][0] = rs.getString("nomEjercicio");
-                info[n][1] = rs.getString("nomTipus");
-                n++;
-            }
-
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        return info;
-    }
-
-/*
-    // Retorna el càlcul (MAX) sobre una columna numèrica (punts) d'una taula ( puntuacio).
-
-    public int getMaxPuntuacioUsuari(String nomUsuari){
-        String q = " SELECT MAX(punts) AS maxima " +
-                " FROM puntuacio " +
-                " WHERE persona = '" + nomUsuari + "' ";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            rs.next();
-            return rs.getInt("maxima");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return 0;
-    }
 
     // Retorna true si el nom d'usuari i password estan a la taula (usuario)
     public boolean isUserOk(String nom, String password){
@@ -266,8 +171,6 @@ public class dataBase {
         }
     }
 
-
- */
 
     // Cercador de Preguntes
     // SELECT * FROM pregunta WHERE enunciat LIKE '%Quin%'
@@ -342,125 +245,6 @@ public class dataBase {
     }
 
 
-
-    // Retorna totes les dades d'una taula en concret
-    public String[][] getnomEjercici(){
-        int numFiles = getNumRowsTaula("ejercicio");
-        int numCols  = 2;
-        String[][] info = new String[numFiles][numCols];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT Nombre FROM ejercicio");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr][0] = rs.getString("Nombre");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    /*
-    public String[][] getInfoTaulaUnitat(){
-        int numFiles = getNumRowsTaula("ejercicio");
-        int numCols  = 2;
-        String[][] info = new String[numFiles][numCols];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT Nombre, Tipus_Nombre FROM ejercicio");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr][0] = String.valueOf(rs.getInt("Nombre"));
-                info[nr][1] = rs.getString("Tipus_Nombre");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-     */
-
-    // Retorna les dades bidimensionals d'una query en concret (Dades de les unitats d'un curs en concret).
-    public String[][] getInfoTaulaUnitatCurs(int curs){
-        String dificultad = String.valueOf(curs);
-        int numFiles = getNumRowsQuery("SELECT COUNT(*) AS n FROM ejercicio WHERE Dificultad_Nombre = '"+ dificultad+"'");
-        int numCols  = 3;
-        String[][] info = new String[numFiles][numCols];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT numero, nom, curs FROM unitat WHERE curs= '"+curs+"'");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr][0] = String.valueOf(rs.getInt("numero"));
-                info[nr][1] = rs.getString("nom");
-                info[nr][2] = String.valueOf(rs.getInt("curs"));
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    // Retorna les dades unidimensionals d'una query en concret (Cursos diferents)
-    public String[] getInfoColumnaCursTaulaUnitat(){
-        int numFiles = getNumRowsQuery("SELECT COUNT(DISTINCT curs) AS n FROM unitat");
-        String[] info = new String[numFiles];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT DISTINCT(curs) AS curs FROM unitat");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr] = rs.getString("curs");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    // Retorna les dades de la columna NOM de la taula UNITAT
-    public String[] getColumnaNomTaulaUnitat(){
-        int numFiles = getNumRowsTaula("unitat");
-        String[] info = new String[numFiles];
-        try {
-            ResultSet rs = query.executeQuery( "SELECT nom FROM unitat ORDER BY nom ASC");
-            int nr = 0;
-            while (rs.next()) {
-                info[nr] = rs.getString("nom");
-                nr++;
-            }
-            return info;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    // Retorna el valor de la Columna NUMERO de la taula UNITAT per aquella fila amb NOM
-    public String getNumeroFromTaulaUnitat(String nom)  {
-        try {
-            ResultSet rs = query.executeQuery( "SELECT numero FROM unitat WHERE nom = '"+nom+"'");
-            rs.next();
-            return String.valueOf(rs.getInt("numero"));
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-
     public boolean isValidUser(String userName, String password){
         String q = "SELECT COUNT(*) AS n FROM usuario WHERE nom = '"+userName+"' AND password='"+password+"'";
         try {
@@ -486,24 +270,6 @@ public class dataBase {
             return null;
         }
     }
-
-
-    // INSERTS
-
-    // Inserta les dades a la taula Unitat
-
-    void insertInfoTaulaUnitat(String num, String nom){
-        try {
-            String sNom = nom.replace("\'", "\\'");
-            String q = "INSERT INTO unitat (numero, nom) VALUES ('" + num + "','" + sNom + "')";
-            System.out.println(q);
-            query.execute(q);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-    }
-
 
     // UPDATES
 
