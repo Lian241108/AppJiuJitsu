@@ -496,4 +496,19 @@ public class dataBase {
         }
     }
 
+    public void deleteAlumno(String dni){
+        try{
+            String q = "DELETE FROM alumno WHERE DNI = ?";
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, dni);
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Alumno eliminado");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

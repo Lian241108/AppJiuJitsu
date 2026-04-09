@@ -453,6 +453,16 @@ public class Main extends PApplet {
             }
         }
 
+        int row = gui.pt1.checkDeleteClick(this, width/2 - 800, height/2 - 100, 1500, 500);
+
+        if(row != -1){
+
+            String dni = gui.pt1.tableData[row][0];
+
+            db.deleteAlumno(dni);   // BORRAR BD
+            gui.refrescarTablaAlumnos(); // REFRESCAR TABLA
+        }
+
 
         gui.t11.isPressed(this);
         gui.t12.isPressed(this);
