@@ -290,6 +290,16 @@ public class Main extends PApplet {
             if (gui.sb1.mouseOverButton(this)){
                 gui.sb1.toggle();
             }
+
+            int row = gui.pt1.checkDeleteClick(this, width/2 - 800, height/2 - 100, 1500, 500);
+
+            if(row != -1){
+
+                String dni = gui.pt1.tableData[row][0];
+
+                db.deleteAlumno(dni);   // BORRAR BD
+                gui.refrescarTablaAlumnos(); // REFRESCAR TABLA
+            }
         }
 
         //PAntalla EJercicios
@@ -312,6 +322,20 @@ public class Main extends PApplet {
 
             if(gui.b42.mouseOverButton(this)) gui.pc1.prevPage();
             if(gui.b43.mouseOverButton(this)) gui.pc1.nextPage();
+
+            int i = gui.pc1.checkDeleteClick(this);
+
+            if(i != -1){
+
+                CardEjercicios c = gui.pc1.cards[i];
+
+                String nombre = c.nombre; // o ID si tienes
+
+                db.deleteEjercicio(nombre); // 👈 crea esto en BD
+
+                gui.createPagedCardsEjercicios(this); // refresca
+            }
+
 
         }
 
@@ -344,6 +368,19 @@ public class Main extends PApplet {
 
             if(gui.b52.mouseOverButton(this)) gui.pc2.prevPage();
             if(gui.b53.mouseOverButton(this)) gui.pc2.nextPage();
+
+            int j = gui.pc2.checkDeleteClick2(this);
+
+            if(j!= -1){
+
+                CardEntrenos c = gui.pc2.cards[j];
+
+                String id = c.id; // o ID si tienes
+
+                db.deleteEntreno(id); // 👈 crea esto en BD
+
+                gui.createPagedCardsEntrenos(this); // refresca
+            }
 
         }
 
@@ -387,6 +424,7 @@ public class Main extends PApplet {
                     System.out.println("Faltan campos obligatorios");
                 }
             }
+
         }
 
         //PAntalla Nuevo Ejercicio
@@ -423,20 +461,6 @@ public class Main extends PApplet {
                 }
             }
 
-            int i = gui.pc1.checkDeleteClick(this);
-
-            if(i != -1){
-
-                CardEjercicios c = gui.pc1.cards[i];
-
-                String nombre = c.nombre; // o ID si tienes
-
-                db.deleteEjercicio(nombre); // 👈 crea esto en BD
-
-                gui.createPagedCardsEjercicios(this); // refresca
-            }
-
-
         }
 
 
@@ -466,28 +490,8 @@ public class Main extends PApplet {
             }
         }
 
-        int row = gui.pt1.checkDeleteClick(this, width/2 - 800, height/2 - 100, 1500, 500);
 
-        if(row != -1){
 
-            String dni = gui.pt1.tableData[row][0];
-
-            db.deleteAlumno(dni);   // BORRAR BD
-            gui.refrescarTablaAlumnos(); // REFRESCAR TABLA
-        }
-
-        int i = gui.pc1.checkDeleteClick(this);
-
-        if(i != -1){
-
-            CardEjercicios c = gui.pc1.cards[i];
-
-            String nombre = c.nombre; // o ID si tienes
-
-            db.deleteEjercicio(nombre); // 👈 crea esto en BD
-
-            gui.createPagedCardsEjercicios(this); // refresca
-        }
 
 
         gui.t11.isPressed(this);

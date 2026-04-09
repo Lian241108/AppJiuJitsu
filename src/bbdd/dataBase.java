@@ -525,4 +525,18 @@ public class dataBase {
         }
     }
 
+    public void deleteEntreno(String id){
+        try{
+            String q = "DELETE FROM entreno WHERE ID = ?";
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, id);
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Entreno eliminado");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

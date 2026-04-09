@@ -113,4 +113,18 @@ public class PagedCardEntrenos {
         }
         return null;
     }
+
+    public int checkDeleteClick2(PApplet p5){
+
+        int first = numPage * numCardsPage;
+        int last = Math.min(first + numCardsPage, numCards);
+
+        for(int i = first; i < last; i++){
+            if(cards[i].mouseOverDeleteButton2(p5)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
