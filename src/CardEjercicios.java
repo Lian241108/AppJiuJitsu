@@ -93,21 +93,43 @@ public class CardEjercicios {
             p5.strokeWeight(2);
             p5.rect(imgX, imgY, imgW, imgH, 10);
 
+        // botones
+        float gapBtn = 10;
 
-        // botón editar
-        float bx = x + 12;
-        float by = y + h - buttonH - 12;
-        float bw = w - 24;
+        float bw = (w - 36) / 2; // dos botones
         float bh = buttonH;
 
+        float by = y + h - buttonH - 12;
+
+// EDITAR (izquierda)
+        float bx1 = x + 12;
+
         p5.noStroke();
-        p5.fill(255, 20, 20);
-        p5.rect(bx, by, bw, bh, 10);
+        if(mouseOverEditButton(p5)){
+            p5.fill(200, 0, 0);
+        } else {
+            p5.fill(255, 20, 20);
+        }
+        p5.rect(bx1, by, bw, bh, 10);
 
         p5.fill(0);
         p5.textAlign(PApplet.CENTER, PApplet.CENTER);
-        p5.textSize(22);
-        p5.text("EDITAR", bx + bw / 2, by + bh / 2);
+        p5.textSize(18);
+        p5.text("EDITAR", bx1 + bw/2, by + bh/2);
+
+
+// ELIMINAR (derecha)
+        float bx2 = x + 12 + bw + gapBtn;
+
+        if(mouseOverDeleteButton(p5)){
+            p5.fill(120, 0, 0);
+        } else {
+            p5.fill(180, 0, 0);
+        }
+        p5.rect(bx2, by, bw, bh, 10);
+
+        p5.fill(255);
+        p5.text("X", bx2 + bw/2, by + bh/2);
 
         p5.popStyle();
     }
@@ -124,6 +146,18 @@ public class CardEjercicios {
         float bh = buttonH;
 
         return p5.mouseX >= bx && p5.mouseX <= bx + bw &&
+                p5.mouseY >= by && p5.mouseY <= by + bh;
+    }
+
+    public boolean mouseOverDeleteButton(PApplet p5){
+        float gapBtn = 10;
+        float bw = (w - 36) / 2;
+        float bh = buttonH;
+        float by = y + h - buttonH - 12;
+
+        float bx2 = x + 12 + bw + gapBtn;
+
+        return p5.mouseX >= bx2 && p5.mouseX <= bx2 + bw &&
                 p5.mouseY >= by && p5.mouseY <= by + bh;
     }
 

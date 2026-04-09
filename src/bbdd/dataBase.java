@@ -511,4 +511,18 @@ public class dataBase {
         }
     }
 
+    public void deleteEjercicio(String nombre){
+        try{
+            String q = "DELETE FROM ejercicio WHERE nombre = ?";
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, nombre);
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Ejercicio eliminado");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

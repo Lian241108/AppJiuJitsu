@@ -423,6 +423,19 @@ public class Main extends PApplet {
                 }
             }
 
+            int i = gui.pc1.checkDeleteClick(this);
+
+            if(i != -1){
+
+                CardEjercicios c = gui.pc1.cards[i];
+
+                String nombre = c.nombre; // o ID si tienes
+
+                db.deleteEjercicio(nombre); // 👈 crea esto en BD
+
+                gui.createPagedCardsEjercicios(this); // refresca
+            }
+
 
         }
 
@@ -461,6 +474,19 @@ public class Main extends PApplet {
 
             db.deleteAlumno(dni);   // BORRAR BD
             gui.refrescarTablaAlumnos(); // REFRESCAR TABLA
+        }
+
+        int i = gui.pc1.checkDeleteClick(this);
+
+        if(i != -1){
+
+            CardEjercicios c = gui.pc1.cards[i];
+
+            String nombre = c.nombre; // o ID si tienes
+
+            db.deleteEjercicio(nombre); // 👈 crea esto en BD
+
+            gui.createPagedCardsEjercicios(this); // refresca
         }
 
 
@@ -511,7 +537,10 @@ public class Main extends PApplet {
             gui.s3.toggle(); // Plegar o desplegar
         }
 
+
+
     }
+
 
 
 
