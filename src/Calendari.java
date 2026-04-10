@@ -7,6 +7,7 @@ public class Calendari {
 
     boolean visible = false;
 
+
     // Textos representatius dels mesos
     String[] months = {"Jan","Feb","Mar","Apr","May","Jun",
             "Jul","Aug","Sep","Oct","Nov","Dec"};
@@ -61,13 +62,14 @@ public class Calendari {
     }
 
     // Getters
-    public boolean isDateSelected(){
-        return this.dateSelected;
-    }
-    public String getSelectedDate(){
-        return this.selectedDay +"/"+ this.selectedMonth + "/"+ this.selectedYear;
-    }
+    public String getSelectedDateSQL(){
+        if(selectedDay <= 0) return "";
 
+        String day = String.format("%02d", selectedDay);
+        String month = String.format("%02d", selectedMonth);
+
+        return selectedYear + "-" + month + "-" + day;
+    }
 
     // Setters
     public void toggleVisibility(){
@@ -221,6 +223,7 @@ public class Calendari {
                 deselectAll();
                 b.setSelected(!prevState);
                 if(b.selected){
+                    selectedDay = dia;
                     dateSelected = true;
                     setSelectedDate(b.dia,b.mes,b.any);
                 }
@@ -238,6 +241,14 @@ public class Calendari {
                 b.setSelected(false);
             }
         }
+    }
+
+    public boolean isDateSelected(){
+        return dateSelected;
+    }
+
+    public void resetDateSelected(){
+        dateSelected = false;
     }
 
 }

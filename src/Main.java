@@ -375,18 +375,6 @@ public class Main extends PApplet {
                 println("B11 has been pressed!!!");
                 gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
             }
-            if(gui.bOK.mouseOverButton(this)){
-                gui.c1.toggleVisibility();
-                gui.bc1.toggleVisibility();
-                gui.bc2.toggleVisibility();
-            }
-            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled()&& gui.bc1.visible){
-                gui.c1.prevMonth();
-            }
-            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled()&&gui.bc2.visible){
-                gui.c1.nextMonth();
-            }
-            gui.c1.checkButtons(this);
 
             if(gui.b52.mouseOverButton(this)) gui.pc2.prevPage();
             if(gui.b53.mouseOverButton(this)) gui.pc2.nextPage();
@@ -511,29 +499,69 @@ public class Main extends PApplet {
         }
 
 
-        //PAntalla Nuevo Entreno
+        //Pantalla Nuevo Entreno
+        else if(gui.pantallaActual == GUI.PANTALLA.NUEVOENTRENO) {
 
-        else if(gui.pantallaActual==GUI.PANTALLA.NUEVOENTRENO) {
+            // 🔙 volver a inicio
             if(gui.b0.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
+                println("Back to INICIO");
+                gui.c1.resetDateSelected();
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
+
+            // 🔙 volver a lista de entrenos
             if(gui.b81.mouseOverButton(this)){
-                println("B11 has been pressed!!!");
+                println("Back to ENTRENOS");
+                gui.c1.resetDateSelected();
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
 
+            // 📅 mostrar / ocultar calendario
+            if(gui.bOK.mouseOverButton(this)){
+                gui.c1.toggleVisibility();
+                gui.bc1.toggleVisibility();
+                gui.bc2.toggleVisibility();
+            }
+
+            // 📅 navegación calendario
+            if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled() && gui.bc1.visible){
+                gui.c1.prevMonth();
+            }
+
+            if(gui.bc2.mouseOverButton(this) && gui.bc2.isEnabled() && gui.bc2.visible){
+                gui.c1.nextMonth();
+            }
+
+            // 📅 selección de día
+            gui.c1.checkButtons(this);
+
+            if(gui.c1.isDateSelected()){
+                gui.t42.setText(gui.c1.getSelectedDateSQL());
+                gui.c1.resetDateSelected();
+            }
+
+            // 💾 GUARDAR
             if(gui.b72.mouseOverButton(this)){
 
                 String nombre = gui.t41.getText().trim();
                 String fecha = gui.t42.getText().trim();
 
+                // 🔴 VALIDACIONES
+                if(nombre.isEmpty()){
+                    System.out.println("Nombre vacío");
+                    return;
+                }
 
+                if(fecha.isEmpty() || !fecha.matches("\\d{4}-\\d{2}-\\d{2}")){
+                    System.out.println("Fecha inválida o no seleccionada");
+                    return;
+                }
+
+                // 🔄 UPDATE / INSERT
                 if(modoEditar){
 
                     db.updateEntreno(
-                            entrenoEditando.id, // clave original
-
+                            entrenoEditando.id,
                             nombre,
                             fecha
                     );
@@ -546,17 +574,21 @@ public class Main extends PApplet {
                     db.insertEntrenos(nombre, fecha);
                 }
 
+                // 🔄 refrescar UI
                 gui.createPagedCardsEntrenos(this);
 
+                // 🧹 limpiar campos
                 gui.t41.setText("");
                 gui.t42.setText("");
 
+                // 🧹 MUY IMPORTANTE: limpiar calendario
+                gui.c1.resetDateSelected();
+                gui.c1.setVisible(false);
+
+                // 🔁 volver
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
         }
-
-
-
 
 
         gui.t11.isPressed(this);

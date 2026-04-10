@@ -102,7 +102,7 @@ public class GUI{
     }
 
     public void createPagedCardsEntrenos(PApplet p5){
-        pc2 = new PagedCardEntrenos(3, 5);   // 8 cards por página
+        pc2 = new PagedCardEntrenos(4, 4);   // 8 cards por página
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
@@ -238,7 +238,7 @@ public class GUI{
         
         // PAntalla NuevoEntreno
         t41 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-        t42 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600); // DESCRIPCIÓ
+        t42 = new TextField(p5, p5.width/2-100, p5.height/2-300, 400, 100); // DESCRIPCIÓ
 
     }
     
@@ -315,7 +315,6 @@ public class GUI{
         p5.background(255);
 
         dibuixaButtonEntrenos(p5);
-        dibuixaCalendari(p5);
         dibuixaTextListEntrenos(p5);
 
         dibuixaPagedCard2(p5);
@@ -345,11 +344,13 @@ public class GUI{
 
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
+        dibuixaCalendari(p5);
 
         p5.textAlign(p5.CORNER);
         p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
         //p5.text("DIFICULTAD: ",p5.width/2-800, p5.height/2-310);
+
     }
 
     public void dibuixaPantallaNuevoEjercicio(PApplet p5){
@@ -455,13 +456,6 @@ public class GUI{
 
         b0.display(p5);
 
-        bOK.display(p5);
-
-        if (bc1.visible) bc1.display(p5);
-
-        if (bc2.visible) bc2.display(p5);
-
-
     }
 
     public void dibuixaPagedCard(PApplet p5){
@@ -491,6 +485,12 @@ public class GUI{
         b82.display(p5);
 
         b0.display(p5);
+
+        bOK.display(p5);
+
+        if (bc1.visible) bc1.display(p5);
+
+        if (bc2.visible) bc2.display(p5);
     }
 
     //*******************************************************
