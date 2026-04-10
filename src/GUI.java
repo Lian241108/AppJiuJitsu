@@ -135,15 +135,15 @@ public class GUI{
 
 
     public void createPagedTable(PApplet p5){
-        pt1 = new PagedTable(6, 10);   // 1 cabecera + 5 filas visibles, 9 columnas
+        pt1 = new PagedTable(6, 9);   // 1 cabecera + 5 filas visibles, 9 columnas
 
         String[] headers = {
                 "DNI", "Nombre", "Tutor legal", "Telefono",
-                "Pagado", "Fecha nacimiento", "Edad", "Nivel", "Genero", "Eliminar"
+                "Pagado", "Edad", "Nivel", "Genero", "Eliminar"
         };
         pt1.setHeaders(headers);
 
-        float[] widths = {11, 17, 17, 11, 7, 15, 5, 7, 10, 10};
+        float[] widths = {11, 18, 18, 10, 7, 6, 9, 11, 10};
         pt1.setColumnWidths(widths);
 
         String[][] datos = db.getInfoTotsAlumnes();

@@ -405,11 +405,10 @@ public class Main extends PApplet {
 
 
                 String pagado = "0";
-                String fechaNacimiento = "00-00-00";
                 String nivel = "Blanco";
 
                 if(!nombre.equals("") && !dni.equals("")){
-                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, fechaNacimiento, edad, nivel, genero);
+                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, edad, nivel, genero);
                     gui.refrescarTablaAlumnos();
 
                     gui.t21.setText("");

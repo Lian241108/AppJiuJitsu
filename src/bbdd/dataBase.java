@@ -321,11 +321,11 @@ public class dataBase {
     }
 
     public String[][] getInfoTotsAlumnes(){
-        String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel, Genero FROM alumno ORDER BY Nombre ASC";
+        String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, Edad, Nivel, Genero FROM alumno ORDER BY Nombre ASC";
         System.out.println(q);
         try{
             int numFiles = getNumFilesTaula("alumno");
-            String[][] info = new String[numFiles][9];
+            String[][] info = new String[numFiles][8];
             ResultSet rs = query.executeQuery(q);
             int f = 0;
             while(rs.next()){
@@ -334,10 +334,9 @@ public class dataBase {
                 info[f][2] = rs.getString("NombreTutor");
                 info[f][3] = rs.getString("TelefonoTutor");
                 info[f][4] = rs.getString("Pagado");
-                info[f][5] = rs.getString("FechaNacimiento");
-                info[f][6] = rs.getString("Edad");
-                info[f][7] = rs.getString("Nivel");
-                info[f][8] = rs.getString("Genero");
+                info[f][5] = rs.getString("Edad");
+                info[f][6] = rs.getString("Nivel");
+                info[f][7] = rs.getString("Genero");
                 f++;
             }
             return info;
@@ -423,9 +422,9 @@ public class dataBase {
 
     public void insertAlumno(String dni, String nombre, String nombreTutor,
                              String telefonoTutor, String pagado,
-                             String fechaNacimiento, String edad, String nivel, String genero) {
-        String q = "INSERT INTO alumno (dni, Nombre, NombreTutor, TelefonoTutor, Pagado, FechaNacimiento, Edad, Nivel, Genero) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                             String edad, String nivel, String genero) {
+        String q = "INSERT INTO alumno (dni, Nombre, NombreTutor, TelefonoTutor, Pagado, Edad, Nivel, Genero) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = c.prepareStatement(q);
@@ -434,10 +433,9 @@ public class dataBase {
             ps.setString(3, nombreTutor);
             ps.setString(4, telefonoTutor);
             ps.setString(5, pagado);
-            ps.setString(6, fechaNacimiento);
-            ps.setString(7, edad);
-            ps.setString(8, nivel);
-            ps.setString(9,genero);
+            ps.setString(6, edad);
+            ps.setString(7, nivel);
+            ps.setString(8,genero);
 
             ps.executeUpdate();
             ps.close();
