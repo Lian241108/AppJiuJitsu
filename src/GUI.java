@@ -34,7 +34,7 @@ public class GUI{
 
     // Botons, text fields, switch buttons.....
     Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
-    TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42;
+    TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42, t43;
     SwitchButton sb1;
     Select s1,s2,s3,s4;
     TextList textListAlumnos, textListEntrenos, textListEjercicios;
@@ -179,7 +179,7 @@ public class GUI{
         b24 = new Button(p5, "<", marginH, marginV, 50, 50);
 
         // Pantalla Alumnos
-        b31 = new Button (p5,"NUEVO ALUMNO",p5.width/2+400, p5.height/2+300, 400, 100);
+        b31 = new Button (p5,"+",p5.width/2+750, p5.height/2-100, 50, 500);
         //b32 = new Button (p5,"<", p5.width/2+400, p5.height/2-300, 50, 50);
         //b33 = new Button (p5,">", p5.width/2+500, p5.height/2-300, 50, 50);
         b34 = new Button(p5, "<", marginH, marginV, 50, 50);
@@ -245,7 +245,7 @@ public class GUI{
     public void createSelect(PApplet p5){
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
-        String[] valors3 = {"FACIL", "MEDIO", "DIFICIL"};
+        String[] valors3 = {"FACIL", "MEDIA", "DIFICIL"};
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);

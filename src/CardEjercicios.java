@@ -140,12 +140,14 @@ public class CardEjercicios {
     }
 
     public boolean mouseOverEditButton(PApplet p5) {
-        float bx = x + 12;
-        float by = y + h - buttonH - 12;
-        float bw = w - 24;
+        float gapBtn = 10;
+        float bw = (w - 36) / 2;
         float bh = buttonH;
+        float by = y + h - buttonH - 12;
 
-        return p5.mouseX >= bx && p5.mouseX <= bx + bw &&
+        float bx1 = x + 12;
+
+        return p5.mouseX >= bx1 && p5.mouseX <= bx1 + bw &&
                 p5.mouseY >= by && p5.mouseY <= by + bh;
     }
 

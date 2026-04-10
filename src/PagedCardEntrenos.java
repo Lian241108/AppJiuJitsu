@@ -127,4 +127,18 @@ public class PagedCardEntrenos {
 
         return -1;
     }
+
+    public int checkEditClick(PApplet p5){
+
+        int first = numPage * numCardsPage;
+        int last = Math.min(first + numCardsPage, numCards);
+
+        for(int i = first; i < last; i++){
+            if(cards[i].mouseOverEditButton(p5)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

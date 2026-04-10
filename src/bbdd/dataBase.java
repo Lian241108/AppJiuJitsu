@@ -483,7 +483,7 @@ public class dataBase {
             PreparedStatement ps = c.prepareStatement(q);
             ps.setInt(1, nuevoID);     // El ID que hemos calculado
             ps.setString(2, nombre);   // El nombre que viene del TextField
-            ps.setString(3, fecha);    // La fecha
+            ps.setString(3, fecha); // La fecha
 
             ps.executeUpdate();
             ps.close();
@@ -533,6 +533,48 @@ public class dataBase {
 
             System.out.println("Entreno eliminado");
         }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEjercicio(String nombreOriginal, String nombre,
+                                String descripcion, String tipo, String dificultad) {
+
+        String q = "UPDATE ejercicio SET Nombre=?, Descripción=?, Tipus_Nombre=?, Dificultad_Nombre=? WHERE Nombre=?";
+
+        try {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, nombre);
+            ps.setString(2, descripcion);
+            ps.setString(3, tipo);
+            ps.setString(4, dificultad);
+            ps.setString(5, nombreOriginal);
+
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Ejercicio actualizado");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEntreno(String id, String nombre,
+                                String fecha) {
+
+        String q = "UPDATE entreno SET Nombre=?, Fecha=? WHERE ID=?";
+
+        try {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, nombre);
+            ps.setString(2, fecha);
+            ps.setString(3, id);
+
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Entreno actualizado");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

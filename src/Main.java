@@ -14,6 +14,9 @@ public class Main extends PApplet {
     GUI gui;
 
     boolean loginOK = false;
+    CardEjercicios ejercicioEditando = null;
+    CardEntrenos entrenoEditando = null;
+    boolean modoEditar = false;
 
 
     //ar.get(i);
@@ -336,6 +339,25 @@ public class Main extends PApplet {
                 gui.createPagedCardsEjercicios(this); // refresca
             }
 
+            int iEdit = gui.pc1.checkEditClick(this);
+
+            if(iEdit != -1){
+
+                ejercicioEditando = gui.pc1.cards[iEdit];
+                modoEditar = true;
+
+                // 👉 cargar datos en los campos
+                gui.t31.setText(ejercicioEditando.nombre);
+                gui.t33.setText(ejercicioEditando.descripcion);
+
+                if(ejercicioEditando != null){
+                    gui.s2.setSelected(ejercicioEditando.tipo);
+                    gui.s3.setSelected(ejercicioEditando.dificultad);
+                }
+
+                gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
+            }
+
 
         }
 
@@ -381,6 +403,21 @@ public class Main extends PApplet {
 
                 gui.createPagedCardsEntrenos(this); // refresca
             }
+
+            int jEdit = gui.pc2.checkEditClick(this);
+
+            if(jEdit != -1){
+
+                entrenoEditando = gui.pc2.cards[jEdit];
+                modoEditar = true;
+
+                // 👉 cargar datos en los campos
+                gui.t41.setText(entrenoEditando.nombre);
+                gui.t42.setText(entrenoEditando.fecha);
+
+                gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
+            }
+
 
         }
 
@@ -439,25 +476,36 @@ public class Main extends PApplet {
             }
 
             if(gui.b72.mouseOverButton(this)){
+
                 String nombre = gui.t31.getText().trim();
-                //String imagenPath = gui.t32.getText().trim();
                 String descripcion = gui.t33.getText().trim();
                 String tipo = gui.s2.getSelectedValue().trim();
                 String dificultad = gui.s3.getSelectedValue().trim();
 
+                if(modoEditar){
 
-                if(!nombre.equals("") && !nombre.equals("")){
-                    db.insertEjercicio( nombre, descripcion, tipo, dificultad);
-                    gui.createPagedCardsEjercicios(this);
+                    db.updateEjercicio(
+                            ejercicioEditando.nombre, // clave original
+                            nombre,
+                            descripcion,
+                            tipo,
+                            dificultad
+                    );
 
-                    gui.t31.setText("");
-                    //gui.t32.setText("");
-                    gui.t33.setText("");
+                    modoEditar = false;
+                    ejercicioEditando = null;
 
-                    gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
                 } else {
-                    System.out.println("Faltan campos obligatorios");
+
+                    db.insertEjercicio(nombre, descripcion, tipo, dificultad);
                 }
+
+                gui.createPagedCardsEjercicios(this);
+
+                gui.t31.setText("");
+                gui.t33.setText("");
+
+                gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
             }
 
         }
@@ -475,17 +523,35 @@ public class Main extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
 
-            if (gui.b82.mouseOverButton(this)) {
-                String nombre = gui.t41.getText();
-                String fecha = gui.t42.getText(); // Asegúrate de que esto sea una fecha válida (AAAA-MM-DD)
+            if(gui.b72.mouseOverButton(this)){
 
-                db.insertEntrenos(nombre, fecha);
+                String nombre = gui.t41.getText().trim();
+                String fecha = gui.t42.getText().trim();
+
+
+                if(modoEditar){
+
+                    db.updateEntreno(
+                            entrenoEditando.id, // clave original
+
+                            nombre,
+                            fecha
+                    );
+
+                    modoEditar = false;
+                    entrenoEditando = null;
+
+                } else {
+
+                    db.insertEntrenos(nombre, fecha);
+                }
 
                 gui.createPagedCardsEntrenos(this);
-                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
-            } else {
-                    System.out.println("Faltan campos obligatorios");
 
+                gui.t41.setText("");
+                gui.t42.setText("");
+
+                gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
         }
 

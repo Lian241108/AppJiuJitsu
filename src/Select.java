@@ -9,7 +9,8 @@ public class Select {
     boolean collapsed = true;  // Plegat / Desplegat
     boolean enabled;           // Abilitat / desabilitat
 
-    float lineSpace = 15;      // Espai entre línies
+    float lineSpace = 15;// Espai entre línies
+
 
     public Select(String[] texts, float x, float y, float w, float h){
 
@@ -35,6 +36,8 @@ public class Select {
     public String getSelectedValue(){
         return  this.selectedValue;
     }
+
+
 
     public void display(PApplet p5){
         p5.pushStyle();
@@ -104,6 +107,21 @@ public class Select {
         int i = (int)p5.map(p5.mouseY, y + h, y + h + (h + lineSpace)*texts.length,
                 0, texts.length);
         return i;
+    }
+
+    public void setSelected(String value){
+
+        if(texts == null){
+            System.out.println("ERROR: texts es null en Select");
+            return;
+        }
+
+        for(int i = 0; i < texts.length; i++){
+            if(texts[i].trim().equalsIgnoreCase(value.trim())){
+                selectedValue = texts[i]; // 🔥 IMPORTANTE
+                return;
+            }
+        }
     }
 
 }
