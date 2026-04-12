@@ -427,10 +427,10 @@ public class Main extends PApplet {
                 String nombreTutor = gui.t24.getText().trim();
                 String telefonoTutor = gui.t25.getText().trim();
                 String genero = gui.s1.getSelectedValue().trim();
+                String nivel = gui.s4.getSelectedValue().trim();
 
 
                 String pagado = "0";
-                String nivel = "Blanco";
 
                 if(!nombre.equals("") && !dni.equals("")){
                     db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, edad, nivel, genero);
@@ -502,28 +502,28 @@ public class Main extends PApplet {
         //Pantalla Nuevo Entreno
         else if(gui.pantallaActual == GUI.PANTALLA.NUEVOENTRENO) {
 
-            // 🔙 volver a inicio
+            // volver a inicio
             if(gui.b0.mouseOverButton(this)){
                 println("Back to INICIO");
                 gui.c1.resetDateSelected();
                 gui.pantallaActual = GUI.PANTALLA.INICIAL;
             }
 
-            // 🔙 volver a lista de entrenos
+            // volver a lista de entrenos
             if(gui.b81.mouseOverButton(this)){
                 println("Back to ENTRENOS");
                 gui.c1.resetDateSelected();
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
 
-            // 📅 mostrar / ocultar calendario
+            // mostrar / ocultar calendario
             if(gui.bOK.mouseOverButton(this)){
                 gui.c1.toggleVisibility();
                 gui.bc1.toggleVisibility();
                 gui.bc2.toggleVisibility();
             }
 
-            // 📅 navegación calendario
+            // navegación calendario
             if(gui.bc1.mouseOverButton(this) && gui.bc1.isEnabled() && gui.bc1.visible){
                 gui.c1.prevMonth();
             }
@@ -532,7 +532,7 @@ public class Main extends PApplet {
                 gui.c1.nextMonth();
             }
 
-            // 📅 selección de día
+            // selección de día
             gui.c1.checkButtons(this);
 
             if(gui.c1.isDateSelected()){
@@ -540,13 +540,13 @@ public class Main extends PApplet {
                 gui.c1.resetDateSelected();
             }
 
-            // 💾 GUARDAR
+            // GUARDAR
             if(gui.b72.mouseOverButton(this)){
 
                 String nombre = gui.t41.getText().trim();
                 String fecha = gui.t42.getText().trim();
 
-                // 🔴 VALIDACIONES
+                // VALIDACIONES
                 if(nombre.isEmpty()){
                     System.out.println("Nombre vacío");
                     return;
@@ -557,7 +557,7 @@ public class Main extends PApplet {
                     return;
                 }
 
-                // 🔄 UPDATE / INSERT
+                // UPDATE / INSERT
                 if(modoEditar){
 
                     db.updateEntreno(
@@ -574,18 +574,18 @@ public class Main extends PApplet {
                     db.insertEntrenos(nombre, fecha);
                 }
 
-                // 🔄 refrescar UI
+                // refrescar UI
                 gui.createPagedCardsEntrenos(this);
 
-                // 🧹 limpiar campos
+                // limpiar campos
                 gui.t41.setText("");
                 gui.t42.setText("");
 
-                // 🧹 MUY IMPORTANTE: limpiar calendario
+                // MUY IMPORTANTE: limpiar calendario
                 gui.c1.resetDateSelected();
                 gui.c1.setVisible(false);
 
-                // 🔁 volver
+                // volver
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
             }
         }
@@ -636,6 +636,14 @@ public class Main extends PApplet {
 
             }
             gui.s3.toggle(); // Plegar o desplegar
+        }
+
+        if(gui.s4.mouseOverSelect(this) && gui.s4.isEnabled()) {
+            if (!gui.s4.isCollapsed()) {
+                gui.s4.update(this);      // Actualitzar valor
+
+            }
+            gui.s4.toggle(); // Plegar o desplegar
         }
 
 

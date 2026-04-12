@@ -246,9 +246,11 @@ public class GUI{
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
         String[] valors3 = {"FACIL", "MEDIA", "DIFICIL"};
+        String[] valors4 = {"Blanco","Blanco-Amarillo","Amarillo","Amarillo-Naranja","Naranja","Naranja-Verde","Verde","Verde-Azul","Azul","Azul-Morado","Morado","Marrón","Shodan-ho","Negro","Negro-Rojo","Blanco-Rojo","Rojo"};
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);
+        s4 = new Select(valors4, p5.width/2-800, p5.height/2+200, 400, 50);
 
     }
 
@@ -406,6 +408,7 @@ public class GUI{
     
     public void dibuixaSelectAlumnos(PApplet p5){
         s1.display(p5);
+        s4.display(p5);
     }
     public void dibuixaSelectEjercicio(PApplet p5){
         s2.display(p5);
