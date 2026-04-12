@@ -36,7 +36,7 @@ public class GUI{
     Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42, t43;
     SwitchButton sb1;
-    Select s1,s2,s3,s4;
+    Select s1,s2,s3,s4, s5;
     TextList textListAlumnos, textListEntrenos, textListEjercicios;
     PagedTable pt1;
     Calendari c1;
@@ -246,17 +246,19 @@ public class GUI{
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
         String[] valors3 = {"FACIL", "MEDIA", "DIFICIL"};
-        String[] valors4 = {"Blanco","Blanco-Amarillo","Amarillo","Amarillo-Naranja","Naranja","Naranja-Verde","Verde","Verde-Azul","Azul","Azul-Morado","Morado","Marrón","Shodan-ho","Negro","Negro-Rojo","Blanco-Rojo","Rojo"};
+        String[] valors4 = {"Blanco","B-A","Amarillo","A-N","Naranja","N-V","Verde","V-A","Azul","A-M","Morado","Marrón","Shodan-ho","Negro","Negro-Rojo","Blanco-Rojo","Rojo"};
+        String[] valors5 = {"Si", "NO"};
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);
         s4 = new Select(valors4, p5.width/2-800, p5.height/2+200, 400, 50);
+        s5 = new Select(valors5, p5.width/2-200, p5.height/2-100, 400, 50);
 
     }
 
     public void createTextList (PApplet p5){
 
-        String[] alumnos = {"Julia Sanso Sanso","Lian Sanso Gonzalez"};
+        String[] alumnos = {"Julia Sanso Sanso","Lian Sanso Gonzalez", "Alma"};
         String[] entrenos = {"Entreno intenso","Entreno noche", "Divertido", "Tecnico", "Fisico", "Proyecciones"};
         String[] ejercicios = {"Lobo","O Soto Gari", "OGoshi", "Sentadillas", "Flexiones", "Seio Nage", "Relajacion", "O Ushi Gari", "Ukemi"};
 
@@ -338,6 +340,8 @@ public class GUI{
         p5.text("TUTOR LEGAL: ",p5.width/2-200, p5.height/2+40);
         p5.text("TELEFONO: ",p5.width/2-200, p5.height/2+190);
         p5.text("DESCRIPCIÓN: ",p5.width/2+400, p5.height/2-310);
+        p5.text("NIVEL ",p5.width/2-800, p5.height/2+190);
+        p5.text("PAGADO? ",p5.width/2-200, p5.height/2-110);
 
     }
 
@@ -376,6 +380,7 @@ public class GUI{
         p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
         p5.text("TIPO: ",p5.width/2-800, p5.height/2-60);
+        p5.text("NIVEL: ",p5.width/2-800, p5.height/2+40);
     }
 
 
@@ -409,6 +414,7 @@ public class GUI{
     public void dibuixaSelectAlumnos(PApplet p5){
         s1.display(p5);
         s4.display(p5);
+        s5.display(p5);
     }
     public void dibuixaSelectEjercicio(PApplet p5){
         s2.display(p5);

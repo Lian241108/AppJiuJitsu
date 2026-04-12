@@ -334,7 +334,7 @@ public class Main extends PApplet {
 
                 String nombre = c.nombre; // o ID si tienes
 
-                db.deleteEjercicio(nombre); // 👈 crea esto en BD
+                db.deleteEjercicio(nombre); // crea esto en BD
 
                 gui.createPagedCardsEjercicios(this); // refresca
             }
@@ -346,7 +346,7 @@ public class Main extends PApplet {
                 ejercicioEditando = gui.pc1.cards[iEdit];
                 modoEditar = true;
 
-                // 👉 cargar datos en los campos
+                // cargar datos en los campos
                 gui.t31.setText(ejercicioEditando.nombre);
                 gui.t33.setText(ejercicioEditando.descripcion);
 
@@ -387,7 +387,7 @@ public class Main extends PApplet {
 
                 String id = c.id; // o ID si tienes
 
-                db.deleteEntreno(id); // 👈 crea esto en BD
+                db.deleteEntreno(id);
 
                 gui.createPagedCardsEntrenos(this); // refresca
             }
@@ -399,7 +399,7 @@ public class Main extends PApplet {
                 entrenoEditando = gui.pc2.cards[jEdit];
                 modoEditar = true;
 
-                // 👉 cargar datos en los campos
+                // cargar datos en los campos
                 gui.t41.setText(entrenoEditando.nombre);
                 gui.t42.setText(entrenoEditando.fecha);
 
@@ -428,9 +428,8 @@ public class Main extends PApplet {
                 String telefonoTutor = gui.t25.getText().trim();
                 String genero = gui.s1.getSelectedValue().trim();
                 String nivel = gui.s4.getSelectedValue().trim();
+                String pagado = gui.s5.getSelectedValue().trim();
 
-
-                String pagado = "0";
 
                 if(!nombre.equals("") && !dni.equals("")){
                     db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, edad, nivel, genero);
@@ -644,6 +643,14 @@ public class Main extends PApplet {
 
             }
             gui.s4.toggle(); // Plegar o desplegar
+        }
+
+        if(gui.s5.mouseOverSelect(this) && gui.s5.isEnabled()) {
+            if (!gui.s5.isCollapsed()) {
+                gui.s5.update(this);      // Actualitzar valor
+
+            }
+            gui.s5.toggle(); // Plegar o desplegar
         }
 
 
