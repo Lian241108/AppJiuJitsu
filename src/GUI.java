@@ -256,9 +256,9 @@ public class GUI{
 
     public void createTextList (PApplet p5){
 
-        String[] alumnos = {"Juan","Miquel", "Toni", "Ando", "Felip"};
-        String[] entrenos = {"Intens","Suau", "Fisic", "Flexibilitat", "Tecnic"};
-        String[] ejercicios = {"Ogoshi","Osotogari", "Flexions", "Sentadillas", "Caigudes"};
+        String[] alumnos = {"Julia Sanso Sanso","Lian Sanso Gonzalez"};
+        String[] entrenos = {"Entreno intenso","Entreno noche", "Divertido", "Tecnico", "Fisico", "Proyecciones"};
+        String[] ejercicios = {"Lobo","O Soto Gari", "OGoshi", "Sentadillas", "Flexiones", "Seio Nage", "Relajacion", "O Ushi Gari", "Ukemi"};
 
         textListAlumnos = new TextList(p5, alumnos, p5.width/2-800, p5.height/2-300, 400, 50);
         textListEntrenos = new TextList(p5, entrenos, p5.width/2+400, p5.height/2-190, 400, 50);
