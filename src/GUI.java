@@ -237,8 +237,8 @@ public class GUI{
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
         
         // PAntalla NuevoEntreno
-        t41 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-        t42 = new TextField(p5, p5.width/2-100, p5.height/2-300, 400, 100); // DESCRIPCIÓ
+        t41 = new TextField(p5, p5.width/2-800, p5.height/2-240, 400, 100 );
+        t42 = new TextField(p5, p5.width/2-100, p5.height/2-240, 400, 100); // DESCRIPCIÓ
 
     }
     
@@ -353,8 +353,8 @@ public class GUI{
         dibuixaCalendari(p5);
 
         p5.textAlign(p5.CORNER);
-        p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-310);
-        p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
+        p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-250);
+        p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-250);
         //p5.text("DIFICULTAD: ",p5.width/2-800, p5.height/2-310);
 
     }
