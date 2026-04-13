@@ -16,12 +16,12 @@ public class CardEjercicios {
     float buttonH = 50;
 
 
-    public CardEjercicios(String nombre, String descripcion, String tipo, String dificultad) {
+    public CardEjercicios(String nombre, String descripcion, String tipo, String dificultad, String imagenPath) {
         this.nombre = nombre;
-        //this.imagenPath = imagenPath;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.dificultad = dificultad;
+        this.imagenPath = imagenPath;  // guardamos la ruta
     }
 
     public void setDimensions(float x, float y, float w, float h, float r) {

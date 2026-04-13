@@ -6,6 +6,8 @@ import static Graphics.Layout.*;
 
 public class GUI{
 
+    String rutaAbsolutaImagen = "";  // nueva variable
+
     PImage imgCarregada;
     String nomCarregada;
     Button botoCarregada;
@@ -68,7 +70,7 @@ public class GUI{
     }
 
     public void createPagedCardsEjercicios(PApplet p5){
-        pc1 = new PagedCardEjercicios(2, 4);   // 2 filas, 4 columnas = 8 cards por página
+        pc1 = new PagedCardEjercicios(2, 4);
 
         float x = p5.width/2 - 900;
         float y = p5.height/2 - 300;
@@ -78,27 +80,32 @@ public class GUI{
         pc1.setDimensions(x, y, w, h);
 
         String[][] datos = db.getInfoTotsEjercicios();
-
         CardEjercicios[] cards = new CardEjercicios[datos.length];
 
         for(int i = 0; i < datos.length; i++){
-            String nombre = datos[i][0];
-            //String imagen = datos[i][1];
-            String descripcion = datos[i][1];
-            String tipo = datos[i][2];
+            String nombre     = datos[i][0];
+            String descripcion= datos[i][1];
+            String tipo       = datos[i][2];
             String dificultad = datos[i][3];
+            String imagen     = datos[i][4];  // ruta
 
+            cards[i] = new CardEjercicios(nombre, descripcion, tipo, dificultad, imagen);
 
-            cards[i] = new CardEjercicios(nombre, descripcion,tipo,dificultad);
-/*
+            // Cargar imagen si la ruta existe
             if(imagen != null && !imagen.trim().isEmpty()){
-                cards[i].setImage(p5.loadImage(imagen));
+                try {
+                    cards[i].setImage(p5.loadImage(imagen));
+                } catch(Exception e) {
+                    System.out.println("No se pudo cargar imagen: " + imagen);
+                }
             }
-
- */
         }
 
         pc1.setCards(cards);
+    }
+
+    public String getRutaImagenCargada(){
+        return (imgCarregada != null && nomCarregada != null) ? nomCarregada : "";
     }
 
     public void createPagedCardsEntrenos(PApplet p5){

@@ -348,30 +348,23 @@ public class dataBase {
     }
 
     public String[][] getInfoTotsEjercicios() {
-        String q = "SELECT Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre " +
+        String q = "SELECT Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre, Imagen " +
                 "FROM ejercicio ORDER BY Nombre ASC";
-        System.out.println(q);
-
         try {
             int numFiles = getNumFilesTaula("ejercicio");
-            String[][] info = new String[numFiles][4];
-
+            String[][] info = new String[numFiles][5];  // ahora 5 columnas
             ResultSet rs = query.executeQuery(q);
             int f = 0;
-
             while (rs.next()) {
                 info[f][0] = rs.getString("Nombre");
-                //info[f][1] = rs.getString("Imagen");
                 info[f][1] = rs.getString("Descripción");
                 info[f][2] = rs.getString("Tipus_Nombre");
                 info[f][3] = rs.getString("Dificultad_Nombre");
+                info[f][4] = rs.getString("Imagen");  // ruta de la imagen
                 f++;
             }
             return info;
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        } catch (Exception e) { System.out.println(e); }
         return null;
     }
 
@@ -447,48 +440,41 @@ public class dataBase {
     }
 
     public void insertEjercicio(String nombre, String descripcion,
-                                String tipusNombre, String dificultadNombre) {
-        String q = "INSERT INTO ejercicio (Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre) " +
-                "VALUES (?, ?, ?, ?)";
-
+                                String tipusNombre, String dificultadNombre, String imagen) {
+        String q = "INSERT INTO ejercicio (Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre, Imagen) " +
+                "VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = c.prepareStatement(q);
             ps.setString(1, nombre);
             ps.setString(2, descripcion);
             ps.setString(3, tipusNombre);
             ps.setString(4, dificultadNombre);
-
+            ps.setString(5, imagen);
             ps.executeUpdate();
             ps.close();
-
-            System.out.println("Ejercicio añadido correctamente");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     public void insertEntrenos(String nombre, String fecha) {
         try {
-            // 1. Buscamos el ID más alto actual
-            String queryMaxID = "SELECT MAX(ID) AS ultimoID FROM entreno";
-            ResultSet rs = query.executeQuery(queryMaxID);
-            int nuevoID = 1; // Por defecto, si la tabla está vacía, empezamos en 1
-
-            if (rs.next()) {
+            // Usar Statement separado para no interferir con el query principal
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT MAX(ID) AS ultimoID FROM entreno");
+            int nuevoID = 1;
+            if (rs.next() && rs.getString("ultimoID") != null) {
                 nuevoID = rs.getInt("ultimoID") + 1;
             }
+            st.close();
 
-            // 2. Insertamos el nuevo registro incluyendo el ID calculado por Java
             String q = "INSERT INTO entreno (ID, Nombre, Fecha) VALUES (?, ?, ?)";
             PreparedStatement ps = c.prepareStatement(q);
-            ps.setInt(1, nuevoID);     // El ID que hemos calculado
-            ps.setString(2, nombre);   // El nombre que viene del TextField
-            ps.setString(3, fecha); // La fecha
-
+            ps.setInt(1, nuevoID);
+            ps.setString(2, nombre);
+            ps.setString(3, fecha);
             ps.executeUpdate();
             ps.close();
 
-            System.out.println("Entreno añadido con ID manual: " + nuevoID);
+            System.out.println("Entreno añadido con ID: " + nuevoID);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -538,25 +524,19 @@ public class dataBase {
     }
 
     public void updateEjercicio(String nombreOriginal, String nombre,
-                                String descripcion, String tipo, String dificultad) {
-
-        String q = "UPDATE ejercicio SET Nombre=?, Descripción=?, Tipus_Nombre=?, Dificultad_Nombre=? WHERE Nombre=?";
-
+                                String descripcion, String tipo, String dificultad, String imagen) {
+        String q = "UPDATE ejercicio SET Nombre=?, Descripción=?, Tipus_Nombre=?, Dificultad_Nombre=?, Imagen=? WHERE Nombre=?";
         try {
             PreparedStatement ps = c.prepareStatement(q);
             ps.setString(1, nombre);
             ps.setString(2, descripcion);
             ps.setString(3, tipo);
             ps.setString(4, dificultad);
-            ps.setString(5, nombreOriginal);
-
+            ps.setString(5, imagen);
+            ps.setString(6, nombreOriginal);
             ps.executeUpdate();
             ps.close();
-
-            System.out.println("Ejercicio actualizado");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     public void updateEntreno(String id, String nombre,

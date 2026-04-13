@@ -319,7 +319,12 @@ public class Main extends PApplet {
             }
 
             if (gui.b41.mouseOverButton(this)) {
-                println("B11 has been pressed!!!");
+                modoEditar = false;              // <- añadir esto
+                ejercicioEditando = null;        // <- añadir esto
+                gui.rutaAbsolutaImagen = "";     // <- añadir esto
+                gui.imgCarregada = null;         // <- añadir esto
+                gui.t31.setText("");             // <- limpiar campos
+                gui.t33.setText("");             // <- limpiar campos
                 gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
             }
 
@@ -383,7 +388,7 @@ public class Main extends PApplet {
 
             if(j!= -1){
 
-                CardEntrenos c = gui.pc2.cards[j];
+                CardEntrenos c = gui.pc2.cards.get(j);
 
                 String id = c.id; // o ID si tienes
 
@@ -396,7 +401,7 @@ public class Main extends PApplet {
 
             if(jEdit != -1){
 
-                entrenoEditando = gui.pc2.cards[jEdit];
+                entrenoEditando = gui.pc2.cards.get(jEdit);
                 modoEditar = true;
 
                 // cargar datos en los campos
@@ -462,33 +467,30 @@ public class Main extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.EJERCICIOS;
             }
 
+            // LOAD IMAGE — debe estar aquí en Main, no en GUI
+            if(gui.botoCarregada.mouseOverButton(this)){
+                selectInput("Selecciona una imatge ...", "fileSelected");
+            }
+
             if(gui.b72.mouseOverButton(this)){
 
-                String nombre = gui.t31.getText().trim();
-                String descripcion = gui.t33.getText().trim();
-                String tipo = gui.s2.getSelectedValue().trim();
+                String nombre     = gui.t31.getText().trim();
+                String descripcion= gui.t33.getText().trim();
+                String tipo       = gui.s2.getSelectedValue().trim();
                 String dificultad = gui.s3.getSelectedValue().trim();
+                String imagen     = gui.rutaAbsolutaImagen;  // ruta de la imagen
 
                 if(modoEditar){
-
-                    db.updateEjercicio(
-                            ejercicioEditando.nombre, // clave original
-                            nombre,
-                            descripcion,
-                            tipo,
-                            dificultad
-                    );
-
+                    db.updateEjercicio(ejercicioEditando.nombre, nombre, descripcion, tipo, dificultad, imagen);
                     modoEditar = false;
                     ejercicioEditando = null;
-
                 } else {
-
-                    db.insertEjercicio(nombre, descripcion, tipo, dificultad);
+                    db.insertEjercicio(nombre, descripcion, tipo, dificultad, imagen);
                 }
 
                 gui.createPagedCardsEjercicios(this);
-
+                gui.rutaAbsolutaImagen = "";   // limpiar
+                gui.imgCarregada = null;
                 gui.t31.setText("");
                 gui.t33.setText("");
 
@@ -540,7 +542,7 @@ public class Main extends PApplet {
             }
 
             // GUARDAR
-            if(gui.b72.mouseOverButton(this)){
+            if(gui.b82.mouseOverButton(this)){
 
                 String nombre = gui.t41.getText().trim();
                 String fecha = gui.t42.getText().trim();
@@ -697,15 +699,10 @@ public class Main extends PApplet {
 
     // Carrega Imatge
     public void fileSelected(File selection) {
-        if (selection == null) {
-            println("No s'ha seleccionat cap fitxer.");
-        } else {
-
-            // Obtenim la ruta del fitxer seleccionat
-            String rutaImatge = selection.getAbsolutePath();
-
-            gui.imgCarregada = loadImage(rutaImatge);  // Actualitzam imatge
-            gui.nomCarregada = selection.getName();  // Actualitzam títol
+        if (selection != null) {
+            gui.imgCarregada = loadImage(selection.getAbsolutePath());
+            gui.nomCarregada = selection.getName();
+            gui.rutaAbsolutaImagen = selection.getAbsolutePath();  // guardamos ruta completa
         }
     }
 
