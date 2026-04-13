@@ -36,7 +36,7 @@ public class GUI{
     Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42, t43;
     SwitchButton sb1;
-    Select s1,s2,s3,s4, s5, s6, s7, s8;
+    Select s1,s2,s3,s4, s5, s6, s7, s8, s9;
     TextList textListAlumnos, textListEntrenos, textListEjercicios;
     PagedTable pt1;
     Calendari c1;
@@ -130,7 +130,7 @@ public class GUI{
 
 
     public void createCalendari(PApplet p5){
-        c1 = new Calendari(p5.width/2+400,p5.height/2+150,400,300);
+        c1 = new Calendari(p5.width/2+400,p5.height/2-50,400,300);
     }
 
 
@@ -165,7 +165,7 @@ public class GUI{
         //Pantalla Inicio
         botoCarregada = new Button(p5, "LOAD IMAGE", p5.width/2-800, p5.height/2+200, 350, 100);
 
-        bOK = new Button(p5, "OK", p5.width/2+400,p5.height/2,100,100);
+        bOK = new Button(p5, "OK", p5.width/2+400,p5.height/2-250,200,100);
 
         b0 = new Button(p5,logo, p5.width/2-100,50, logoWidth, logoHeight);
 
@@ -210,8 +210,8 @@ public class GUI{
         b81 = new Button(p5, "<", marginH, marginV, 50, 50);
         b82 = new Button (p5,"GUARDAR",p5.width/2+400, p5.height/2+400, 300, 100);
 
-        bc1 = new Button (p5,"<", p5.width/2+550, p5.height/2, 50, 50);
-        bc2 = new Button (p5,">", p5.width/2+650, p5.height/2, 50, 50);
+        bc1 = new Button (p5,"<", p5.width/2+650, p5.height/2-250, 50, 50);
+        bc2 = new Button (p5,">", p5.width/2+750, p5.height/2-250, 50, 50);
     }
 
     public void createTextField(PApplet p5){
@@ -233,7 +233,7 @@ public class GUI{
 
         // Pantalla NuevoEjercicio
         t31 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
-       // t32 = new TextField(p5, p5.width/2-800, p5.height/2+50, 400, 100 );
+        // t32 = new TextField(p5, p5.width/2-800, p5.height/2+50, 400, 100 );
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
         
         // PAntalla NuevoEntreno
@@ -248,9 +248,12 @@ public class GUI{
         String[] valors3 = {"FACIL", "MEDIA", "DIFICIL"};
         String[] valors4 = {"Blanco","B-A","Amarillo","A-N","Naranja","N-V","Verde","V-A","Azul","A-M","Morado","Marrón","Shodan-ho","Negro","Negro-Rojo","Blanco-Rojo","Rojo"};
         String[] valors5 = {"Si", "NO"};
+
         String[] valors6 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors7 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
         String[] valors8 = {"FACIL", "MEDIA", "DIFICIL"};
+
+        String[] valors9 = {"FACIL", "MEDIA", "DIFICIL"};
 
 
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
@@ -258,9 +261,12 @@ public class GUI{
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);
         s4 = new Select(valors4, p5.width/2-800, p5.height/2+200, 400, 50);
         s5 = new Select(valors5, p5.width/2-200, p5.height/2-100, 400, 50);
+
         s6 = new Select(valors6, p5.width/2-800, p5.height/2-40, 400, 50);
         s7 = new Select(valors7, p5.width/2-100, p5.height/2-40, 400, 50);
         s8 = new Select(valors8, p5.width/2-800, p5.height/2+160, 400, 50);
+
+        s9 = new Select(valors8, p5.width/2-800, p5.height/2+160, 400, 50);
 
     }
 
