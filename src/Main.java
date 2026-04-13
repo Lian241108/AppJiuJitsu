@@ -544,6 +544,9 @@ public class Main extends PApplet {
 
                 String nombre = gui.t41.getText().trim();
                 String fecha = gui.t42.getText().trim();
+                //String genero = gui.s6.getSelectedValue().trim();
+                //String nivel = gui.s7.getSelectedValue().trim();
+                //String pagado = gui.s8.getSelectedValue().trim();
 
                 // VALIDACIONES
                 if(nombre.isEmpty()){
@@ -653,7 +656,29 @@ public class Main extends PApplet {
             gui.s5.toggle(); // Plegar o desplegar
         }
 
+        if(gui.s6.mouseOverSelect(this) && gui.s6.isEnabled()) {
+            if (!gui.s6.isCollapsed()) {
+                gui.s6.update(this);      // Actualitzar valor
 
+            }
+            gui.s6.toggle(); // Plegar o desplegar
+        }
+
+        if(gui.s7.mouseOverSelect(this) && gui.s7.isEnabled()) {
+            if (!gui.s7.isCollapsed()) {
+                gui.s7.update(this);      // Actualitzar valor
+
+            }
+            gui.s7.toggle(); // Plegar o desplegar
+        }
+
+        if(gui.s8.mouseOverSelect(this) && gui.s8.isEnabled()) {
+            if (!gui.s8.isCollapsed()) {
+                gui.s8.update(this);      // Actualitzar valor
+
+            }
+            gui.s8.toggle(); // Plegar o desplegar
+        }
 
     }
 

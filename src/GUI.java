@@ -36,7 +36,7 @@ public class GUI{
     Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42, t43;
     SwitchButton sb1;
-    Select s1,s2,s3,s4, s5;
+    Select s1,s2,s3,s4, s5, s6, s7, s8;
     TextList textListAlumnos, textListEntrenos, textListEjercicios;
     PagedTable pt1;
     Calendari c1;
@@ -248,11 +248,19 @@ public class GUI{
         String[] valors3 = {"FACIL", "MEDIA", "DIFICIL"};
         String[] valors4 = {"Blanco","B-A","Amarillo","A-N","Naranja","N-V","Verde","V-A","Azul","A-M","Morado","Marrón","Shodan-ho","Negro","Negro-Rojo","Blanco-Rojo","Rojo"};
         String[] valors5 = {"Si", "NO"};
+        String[] valors6 = {"MASCULINO", "FEMENINO", "OTRO"};
+        String[] valors7 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
+        String[] valors8 = {"FACIL", "MEDIA", "DIFICIL"};
+
+
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
         s3 = new Select(valors3, p5.width/2-800, p5.height/2+50, 400, 50);
         s4 = new Select(valors4, p5.width/2-800, p5.height/2+200, 400, 50);
         s5 = new Select(valors5, p5.width/2-200, p5.height/2-100, 400, 50);
+        s6 = new Select(valors6, p5.width/2-800, p5.height/2-40, 400, 50);
+        s7 = new Select(valors7, p5.width/2-100, p5.height/2-40, 400, 50);
+        s8 = new Select(valors8, p5.width/2-800, p5.height/2+160, 400, 50);
 
     }
 
@@ -351,11 +359,15 @@ public class GUI{
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
         dibuixaCalendari(p5);
+        dibuixaSelectNuevoEntreno(p5);
 
         p5.textAlign(p5.CORNER);
         p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-250);
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-250);
         //p5.text("DIFICULTAD: ",p5.width/2-800, p5.height/2-310);
+        p5.text("CALENTAMIENTO: ",p5.width/2-800, p5.height/2-50);
+        p5.text("TECNICA / EJERCICIO: ",p5.width/2-100, p5.height/2-50);
+        p5.text("FINAL: ",p5.width/2-800, p5.height/2+150);
 
     }
 
@@ -419,6 +431,12 @@ public class GUI{
     public void dibuixaSelectEjercicio(PApplet p5){
         s2.display(p5);
         s3.display(p5);
+    }
+
+    public void dibuixaSelectNuevoEntreno(PApplet p5){
+        s6.display(p5);
+        s7.display(p5);
+        s8.display(p5);
     }
 
 
