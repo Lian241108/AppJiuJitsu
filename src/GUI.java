@@ -277,18 +277,48 @@ public class GUI{
 
     }
 
-    public void createTextList (PApplet p5){
+    public void createTextList(PApplet p5){
+        // Cargamos los datos reales de la BD
+        String[] alumnos   = getNombresAlumnos();
+        String[] entrenos  = getNombresEntrenos();
+        String[] ejercicios = getNombresEjercicios();
 
-        String[] alumnos = {"Julia Sanso Sanso","Lian Sanso Gonzalez", "Alma"};
-        String[] entrenos = {"Entreno intenso","Entreno noche", "Divertido", "Tecnico", "Fisico", "Proyecciones"};
-        String[] ejercicios = {"Lobo","O Soto Gari", "OGoshi", "Sentadillas", "Flexiones", "Seio Nage", "Relajacion", "O Ushi Gari", "Ukemi"};
-
-        textListAlumnos = new TextList(p5, alumnos, p5.width/2-800, p5.height/2-300, 400, 50);
-        textListEntrenos = new TextList(p5, entrenos, p5.width/2+400, p5.height/2-190, 400, 50);
+        textListAlumnos    = new TextList(p5, alumnos,    p5.width/2-800, p5.height/2-300, 400, 50);
+        textListEntrenos   = new TextList(p5, entrenos,   p5.width/2+400, p5.height/2-190, 400, 50);
         textListEjercicios = new TextList(p5, ejercicios, p5.width/2+400, p5.height/2-190, 400, 50);
-
-
     }
+
+    // Métodos auxiliares para extraer solo los nombres
+    private String[] getNombresAlumnos(){
+        String[][] datos = db.getInfoTotsAlumnes();
+        if(datos == null) return new String[0];
+        String[] nombres = new String[datos.length];
+        for(int i = 0; i < datos.length; i++) nombres[i] = datos[i][1]; // columna Nombre
+        return nombres;
+    }
+
+    private String[] getNombresEntrenos(){
+        String[][] datos = db.getInfoTotsEntrenos();
+        if(datos == null) return new String[0];
+        String[] nombres = new String[datos.length];
+        for(int i = 0; i < datos.length; i++) nombres[i] = datos[i][1]; // columna Nombre
+        return nombres;
+    }
+
+    private String[] getNombresEjercicios(){
+        String[][] datos = db.getInfoTotsEjercicios();
+        if(datos == null) return new String[0];
+        String[] nombres = new String[datos.length];
+        for(int i = 0; i < datos.length; i++) nombres[i] = datos[i][0]; // columna Nombre
+        return nombres;
+    }
+
+    public void refrescarTextLists(PApplet p5){
+        textListAlumnos.setTexts(getNombresAlumnos());
+        textListEntrenos.setTexts(getNombresEntrenos());
+        textListEjercicios.setTexts(getNombresEjercicios());
+    }
+
 
     // PANTALLES DE LA GUI
     public void dibuixaPantallaInicio(PApplet p5){
@@ -563,5 +593,7 @@ public class GUI{
     public void dibuixaSwitchButton(PApplet p5){
         sb1.display(p5);
     }
+
+
 
 }

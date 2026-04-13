@@ -303,6 +303,29 @@ public class Main extends PApplet {
                 db.deleteAlumno(dni);   // BORRAR BD
                 gui.refrescarTablaAlumnos(); // REFRESCAR TABLA
             }
+
+            // Selección desde TextList de alumnos -> abrir edición
+            gui.textListAlumnos.buttonPressed(this);
+            String alumnoSeleccionado = gui.textListAlumnos.getSelectedValue();
+            if(!alumnoSeleccionado.isEmpty()){
+                // Buscar datos del alumno en la tabla
+                String[][] datos = db.getInfoTotsAlumnes();
+                for(String[] fila : datos){
+                    if(fila[1].equals(alumnoSeleccionado)){
+                        gui.t21.setText(fila[1]); // Nombre
+                        gui.t22.setText(fila[0]); // DNI
+                        gui.t23.setText(fila[5]); // Edad
+                        gui.t24.setText(fila[2]); // NombreTutor
+                        gui.t25.setText(fila[3]); // TelefonoTutor
+                        gui.s1.setSelected(fila[7]); // Genero
+                        gui.s4.setSelected(fila[6]); // Nivel
+                        gui.s5.setSelected(fila[4]); // Pagado
+                        gui.textListAlumnos.clearSelected();
+                        gui.pantallaActual = GUI.PANTALLA.NUEVOALUMNO;
+                        break;
+                    }
+                }
+            }
         }
 
         //PAntalla EJercicios
@@ -341,7 +364,8 @@ public class Main extends PApplet {
 
                 db.deleteEjercicio(nombre); // crea esto en BD
 
-                gui.createPagedCardsEjercicios(this); // refresca
+                gui.createPagedCardsEjercicios(this);
+                gui.refrescarTextLists(this);// refresca
             }
 
             int iEdit = gui.pc1.checkEditClick(this);
@@ -363,6 +387,31 @@ public class Main extends PApplet {
                 gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
             }
 
+            // Selección desde TextList de ejercicios -> abrir edición
+            gui.textListEjercicios.buttonPressed(this);
+            String ejercicioSeleccionado = gui.textListEjercicios.getSelectedValue();
+            if(!ejercicioSeleccionado.isEmpty()){
+                String[][] datos = db.getInfoTotsEjercicios();
+                for(String[] fila : datos){
+                    if(fila[0].equals(ejercicioSeleccionado)){
+                        // Buscar la card correspondiente y activar modo editar
+                        for(int k = 0; k < gui.pc1.cards.length; k++){
+                            if(gui.pc1.cards[k].nombre.equals(ejercicioSeleccionado)){
+                                ejercicioEditando = gui.pc1.cards[k];
+                                modoEditar = true;
+                                gui.t31.setText(fila[0]);
+                                gui.t33.setText(fila[1]);
+                                gui.s2.setSelected(fila[2]);
+                                gui.s3.setSelected(fila[3]);
+                                gui.textListEjercicios.clearSelected();
+                                gui.pantallaActual = GUI.PANTALLA.NUEVOEJERCICIO;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
 
         }
 
@@ -394,7 +443,8 @@ public class Main extends PApplet {
 
                 db.deleteEntreno(id);
 
-                gui.createPagedCardsEntrenos(this); // refresca
+                gui.createPagedCardsEntrenos(this);// refresca
+                gui.refrescarTextLists(this);
             }
 
             int jEdit = gui.pc2.checkEditClick(this);
@@ -409,6 +459,29 @@ public class Main extends PApplet {
                 gui.t42.setText(entrenoEditando.fecha);
 
                 gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
+            }
+
+            // Selección desde TextList de entrenos -> abrir edición
+            gui.textListEntrenos.buttonPressed(this);
+            String entrenoSeleccionado = gui.textListEntrenos.getSelectedValue();
+            if(!entrenoSeleccionado.isEmpty()){
+                String[][] datos = db.getInfoTotsEntrenos();
+                for(String[] fila : datos){
+                    if(fila[1].equals(entrenoSeleccionado)){
+                        for(int k = 0; k < gui.pc2.cards.size(); k++){
+                            if(gui.pc2.cards.get(k).nombre.equals(entrenoSeleccionado)){
+                                entrenoEditando = gui.pc2.cards.get(k);
+                                modoEditar = true;
+                                gui.t41.setText(fila[1]);
+                                gui.t42.setText(fila[2]);
+                                gui.textListEntrenos.clearSelected();
+                                gui.pantallaActual = GUI.PANTALLA.NUEVOENTRENO;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
 
 
@@ -489,6 +562,7 @@ public class Main extends PApplet {
                 }
 
                 gui.createPagedCardsEjercicios(this);
+                gui.refrescarTextLists(this);
                 gui.rutaAbsolutaImagen = "";   // limpiar
                 gui.imgCarregada = null;
                 gui.t31.setText("");
@@ -580,6 +654,7 @@ public class Main extends PApplet {
 
                 // refrescar UI
                 gui.createPagedCardsEntrenos(this);
+                gui.refrescarTextLists(this);
 
                 // limpiar campos
                 gui.t41.setText("");

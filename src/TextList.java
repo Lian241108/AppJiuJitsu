@@ -98,4 +98,16 @@ public class TextList {
             buttons.clear();
         }
     }
+
+    public void setTexts(String[] texts){
+        this.texts = texts;
+        this.buttons.clear();
+    }
+
+    public void clearSelected(){
+        this.selectedValue = "";
+        this.textField.text = "";
+        this.buttons.clear();
+    }
+
 }
