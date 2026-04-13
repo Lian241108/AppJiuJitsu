@@ -38,7 +38,8 @@ public class GUI{
     Button bOK, b0, b11, b21, b22, b23, b24, b31, b32, b33, b34, b41, b42, b43, b44, b51, b52, b53, b54, b61, b62, b71, b72, b81, b82, bpt1, bpt2, bc1, bc2;  // 2a passa : declarar els components
     TextField t11, t12, t21, t22, t23,t24, t25,t26, t31, t32,t33, t41, t42, t43;
     SwitchButton sb1;
-    Select s1,s2,s3,s4, s5, s6, s7, s8, s9;
+    Select s1,s2,s3,s4, s5, s9;
+    Select sEj1, sEj2, sEj3;
     TextList textListAlumnos, textListEntrenos, textListEjercicios;
     PagedTable pt1;
     Calendari c1;
@@ -109,28 +110,24 @@ public class GUI{
     }
 
     public void createPagedCardsEntrenos(PApplet p5){
-        pc2 = new PagedCardEntrenos(4, 4);   // 8 cards por página
-
-        float x = p5.width/2 - 900;
-        float y = p5.height/2 - 300;
-        float w = 1200;
-        float h = 720;
-
-        pc2.setDimensions(x, y, w, h);
+        pc2 = new PagedCardEntrenos(2, 4);
+        pc2.setDimensions(p5.width/2-900, p5.height/2-300, 1200, 720);
 
         String[][] datos = db.getInfoTotsEntrenos();
+        if(datos == null) return;
         CardEntrenos[] cards = new CardEntrenos[datos.length];
 
         for(int i = 0; i < datos.length; i++){
-            String id = datos[i][0];
-            String nombre = datos[i][1];
+            String id    = datos[i][0];
+            String nombre= datos[i][1];
             String fecha = datos[i][2];
 
+            // Cargar los ejercicios de la tabla relación
+            String[] ejercicios = db.getEjerciciosDeEntreno(id);
 
-            // usamos descripcion para guardar la fecha
-            cards[i] = new CardEntrenos(id, nombre, fecha);
+            cards[i] = new CardEntrenos(id, nombre, fecha,
+                    ejercicios[0], ejercicios[1], ejercicios[2]);
         }
-
         pc2.setCards(cards);
     }
 
@@ -262,6 +259,11 @@ public class GUI{
 
         String[] valors9 = {"FACIL", "MEDIA", "DIFICIL"};
 
+        String[] nombresEj = getNombresEjercicios();
+        sEj1 = new Select(nombresEj, p5.width/2-800, p5.height/2-40, 400, 50);
+        sEj2 = new Select(nombresEj, p5.width/2-100, p5.height/2-40, 400, 50);
+        sEj3 = new Select(nombresEj, p5.width/2-800, p5.height/2+160, 400, 50);
+
 
         s1 = new Select(valors1, p5.width/2-800, p5.height/2-100, 400, 50);
         s2 = new Select(valors2, p5.width/2-800, p5.height/2-50, 400, 50);
@@ -269,11 +271,12 @@ public class GUI{
         s4 = new Select(valors4, p5.width/2-800, p5.height/2+200, 400, 50);
         s5 = new Select(valors5, p5.width/2-200, p5.height/2-100, 400, 50);
 
-        s6 = new Select(valors6, p5.width/2-800, p5.height/2-40, 400, 50);
-        s7 = new Select(valors7, p5.width/2-100, p5.height/2-40, 400, 50);
-        s8 = new Select(valors8, p5.width/2-800, p5.height/2+160, 400, 50);
 
         s9 = new Select(valors8, p5.width/2-800, p5.height/2+160, 400, 50);
+
+        p5.text("CALENTAMIENTO: ",p5.width/2-800, p5.height/2-50);
+        p5.text("TECNICA / EJERCICIO: ",p5.width/2-100, p5.height/2-50);
+        p5.text("FINAL: ",p5.width/2-800, p5.height/2+150);
 
     }
 
@@ -405,12 +408,13 @@ public class GUI{
         dibuixaSelectNuevoEntreno(p5);
 
         p5.textAlign(p5.CORNER);
-        p5.text("DESCRIPCIÓN: ",p5.width/2-50, p5.height/2-250);
+        p5.text("FECHA: ",p5.width/2-50, p5.height/2-250);
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-250);
         //p5.text("DIFICULTAD: ",p5.width/2-800, p5.height/2-310);
         p5.text("CALENTAMIENTO: ",p5.width/2-800, p5.height/2-50);
         p5.text("TECNICA / EJERCICIO: ",p5.width/2-100, p5.height/2-50);
         p5.text("FINAL: ",p5.width/2-800, p5.height/2+150);
+
 
     }
 
@@ -477,9 +481,9 @@ public class GUI{
     }
 
     public void dibuixaSelectNuevoEntreno(PApplet p5){
-        s6.display(p5);
-        s7.display(p5);
-        s8.display(p5);
+        sEj1.display(p5);
+        sEj2.display(p5);
+        sEj3.display(p5);
     }
 
 

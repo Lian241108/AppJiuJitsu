@@ -35,23 +35,6 @@ public class dataBase {
         }
     }
 
-    // Retorna la informació d'una casella
-
-    public String getInfo(String nomTaula, String nomColumna, String nomClau, String identificador){
-        try{
-            String q =  "SELECT " + nomColumna +
-                    " FROM " + nomTaula +
-                    " WHERE "+ nomClau  + " = '" + identificador + "' ";
-            System.out.println(q);
-            ResultSet rs= query.executeQuery(q);
-            rs.next();
-            return rs.getString(nomColumna);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return "";
-    }
 
     // Retorna el número total de files d'una taula
 
@@ -68,257 +51,6 @@ public class dataBase {
         return 0;
     }
 
-    // Retorna totes les caselles (files i columnes) d'una taula
-
-    public String[][] getInfoArray2DUnitat(){
-        int nf = getNumFilesTaula("ejercicio");
-        String[][] info = new String[nf][3];
-        String q = "SELECT Nombre, Tipus_Nombre, Dificultad_Nombre FROM ejercicio ORDER BY Nombre ASC";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            int f=0;
-            while(rs.next()){
-                info[f][0] = String.valueOf( rs.getInt("Nombre"));
-                info[f][1] = rs.getString("Tipus_Nombre");
-                info[f][2] = String.valueOf( rs.getInt("Dificultad_Nombre"));
-                f++;
-            }
-            return info;
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-
-        return info;
-    }
-
-    // Retorna el número total de files d'una taula
-
-    public int getNumFilesMatchQuery(String q){
-        try{
-            ResultSet rs = query.executeQuery(q);
-            rs.next();
-            return rs.getInt("num");
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return 0;
-    }
-
-
-
-
-    // Retorna true si el nom d'usuari i password estan a la taula (usuario)
-    public boolean isUserOk(String nom, String password){
-        String q = "SELECT COUNT(*) AS n" +
-                " FROM usuario "+
-                " WHERE nombre='" + nom + "' AND password='" + password + "' ";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            rs.next();
-            return rs.getInt("n")==1;
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return false;
-    }
-
-    // Inserta un usuari a la taula usuario amb nombre i password
-    // INSERT INTO `usuario` (`nombre`, `password`) VALUES ('bel', 'qwerty');
-    public void insertaUsuario(String n, String p){
-        String q = "INSERT INTO usuario (nombre, password) " +
-                "VALUES ('"+n+"', '"+p+"')";
-        System.out.println(q);
-        try{
-            query.execute(q);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-
-    // Esborra un usuari de la taula usuario
-    // DELETE FROM `usuario` WHERE `usuario`.`nombre` = \'pep\'"
-    public void deleteUsuario(String nom){
-        String q = "DELETE FROM usuario WHERE nombre ='" + nom + "'";
-        System.out.println(q);
-        try{
-            query.execute(q);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    // UPDATE `usuario` SET `nombre` = 'paquito', `password` = 'abcdefghi' WHERE `usuario`.`nombre` = 'paco';
-    // Modifica les dades d'un usuari
-    public void updateUsuario(String nomActual, String nouNom, String nouPassword){
-        String q = "UPDATE usuario SET " +
-                " nombre = '"+nouNom+"' , "+
-                " password = '"+nouPassword+ "' " +
-                " WHERE nombre='"+nomActual+"'";
-        System.out.println(q);
-        try{
-            query.execute(q);
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-
-    // Cercador de Preguntes
-    // SELECT * FROM pregunta WHERE enunciat LIKE '%Quin%'
-    public String[][] preguntesCercador(String clauCerca){
-
-        String qNF = "SELECT COUNT(*) AS num FROM ejercicio WHERE Nombre LIKE '%"+ clauCerca+"%'";
-        int nf = getNumFilesMatchQuery(qNF);
-        String[][] info = new String[nf][2];
-        String q = "SELECT Nombre, Descripción FROM ejercico WHERE Nombre LIKE '%"+ clauCerca+"%'";
-        System.out.println(q);
-        try{
-            ResultSet rs = query.executeQuery(q);
-            int n=0;
-            while(rs.next()){
-                info[n][0] = String.valueOf(rs.getInt("Nombre"));
-                info[n][1] = rs.getString("Descripción");
-                n++;
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-        return info;
-    }
-
-
-
-
-
-    // Retorna el número de files d'una taula
-    public int getNumRowsTaula(String nomTaula){
-        try {
-            ResultSet rs = query.executeQuery( "SELECT COUNT(*) AS n FROM "+ nomTaula );
-            rs.next();
-            int numRows = rs.getInt("n");
-            return numRows;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return 0;
-        }
-    }
-
-    // Retorna el número de files que retornaria una query SELECT qualsevol amb valor "n"
-    // Per exemple: SELECT COUNT(*) AS n FROM ...
-    public int getNumRowsQuery(String q){
-        try {
-            ResultSet rs = query.executeQuery( q);
-            rs.next();
-            return rs.getInt("n");
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return 0;
-        }
-    }
-
-    // Retorna el número de columnes d'una taula de la base de dades
-    public int getNumColsTaula(String nomTaula){
-        try {
-            String q = "SELECT count(*) as n FROM information_schema.columns WHERE table_name ='"+ nomTaula +"' AND table_schema='"+databaseName+"'";
-            System.out.println(q);
-            ResultSet rs = query.executeQuery( q);
-            rs.next();
-            int numCols = rs.getInt("n");
-            return numCols;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return 0;
-        }
-    }
-
-
-    public boolean isValidUser(String userName, String password){
-        String q = "SELECT COUNT(*) AS n FROM usuario WHERE nom = '"+userName+"' AND password='"+password+"'";
-        try {
-            ResultSet rs = query.executeQuery( q);
-            rs.next();
-            return rs.getInt("n")==1;
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return false;
-        }
-    }
-
-    public String getClaveFromTabla(String nombreTable, String nombreClave, String nombreColumna, String valorColumna){
-        try {
-            String q = "SELECT "+nombreClave+" AS clave FROM "+nombreTable+" WHERE "+nombreColumna+"='"+valorColumna+"'";
-            ResultSet rs = query.executeQuery( q);
-            rs.next();
-            return rs.getString("clave");
-        }
-        catch(Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    // UPDATES
-
-    // Actualitza les dades a la taula Unitat
-
-    void updateInfoTaulaUnitat(String id, String num, String nom){
-        try {
-            String q = "UPDATE unitat SET numero='"+num+"', nom='"+nom+"' WHERE numero='"+id+"'";
-            System.out.println(q);
-            query.execute(q);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    // DELETES
-
-    // Esborra la fila de la taula Unitat amb el número concret
-    void deleteInfoTaulaUnitat(String id){
-        try {
-            String q = "DELETE FROM unitat WHERE numero='"+id+"'";
-            System.out.println(q);
-            query.execute(q);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    // Print Array 1D String
-    public void printArray1D(String[] info){
-        System.out.println();
-        for(int i=0; i<info.length; i++){
-            System.out.printf("%d: %s.\n", i, info[i]);
-        }
-    }
-
-    // Print Array 2D String
-    public void printArray2D(String[][] info){
-        System.out.println();
-        for(int i=0; i<info.length; i++){
-            System.out.printf("%d:", i);
-            for(int j=0; j<info[i].length; j++) {
-                System.out.printf("%s \t", info[i][j]);
-            }
-            System.out.println();
-        }
-    }
 
     public String[][] getInfoTotsAlumnes(){
         String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, Edad, Nivel, Genero FROM alumno ORDER BY Nombre ASC";
@@ -511,13 +243,21 @@ public class dataBase {
 
     public void deleteEntreno(String id){
         try{
-            String q = "DELETE FROM entreno WHERE ID = ?";
-            PreparedStatement ps = c.prepareStatement(q);
-            ps.setString(1, id);
-            ps.executeUpdate();
-            ps.close();
+            // 1. BORRAR RELACIONES
+            String q1 = "DELETE FROM ejercicio_has_entreno WHERE Entreno_ID = ?";
+            PreparedStatement ps1 = c.prepareStatement(q1);
+            ps1.setString(1, id);
+            ps1.executeUpdate();
+            ps1.close();
 
-            System.out.println("Entreno eliminado");
+            // 2. BORRAR ENTRENAMIENTO
+            String q2 = "DELETE FROM entreno WHERE ID = ?";
+            PreparedStatement ps2 = c.prepareStatement(q2);
+            ps2.setString(1, id);
+            ps2.executeUpdate();
+            ps2.close();
+
+            System.out.println("Entreno eliminado correctamente");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -557,6 +297,63 @@ public class dataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Obtener los 3 ejercicios de un entreno (por Orden 1,2,3)
+    public String[] getEjerciciosDeEntreno(String entrenoId){
+        String[] result = {"", "", ""};
+        String q = "SELECT Ejercicio_Nombre, Orden FROM ejercicio_has_entreno " +
+                "WHERE Entreno_ID = ? ORDER BY Orden ASC";
+        try {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, entrenoId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int orden = rs.getInt("Orden");
+                if(orden >= 1 && orden <= 3){
+                    result[orden - 1] = rs.getString("Ejercicio_Nombre");
+                }
+            }
+            ps.close();
+        } catch(Exception e){ e.printStackTrace(); }
+        return result;
+    }
+
+    // Guardar los 3 ejercicios de un entreno (borra los anteriores y reinserta)
+    public void setEjerciciosDeEntreno(String entrenoId, String ej1, String ej2, String ej3){
+        try {
+            // Borrar los anteriores
+            PreparedStatement del = c.prepareStatement(
+                    "DELETE FROM ejercicio_has_entreno WHERE Entreno_ID = ?");
+            del.setString(1, entrenoId);
+            del.executeUpdate();
+            del.close();
+
+            // Insertar los nuevos
+            String q = "INSERT INTO ejercicio_has_entreno (Ejercicio_Nombre, Entreno_ID, Orden) VALUES (?, ?, ?)";
+            String[] ejercicios = {ej1, ej2, ej3};
+            for(int i = 0; i < 3; i++){
+                if(ejercicios[i] != null && !ejercicios[i].trim().isEmpty()){
+                    PreparedStatement ps = c.prepareStatement(q);
+                    ps.setString(1, ejercicios[i]);
+                    ps.setString(2, entrenoId);
+                    ps.setInt(3, i + 1);
+                    ps.executeUpdate();
+                    ps.close();
+                }
+            }
+            System.out.println("Ejercicios del entreno actualizados");
+        } catch(Exception e){ e.printStackTrace(); }
+    }
+
+    public String getUltimoIdEntreno(){
+        try {
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT MAX(ID) AS ultimoID FROM entreno");
+            if(rs.next()) return rs.getString("ultimoID");
+            st.close();
+        } catch(Exception e){ e.printStackTrace(); }
+        return "1";
     }
 
 }

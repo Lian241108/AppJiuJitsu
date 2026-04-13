@@ -617,55 +617,39 @@ public class Main extends PApplet {
 
             // GUARDAR
             if(gui.b82.mouseOverButton(this)){
-
                 String nombre = gui.t41.getText().trim();
-                String fecha = gui.t42.getText().trim();
-                //String genero = gui.s6.getSelectedValue().trim();
-                //String nivel = gui.s7.getSelectedValue().trim();
-                //String pagado = gui.s8.getSelectedValue().trim();
+                String fecha  = gui.t42.getText().trim();
+                String ej1    = gui.sEj1.getSelectedValue();
+                String ej2    = gui.sEj2.getSelectedValue();
+                String ej3    = gui.sEj3.getSelectedValue();
 
-                // VALIDACIONES
-                if(nombre.isEmpty()){
-                    System.out.println("Nombre vacío");
-                    return;
-                }
-
+                if(nombre.isEmpty()){ System.out.println("Nombre vacío"); return; }
                 if(fecha.isEmpty() || !fecha.matches("\\d{4}-\\d{2}-\\d{2}")){
-                    System.out.println("Fecha inválida o no seleccionada");
-                    return;
+                    System.out.println("Fecha inválida"); return;
                 }
 
-                // UPDATE / INSERT
                 if(modoEditar){
-
-                    db.updateEntreno(
-                            entrenoEditando.id,
-                            nombre,
-                            fecha
-                    );
-
+                    db.updateEntreno(entrenoEditando.id, nombre, fecha);
+                    db.setEjerciciosDeEntreno(entrenoEditando.id, ej1, ej2, ej3);
                     modoEditar = false;
                     entrenoEditando = null;
-
                 } else {
-
                     db.insertEntrenos(nombre, fecha);
+                    // Obtener el ID recién creado para asociar ejercicios
+                    String nuevoId = db.getUltimoIdEntreno();
+                    db.setEjerciciosDeEntreno(nuevoId, ej1, ej2, ej3);
                 }
 
-                // refrescar UI
                 gui.createPagedCardsEntrenos(this);
                 gui.refrescarTextLists(this);
-
-                // limpiar campos
-                gui.t41.setText("");
-                gui.t42.setText("");
-
-                // MUY IMPORTANTE: limpiar calendario
-                gui.c1.resetDateSelected();
-                gui.c1.setVisible(false);
-
-                // volver
+                gui.t41.setText(""); gui.t42.setText("");
+                gui.c1.resetDateSelected(); gui.c1.setVisible(false);
                 gui.pantallaActual = GUI.PANTALLA.ENTRENOS;
+            }
+            if(entrenoEditando != null){
+                gui.sEj1.setSelected(entrenoEditando.ejercicio1);
+                gui.sEj2.setSelected(entrenoEditando.ejercicio2);
+                gui.sEj3.setSelected(entrenoEditando.ejercicio3);
             }
         }
 
@@ -733,28 +717,18 @@ public class Main extends PApplet {
             gui.s5.toggle(); // Plegar o desplegar
         }
 
-        if(gui.s6.mouseOverSelect(this) && gui.s6.isEnabled()) {
-            if (!gui.s6.isCollapsed()) {
-                gui.s6.update(this);      // Actualitzar valor
 
-            }
-            gui.s6.toggle(); // Plegar o desplegar
+        if(gui.sEj1.mouseOverSelect(this) && gui.sEj1.isEnabled()){
+            if(!gui.sEj1.isCollapsed()) gui.sEj1.update(this);
+            gui.sEj1.toggle();
         }
-
-        if(gui.s7.mouseOverSelect(this) && gui.s7.isEnabled()) {
-            if (!gui.s7.isCollapsed()) {
-                gui.s7.update(this);      // Actualitzar valor
-
-            }
-            gui.s7.toggle(); // Plegar o desplegar
+        if(gui.sEj2.mouseOverSelect(this) && gui.sEj2.isEnabled()){
+            if(!gui.sEj2.isCollapsed()) gui.sEj2.update(this);
+            gui.sEj2.toggle();
         }
-
-        if(gui.s8.mouseOverSelect(this) && gui.s8.isEnabled()) {
-            if (!gui.s8.isCollapsed()) {
-                gui.s8.update(this);      // Actualitzar valor
-
-            }
-            gui.s8.toggle(); // Plegar o desplegar
+        if(gui.sEj3.mouseOverSelect(this) && gui.sEj3.isEnabled()){
+            if(!gui.sEj3.isCollapsed()) gui.sEj3.update(this);
+            gui.sEj3.toggle();
         }
 
     }
