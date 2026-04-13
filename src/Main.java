@@ -520,6 +520,7 @@ public class Main extends PApplet {
                     gui.t25.setText("");
                     gui.t26.setText("");
 
+
                     gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
                 } else {
                     System.out.println("Faltan campos obligatorios");

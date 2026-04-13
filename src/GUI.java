@@ -50,7 +50,7 @@ public class GUI{
         pantallaActual = PANTALLA.INICIO;
 
         // 3a passa: crear els components
-        logo = p5.loadImage("LOGO ACADEMIA WEI GANG‘.jpg");
+        logo = p5.loadImage("Logo Academia Wei Gang.jpg");
         pFont1 = p5.createFont("Font/Japan wave.ttf", 30);
         pFont2 = p5.createFont("Font/Roboto-Black.ttf", 30);
         pFont3 = p5.createFont("Font/CHINESETAKEAWAY.ttf", 30);
