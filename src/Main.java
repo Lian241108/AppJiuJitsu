@@ -18,6 +18,8 @@ public class Main extends PApplet {
     CardEntrenos entrenoEditando = null;
     boolean modoEditar = false;
 
+    String dniAlumnoEditando = null; // junto a las otras variables de edición
+
 
     //ar.get(i);
     //ar.set(objeto, i)
@@ -39,7 +41,7 @@ public class Main extends PApplet {
         textAlign(CENTER); textSize(18);   // Alineació i mida del text
 
         // Configura els paràmetres de connexió a la BBDD
-        db = new dataBase("admin", "12345", "appjiujitsu");
+        db = new dataBase("admin", "12345", "academia wei gang");
 
         // Connecta amb la BBDD
         db.connect();
@@ -219,18 +221,16 @@ public class Main extends PApplet {
         if(gui.pantallaActual==GUI.PANTALLA.INICIO) {
 
             if (gui.b11.mouseOverButton(this)){
-                String nombre  = gui.t11.getText();
-                String password  = gui.t12.getText();
-                if(db.loginCorrecte(nombre,password)){
+                String nombre   = gui.t11.getText();
+                String password = gui.t12.getText();
+                if(db.loginCorrecte(nombre, password)){
                     loginOK = true;
-                    print("Loging OK");
+                    gui.loginFallat = false;  // ← limpiar error
                     gui.pantallaActual = GUI.PANTALLA.INICIAL;
-                }else{
+                } else {
                     loginOK = false;
-                    print("Loging Wrong");
-
+                    gui.loginFallat = true;   // ← activar error
                 }
-
             }
 
             if(gui.botoCarregada.mouseOverButton(this)){
@@ -320,6 +320,10 @@ public class Main extends PApplet {
                         gui.s1.setSelected(fila[7]); // Genero
                         gui.s4.setSelected(fila[6]); // Nivel
                         gui.s5.setSelected(fila[4]); // Pagado
+
+                        dniAlumnoEditando = fila[0]; // <-- guardar DNI original
+                        modoEditar = true;           // <-- activar modo editar
+
                         gui.textListAlumnos.clearSelected();
                         gui.pantallaActual = GUI.PANTALLA.NUEVOALUMNO;
                         break;
@@ -499,31 +503,40 @@ public class Main extends PApplet {
             }
 
             if(gui.b62.mouseOverButton(this)){
-                String nombre = gui.t21.getText().trim();
-                String dni = gui.t22.getText().trim();
-                String edad = gui.t23.getText().trim();
-                String nombreTutor = gui.t24.getText().trim();
+                String nombre        = gui.t21.getText().trim();
+                String dni           = gui.t22.getText().trim();
+                String edad          = gui.t23.getText().trim();
+                String nombreTutor   = gui.t24.getText().trim();
                 String telefonoTutor = gui.t25.getText().trim();
-                String genero = gui.s1.getSelectedValue().trim();
-                String nivel = gui.s4.getSelectedValue().trim();
-                String pagado = gui.s5.getSelectedValue().trim();
+                String genero        = gui.s1.getSelectedValue().trim();
+                String nivel         = gui.s4.getSelectedValue().trim();
+                String pagado        = gui.s5.getSelectedValue().trim();
 
+                if(!nombre.isEmpty() && !dni.isEmpty()){
 
-                if(!nombre.equals("") && !dni.equals("")){
-                    db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor, pagado, edad, nivel, genero);
+                    if(modoEditar && dniAlumnoEditando != null){
+                        // EDITAR alumno existente
+                        db.updateAlumno(dniAlumnoEditando, dni, nombre, nombreTutor,
+                                telefonoTutor, pagado, edad, nivel, genero);
+                        modoEditar = false;
+                        dniAlumnoEditando = null;
+                    } else {
+                        // INSERTAR alumno nuevo
+                        db.insertAlumno(dni, nombre, nombreTutor, telefonoTutor,
+                                pagado, edad, nivel, genero);
+                    }
+
                     gui.refrescarTablaAlumnos();
+                    gui.refrescarTextLists(this);
 
-                    gui.t21.setText("");
-                    gui.t22.setText("");
-                    gui.t23.setText("");
-                    gui.t24.setText("");
-                    gui.t25.setText("");
-                    gui.t26.setText("");
-
+                    // limpiar campos
+                    gui.t21.setText(""); gui.t22.setText("");
+                    gui.t23.setText(""); gui.t24.setText("");
+                    gui.t25.setText(""); gui.t26.setText("");
 
                     gui.pantallaActual = GUI.PANTALLA.ALUMNOS;
                 } else {
-                    System.out.println("Faltan campos obligatorios");
+                    System.out.println("Faltan campos obligatorios: Nombre y DNI");
                 }
             }
 

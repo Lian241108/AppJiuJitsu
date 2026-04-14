@@ -118,7 +118,7 @@ public class Select {
 
         for(int i = 0; i < texts.length; i++){
             if(texts[i].trim().equalsIgnoreCase(value.trim())){
-                selectedValue = texts[i]; // 🔥 IMPORTANTE
+                selectedValue = texts[i]; // IMPORTANTE
                 return;
             }
         }

@@ -13,6 +13,9 @@ public class GUI{
     Button botoCarregada;
 
     public dataBase db;
+    // Al principio de la clase, junto a las otras variables
+    // Al principio de la clase, junto a las otras variables
+    public boolean loginFallat = false;
 
 
 
@@ -156,6 +159,7 @@ public class GUI{
 
     public void refrescarTablaAlumnos(){
         pt1.setData(db.getInfoTotsAlumnes());
+        pt1.numPage = 0; // <-- resetear a página 1
     }
 
 
@@ -239,13 +243,13 @@ public class GUI{
         t31 = new TextField(p5, p5.width/2-800, p5.height/2-300, 400, 100 );
         // t32 = new TextField(p5, p5.width/2-800, p5.height/2+50, 400, 100 );
         t33 = new TextField(p5, p5.width/2-100, p5.height/2-300, 1000, 600 ); // DESCRIPCIÓ
-        
+
         // PAntalla NuevoEntreno
         t41 = new TextField(p5, p5.width/2-800, p5.height/2-240, 400, 100 );
         t42 = new TextField(p5, p5.width/2-100, p5.height/2-240, 400, 100); // DESCRIPCIÓ
 
     }
-    
+
     public void createSelect(PApplet p5){
         String[] valors1 = {"MASCULINO", "FEMENINO", "OTRO"};
         String[] valors2 = {"CALENTAMIENTO", "TECNICA/JUEGO", "FINAL"};
@@ -325,20 +329,24 @@ public class GUI{
 
     // PANTALLES DE LA GUI
     public void dibuixaPantallaInicio(PApplet p5){
-
         p5.background(255);
         dibuixaLogoInici(p5);
-
-        //p5.textFont(pFont1);
         dibuixaTextFieldInicio(p5);
         dibuixaButtonInicio(p5);
+
+        p5.textAlign(p5.CENTER);  // ← fija el alineado antes del texto
         p5.fill(0);
+        p5.text("USUARIO", p5.width/2, p5.height/2 - 10);
+        p5.text("CONTRASEÑA", p5.width/2, p5.height/2 + 190);
 
-        //p5.textFont(pFont3);
-
-        p5.text("CORREO",p5.width/2-100, p5.height/2-10);
-        p5.text("CONTRASEÑA",p5.width/2-70, p5.height/2+190);
-
+        // Mensaje de error
+        if(loginFallat){
+            p5.fill(200, 0, 0);  // rojo
+            p5.textSize(22);
+            p5.text("No se ha podido iniciar sesión", p5.width/2, p5.height/2 + 350);
+            p5.textSize(18);
+            p5.fill(0);
+        }
     }
 
     public void dibuixaPantallaInicial(PApplet p5){
@@ -385,7 +393,7 @@ public class GUI{
         p5.background(255);
         dibuixaButtonNuevoAlumno(p5);
         dibuixaTextFieldNuevoAlumno(p5);
-        dibuixaSelectAlumnos(p5);
+
 
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
         p5.text("GENERO: ",p5.width/2-800, p5.height/2-110);
@@ -397,6 +405,8 @@ public class GUI{
         p5.text("NIVEL ",p5.width/2-800, p5.height/2+190);
         p5.text("PAGADO? ",p5.width/2-200, p5.height/2-110);
 
+        dibuixaSelectAlumnos(p5);
+
     }
 
     public void dibuixaPantallaNuevoEntreno(PApplet p5){
@@ -405,7 +415,7 @@ public class GUI{
         dibuixaButtonNuevoEntreno(p5);
         dibuixaTextFieldNuevoEntreno(p5);
         dibuixaCalendari(p5);
-        dibuixaSelectNuevoEntreno(p5);
+
 
         p5.textAlign(p5.CORNER);
         p5.text("FECHA: ",p5.width/2-50, p5.height/2-250);
@@ -414,6 +424,8 @@ public class GUI{
         p5.text("CALENTAMIENTO: ",p5.width/2-800, p5.height/2-50);
         p5.text("TECNICA / EJERCICIO: ",p5.width/2-100, p5.height/2-50);
         p5.text("FINAL: ",p5.width/2-800, p5.height/2+150);
+
+        dibuixaSelectNuevoEntreno(p5);
 
 
     }
@@ -424,7 +436,7 @@ public class GUI{
         dibuixaButtonNuevoEjercicio(p5);
         dibuixaTextFieldNuevoEjercicio(p5);
 
-        dibuixaSelectEjercicio(p5);
+
 
         botoCarregada.display(p5);
         if(imgCarregada!=null) {
@@ -440,6 +452,8 @@ public class GUI{
         p5.text("NOMBRE: ",p5.width/2-800, p5.height/2-310);
         p5.text("TIPO: ",p5.width/2-800, p5.height/2-60);
         p5.text("NIVEL: ",p5.width/2-800, p5.height/2+40);
+
+        dibuixaSelectEjercicio(p5);
     }
 
 
@@ -469,7 +483,7 @@ public class GUI{
         p5.imageMode(p5.CENTER);
         p5.image(logo, p5.displayWidth/2, p5.displayHeight/2-300, logoWidth*2, logoHeight*2);
     }
-    
+
     public void dibuixaSelectAlumnos(PApplet p5){
         s1.display(p5);
         s4.display(p5);

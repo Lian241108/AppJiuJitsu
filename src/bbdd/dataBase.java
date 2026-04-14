@@ -55,19 +55,20 @@ public class dataBase {
     }
 
     // Obtener todos los alumnos
+    // Cambia getInfoTotsAlumnes() para usar Statement nuevo cada vez
     public String[][] getInfoTotsAlumnes(){
         String q = "SELECT DNI, Nombre, NombreTutor, TelefonoTutor, Pagado, Edad, Nivel, Genero FROM alumno ORDER BY Nombre ASC";
-        System.out.println(q);
-
         try{
-            int numFiles = getNumFilesTaula("alumno"); // número de filas
-            String[][] info = new String[numFiles][8]; // matriz de resultados
+            Statement freshStatement = c.createStatement(); // <-- nuevo Statement
+            int numFiles = 0;
+            ResultSet rsCount = freshStatement.executeQuery("SELECT COUNT(*) AS num FROM alumno");
+            rsCount.next();
+            numFiles = rsCount.getInt("num");
 
-            ResultSet rs = query.executeQuery(q);
+            String[][] info = new String[numFiles][8];
+            ResultSet rs = freshStatement.executeQuery(q);
             int f = 0;
-
             while(rs.next()){
-                // Guardar cada campo en la matriz
                 info[f][0] = rs.getString("dni");
                 info[f][1] = rs.getString("Nombre");
                 info[f][2] = rs.getString("NombreTutor");
@@ -78,64 +79,60 @@ public class dataBase {
                 info[f][7] = rs.getString("Genero");
                 f++;
             }
+            freshStatement.close();
             return info;
         }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        catch(Exception e){ System.out.println(e); }
         return null;
     }
 
     // Obtener todos los ejercicios
     public String[][] getInfoTotsEjercicios() {
         String q = "SELECT Nombre, Descripción, Tipus_Nombre, Dificultad_Nombre, Imagen FROM ejercicio ORDER BY Nombre ASC";
-
         try {
-            int numFiles = getNumFilesTaula("ejercicio");
+            Statement freshStatement = c.createStatement();
+            ResultSet rsCount = freshStatement.executeQuery("SELECT COUNT(*) AS num FROM ejercicio");
+            rsCount.next();
+            int numFiles = rsCount.getInt("num");
+
             String[][] info = new String[numFiles][5];
-
-            ResultSet rs = query.executeQuery(q);
+            ResultSet rs = freshStatement.executeQuery(q);
             int f = 0;
-
             while (rs.next()) {
                 info[f][0] = rs.getString("Nombre");
                 info[f][1] = rs.getString("Descripción");
                 info[f][2] = rs.getString("Tipus_Nombre");
                 info[f][3] = rs.getString("Dificultad_Nombre");
-                info[f][4] = rs.getString("Imagen"); // ruta de la imagen
+                info[f][4] = rs.getString("Imagen");
                 f++;
             }
+            freshStatement.close();
             return info;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        } catch (Exception e) { System.out.println(e); }
         return null;
     }
 
     // Obtener todos los entrenos
-    public String[][] getInfoTotsEntrenos(){
+    public String[][] getInfoTotsEntrenos() {
         String q = "SELECT ID, Nombre, Fecha FROM entreno ORDER BY ID DESC";
+        try {
+            Statement freshStatement = c.createStatement();
+            ResultSet rsCount = freshStatement.executeQuery("SELECT COUNT(*) AS num FROM entreno");
+            rsCount.next();
+            int numFiles = rsCount.getInt("num");
 
-        try{
-            int numFiles = getNumFilesTaula("entreno");
             String[][] info = new String[numFiles][3];
-
-            ResultSet rs = query.executeQuery(q);
+            ResultSet rs = freshStatement.executeQuery(q);
             int i = 0;
-
-            while(rs.next()){
+            while (rs.next()) {
                 info[i][0] = rs.getString("ID");
                 info[i][1] = rs.getString("Nombre");
                 info[i][2] = rs.getString("Fecha");
                 i++;
             }
-
+            freshStatement.close();
             return info;
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-
+        } catch (Exception e) { System.out.println(e); }
         return null;
     }
 
@@ -260,18 +257,25 @@ public class dataBase {
     }
 
     // Eliminar ejercicio
-    public void deleteEjercicio(String nombre){
-        try{
-            String q = "DELETE FROM ejercicio WHERE nombre = ?";
-            PreparedStatement ps = c.prepareStatement(q);
+    public void deleteEjercicio(String nombre) {
+        try {
+            // Primero borrar las relaciones en ejercicio_has_entreno
+            String q1 = "DELETE FROM ejercicio_has_entreno WHERE Ejercicio_Nombre = ?";
+            PreparedStatement ps1 = c.prepareStatement(q1);
+            ps1.setString(1, nombre);
+            ps1.executeUpdate();
+            ps1.close();
 
-            ps.setString(1, nombre);
-            ps.executeUpdate();
-            ps.close();
+            // Luego borrar el ejercicio
+            String q2 = "DELETE FROM ejercicio WHERE nombre = ?";
+            PreparedStatement ps2 = c.prepareStatement(q2);
+            ps2.setString(1, nombre);
+            ps2.executeUpdate();
+            ps2.close();
 
-            System.out.println("Ejercicio eliminado");
+            System.out.println("Ejercicio eliminado correctamente");
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -427,6 +431,28 @@ public class dataBase {
         }
 
         return "1";
+    }
+
+    public void updateAlumno(String dniOriginal, String dni, String nombre, String nombreTutor,
+                             String telefonoTutor, String pagado, String edad, String nivel, String genero) {
+        String q = "UPDATE alumno SET DNI=?, Nombre=?, NombreTutor=?, TelefonoTutor=?, Pagado=?, Edad=?, Nivel=?, Genero=? WHERE DNI=?";
+        try {
+            PreparedStatement ps = c.prepareStatement(q);
+            ps.setString(1, dni);
+            ps.setString(2, nombre);
+            ps.setString(3, nombreTutor);
+            ps.setString(4, telefonoTutor);
+            ps.setString(5, pagado);
+            ps.setString(6, edad);
+            ps.setString(7, nivel);
+            ps.setString(8, genero);
+            ps.setString(9, dniOriginal);
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Alumno actualizado correctamente");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
